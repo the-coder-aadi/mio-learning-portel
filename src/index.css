@@ -50,6 +50,12 @@ body{
     #0f172a;
 }
 
+@media (max-width:400px) {
+    .hero{
+     padding-bottom: 10px;
+    }
+}
+
 
 /* .hero::before{
     content:"";
@@ -286,6 +292,11 @@ body{
     margin:auto;
     text-align:center;
     padding:80px 20px;
+}
+@media (max-width:400px) {
+    .about-course{
+        padding-top: 20px;
+    }
 }
 
 .about-course h2{
