@@ -636,6 +636,296 @@ export const notes = [
       type: "feedback"
     }
   ]
+},
+
+{
+  id: 4,
+  slug: "html-entities-inline-block-media",
+  title: "HTML Entities, Inline & Block Elements",
+  date: "04 June 2026",
+
+  description:
+    "Learn HTML Entities, Inline Elements, Block Elements, Audio and Video tags.",
+
+  content: [
+
+    {
+      type: "heading",
+      text: "HTML Entities"
+    },
+
+    {
+      type: "paragraph",
+      text: "HTML Entities are special codes used to display reserved characters and symbols in a webpage."
+    },
+
+    {
+      type: "paragraph",
+      text: "Some characters have a special meaning in HTML, so we cannot write them directly. For such cases we use HTML Entities."
+    },
+
+    {
+      type: "heading",
+      text: "Common HTML Entities"
+    },
+
+    {
+      type: "code",
+      language: "html",
+      text: `&lt;  = <
+&gt;  = >
+&amp; = &
+&nbsp; = Space
+&copy; = ©
+&reg; = ®`
+    },
+
+    {
+      type: "output",
+      html: `
+        <p><b>&lt;</b> = <</p>
+        <p><b>&gt;</b> = ></p>
+        <p><b>&amp;</b> = &</p>
+        <p><b>&copy;</b> = ©</p>
+        <p><b>&reg;</b> = ®</p>
+      `
+    },
+
+    {
+      type: "heading",
+      text: "Why Do We Use Entities?"
+    },
+
+    {
+      type: "list",
+      items: [
+        "To display special symbols",
+        "To display reserved HTML characters",
+        "To avoid browser confusion",
+        "To improve content formatting"
+      ]
+    },
+
+    {
+      type: "heading",
+      text: "Block Elements"
+    },
+
+    {
+      type: "paragraph",
+      text: "Block Elements always start from a new line and take the full available width."
+    },
+
+    {
+      type: "code",
+      language: "html",
+      text: `<h1>Heading</h1>
+
+<p>This is a paragraph.</p>
+
+<div>This is a div.</div>`
+    },
+
+    {
+      type: "paragraph",
+      text: "Each element appears on a new line because these are Block Elements."
+    },
+
+    {
+      type: "heading",
+      text: "Common Block Elements"
+    },
+
+    {
+      type: "list",
+      items: [
+        "<h1> to <h6>",
+        "<p>",
+        "<div>",
+        "<section>",
+        "<article>",
+        "<header>",
+        "<footer>"
+      ]
+    },
+
+    {
+      type: "heading",
+      text: "Inline Elements"
+    },
+
+    {
+      type: "paragraph",
+      text: "Inline Elements do not start from a new line. They only take the space required by their content."
+    },
+
+    {
+      type: "code",
+      language: "html",
+      text: `This is a <span>span tag</span>.
+
+<a href="#">Click Here</a>
+
+<strong>Important Text</strong>`
+    },
+
+    {
+      type: "paragraph",
+      text: "Inline elements stay in the same line unless there is not enough space."
+    },
+
+    {
+      type: "heading",
+      text: "Common Inline Elements"
+    },
+
+    {
+      type: "list",
+      items: [
+        "<span>",
+        "<a>",
+        "<strong>",
+        "<em>",
+        "<img>",
+        "<label>"
+      ]
+    },
+
+    {
+      type: "heading",
+      text: "Difference Between Block and Inline Elements"
+    },
+
+    {
+      type: "list",
+      items: [
+        "Block Elements start on a new line",
+        "Inline Elements stay in the same line",
+        "Block Elements take full width",
+        "Inline Elements take only required width"
+      ]
+    },
+
+    {
+      type: "heading",
+      text: "HTML Audio Tag"
+    },
+
+    {
+      type: "paragraph",
+      text: "The audio tag is used to play audio files directly inside a webpage."
+    },
+
+    {
+      type: "code",
+      language: "html",
+      text: `<audio controls>
+  <source src="song.mp3" type="audio/mp3">
+</audio>`
+    },
+
+    {
+      type: "paragraph",
+      text: "The controls attribute provides Play, Pause and Volume controls."
+    },
+
+    {
+      type: "heading",
+      text: "HTML Video Tag"
+    },
+
+    {
+      type: "paragraph",
+      text: "The video tag is used to display videos directly inside a webpage."
+    },
+
+    {
+      type: "code",
+      language: "html",
+      text: `<video width="400" controls>
+  <source src="video.mp4" type="video/mp4">
+</video>`
+    },
+
+    {
+      type: "paragraph",
+      text: "The controls attribute allows users to Play, Pause and control the video."
+    },
+
+    {
+      type: "heading",
+      text: "Practice Project"
+    },
+
+    {
+      type: "code",
+      language: "html",
+      text: `<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Welcome to MIO Institute</h1>
+
+<p>
+Copyright &copy; 2026
+</p>
+
+<a href="#">Join Course</a>
+
+<br><br>
+
+<audio controls>
+  <source src="song.mp3">
+</audio>
+
+<br><br>
+
+<video width="300" controls>
+  <source src="video.mp4">
+</video>
+
+</body>
+</html>`
+    },
+
+    {
+      type: "output",
+      html: `
+        <h2>Welcome to MIO Institute</h2>
+
+        <p>Copyright © 2026</p>
+
+        <a href="#">Join Course</a>
+
+        <br><br>
+
+        🎵 Audio Player
+
+        <br><br>
+
+        🎬 Video Player
+      `
+    },
+
+    {
+      type: "summary",
+      items: [
+        "HTML Entities",
+        "Reserved Characters",
+        "Special Symbols",
+        "Block Elements",
+        "Inline Elements",
+        "Difference Between Block and Inline",
+        "Audio Tag",
+        "Video Tag"
+      ]
+    },
+
+    {
+      type: "feedback"
+    }
+
+  ]
 }
   
 ];

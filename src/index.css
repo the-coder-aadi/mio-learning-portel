@@ -6,6 +6,11 @@
     box-sizing:border-box;
 }
 
+::selection {
+  background-color: rgb(255, 255, 0);  /* highlight color */
+  color: black;              /* selected text color */
+}
+
 body{
     font-family:'Inter',sans-serif;
     background:#0f172a;
