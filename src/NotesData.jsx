@@ -926,6 +926,299 @@ Copyright &copy; 2026
     }
 
   ]
+},
+
+{
+id: 5,
+slug: "css-introduction-selectors",
+title: "Introduction to CSS",
+date: "05 June 2026",
+
+description:
+"Learn CSS from scratch. Understand CSS syntax, ways to add CSS, selectors, colors, backgrounds, fonts, sizing and borders with easy examples.",
+
+content: [
+
+{
+type: "heading",
+text: "What is CSS?"
+},
+
+{
+type: "paragraph",
+text: "CSS stands for Cascading Style Sheets. CSS is used to style and design HTML webpages."
+},
+
+{
+type: "paragraph",
+text: "HTML creates the structure of a webpage while CSS controls its appearance such as colors, fonts, spacing, borders, alignment and layouts."
+},
+
+{
+type: "paragraph",
+text: "Without CSS, webpages look very plain. CSS helps make websites attractive and user-friendly."
+},
+
+{
+type: "heading",
+text: "Why Do We Use CSS?"
+},
+
+{
+type: "list",
+items: [
+"Add colors to webpages",
+"Change fonts and text styles",
+"Control spacing and layout",
+"Create attractive designs",
+"Improve user experience",
+"Make websites responsive",
+"Separate design from HTML structure"
+]
+},
+
+{
+type: "heading",
+text: "CSS Syntax"
+},
+
+{
+type: "paragraph",
+text: "A CSS rule contains three main parts: Selector, Property and Value."
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  color: red;\n}"
+},
+
+{
+type: "paragraph",
+text: "Here, h1 is the selector, color is the property and red is the value."
+},
+
+{
+type: "heading",
+text: "Three Ways To Add CSS"
+},
+
+{
+type: "heading",
+text: "1. Inline CSS"
+},
+
+{
+type: "paragraph",
+text: "Inline CSS is written directly inside the style attribute of an HTML element."
+},
+
+{
+type: "code",
+language: "html",
+text: "<h1 style='color:red'>Welcome</h1>"
+},
+
+{
+type: "output",
+html: "<h1 style='color:red'>Welcome</h1>"
+},
+
+{
+type: "heading",
+text: "2. Internal CSS"
+},
+
+{
+type: "paragraph",
+text: "Internal CSS is written inside the style tag in the HTML file."
+},
+
+{
+type: "code",
+language: "html",
+text: "<style>\nh1 {\n color: blue;\n}\n</style>\n\n<h1>Welcome</h1>"
+},
+
+{
+type: "heading",
+text: "3. External CSS"
+},
+
+{
+type: "paragraph",
+text: "External CSS is written in a separate .css file and linked with HTML."
+},
+
+{
+type: "code",
+language: "html",
+text: "<link rel='stylesheet' href='style.css'>"
+},
+
+{
+type: "heading",
+text: "Selectors in CSS"
+},
+
+{
+type: "paragraph",
+text: "Selectors are used to target HTML elements so that CSS styles can be applied to them."
+},
+
+{
+type: "heading",
+text: "Universal Selector (*)"
+},
+
+{
+type: "paragraph",
+text: "The universal selector selects every element on the webpage."
+},
+
+{
+type: "code",
+language: "html",
+text: "<h1>Heading</h1>\n<p>Paragraph</p>"
+},
+
+{
+type: "code",
+language: "css",
+text: "* {\n color: blue;\n}"
+},
+
+{
+type: "heading",
+text: "Element Selector"
+},
+
+{
+type: "paragraph",
+text: "Element selectors target HTML tags directly."
+},
+
+{
+type: "code",
+language: "html",
+text: "<p>Hello World</p>"
+},
+
+{
+type: "code",
+language: "css",
+text: "p {\n color: blue;\n}"
+},
+
+{
+type: "output",
+html: "<p style='color:blue'>Hello World</p>"
+},
+
+{
+type: "heading",
+text: "ID Selector"
+},
+
+{
+type: "paragraph",
+text: "An ID selector is used to target a specific HTML element. An ID should be unique, meaning only one element on a webpage should use that ID. IDs are useful when we want to style or control a single element separately from other elements. In CSS, we use the # symbol before the ID name to select it."
+},
+
+{
+type: "code",
+language: "html",
+text: "<h1 id='title'>Welcome</h1>"
+},
+
+{
+type: "code",
+language: "css",
+text: "#title {\n color: red;\n}"
+},
+
+{
+type: "output",
+html: "<h1 style='color:red'>Welcome</h1>"
+},
+
+{
+type: "heading",
+text: "Class Selector"
+},
+
+{
+type: "paragraph",
+text: "A class selector is used to target one or more HTML elements that need the same styling. Unlike IDs, the same class can be used on multiple elements on a webpage. This makes classes very useful for applying common styles to different elements. In CSS, a class selector is written using a dot (.) followed by the class name."
+},
+
+{
+type: "code",
+language: "html",
+text: "<p class='info'>Hello</p>"
+},
+
+{
+type: "code",
+language: "css",
+text: ".info {\n color: green;\n}"
+},
+
+{
+type: "output",
+html: "<p style='color:green'>Hello</p>"
+},
+
+{
+type: "heading",
+text: "Group Selector"
+},
+
+{
+type: "paragraph",
+text: "Group selectors allow multiple elements to share the same styles."
+},
+
+{
+type: "code",
+language: "html",
+text: "<h1>Heading</h1>\n<p>Paragraph</p>"
+},
+
+{
+type: "code",
+language: "css",
+text: "h1, p {\n color: purple;\n}"
+},
+
+
+{
+type: "heading",
+text: "What You Learned"
+},
+
+{
+type: "summary",
+items: [
+"What is CSS",
+"Why CSS is Used",
+"CSS Syntax",
+"Inline CSS",
+"Internal CSS",
+"External CSS",
+"Universal Selector",
+"Element Selector",
+"ID Selector",
+"Class Selector",
+"Group Selector",
+]
 }
+
+]
+
+}
+
+
+
   
 ];
