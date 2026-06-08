@@ -296,7 +296,7 @@ title: "CSS Combinators, Colors & Text Styling",
 date: "06 June 2026",
 
 description:
-"More selectors, colors, background colors, text alignment, text decoration and text transform.",
+"More selectors, colors, background colors, text alignment.",
 
 content: [
 
@@ -682,6 +682,377 @@ items: [
 "Right Alignment",
 "Justify Alignment",
 
+]
+}
+
+]
+
+},
+{
+id: 7,
+slug: "css-text-decoration-transform-and-styling",
+title: "CSS Text Decoration, Transform & Text Styling",
+date: "08 June 2026",
+
+description:
+"text decoration, decoration styles, text transform and additional text styling properties.",
+
+content: [
+
+{
+type: "heading",
+text: "Text Decoration"
+},
+
+{
+type: "paragraph",
+text: "The text-decoration property is used to add or remove decorations such as underline, overline and line-through."
+},
+
+{
+type: "heading",
+text: "Underline Text"
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  text-decoration: underline;\n}"
+},
+
+{
+type: "paragraph",
+text: "The underline value places a line below the text."
+},
+
+{
+type: "output",
+html: "<h1 style='text-decoration:underline'>Welcome</h1>"
+},
+
+{
+type: "heading",
+text: "Overline Text"
+},
+
+{
+type: "paragraph",
+text: "The overline value places a line above the text."
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  text-decoration: overline;\n}"
+},
+
+{
+type: "output",
+html: "<h1 style='text-decoration:overline'>Welcome</h1>"
+},
+
+{
+type: "heading",
+text: "Line Through Text"
+},
+
+{
+type: "paragraph",
+text: "The line-through value draws a line through the middle of the text."
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  text-decoration: line-through;\n}"
+},
+
+{
+type: "output",
+html: "<h1 style='text-decoration:line-through'>Welcome</h1>"
+},
+
+{
+type: "heading",
+text: "Text Decoration Style"
+},
+
+{
+type: "paragraph",
+text: "Decoration styles change the appearance of the decoration line. A decoration line must exist before a style can be applied."
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  text-decoration: underline;\n  text-decoration-style: dotted;\n}"
+},
+
+{
+type: "output",
+html: "<h1 style='text-decoration:underline dotted'>Welcome</h1>"
+},
+
+{
+type: "paragraph",
+text: "The dotted style creates small dots in the underline."
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  text-decoration: underline;\n  text-decoration-style: wavy;\n}"
+},
+
+{
+type: "output",
+html: "<h1 style='text-decoration:underline wavy'>Welcome</h1>"
+},
+
+{
+type: "paragraph",
+text: "Other available values are solid, dashed, dotted, double and wavy."
+},
+
+{
+type: "heading",
+text: "Text Transform"
+},
+
+{
+type: "paragraph",
+text: "The text-transform property changes the capitalization of text without changing the original content."
+},
+
+{
+type: "heading",
+text: "Uppercase"
+},
+
+{
+type: "code",
+language: "css",
+text: "p {\n  text-transform: uppercase;\n}"
+},
+
+{
+type: "paragraph",
+text: "All letters become capital letters."
+},
+
+{
+type: "output",
+html: "<p style='text-transform:uppercase'>hello world</p>"
+},
+
+{
+type: "heading",
+text: "Lowercase"
+},
+
+{
+type: "code",
+language: "css",
+text: "p {\n  text-transform: lowercase;\n}"
+},
+
+{
+type: "paragraph",
+text: "All letters become small letters."
+},
+
+{
+type: "output",
+html: "<p style='text-transform:lowercase'>HELLO WORLD</p>"
+},
+
+{
+type: "heading",
+text: "Capitalize"
+},
+
+{
+type: "code",
+language: "css",
+text: "p {\n  text-transform: capitalize;\n}"
+},
+
+{
+type: "paragraph",
+text: "The first letter of each word becomes uppercase."
+},
+
+{
+type: "output",
+html: "<p style='text-transform:capitalize'>hello world</p>"
+},
+
+{
+type: "heading",
+text: "Text Indent"
+},
+
+{
+type: "paragraph",
+text: "The text-indent property adds space before the first line of a paragraph."
+},
+
+{
+type: "code",
+language: "css",
+text: "p {\n  text-indent: 40px;\n}"
+},
+
+{
+type: "output",
+html: "<p style='text-indent:40px'>This paragraph starts with an indent.</p>"
+},
+
+{
+type: "heading",
+text: "Letter Spacing"
+},
+
+{
+type: "paragraph",
+text: "The letter-spacing property controls the space between characters."
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  letter-spacing: 10px;\n}"
+},
+
+{
+type: "output",
+html: "<h1 style='letter-spacing:10px'>WELCOME</h1>"
+},
+
+{
+type: "heading",
+text: "Word Spacing"
+},
+
+{
+type: "paragraph",
+text: "The word-spacing property controls the space between words."
+},
+
+{
+type: "code",
+language: "css",
+text: "p {\n  word-spacing: 10px;\n}"
+},
+
+{
+type: "output",
+html: "<p style='word-spacing:10px'>Hello World Everyone</p>"
+},
+
+{
+type: "heading",
+text: "Line Height"
+},
+
+{
+type: "paragraph",
+text: "The line-height property controls the vertical spacing between lines of text."
+},
+
+{
+type: "code",
+language: "css",
+text: "p {\n  line-height: 2;\n}"
+},
+
+{
+type: "output",
+html: "<p style='line-height:2'>Line One<br>Line Two<br>Line Three</p>"
+},
+
+{
+type: "paragraph",
+text: "Increasing line-height improves readability in long paragraphs."
+},
+
+{
+type: "heading",
+text: "Font Weight"
+},
+
+{
+type: "paragraph",
+text: "The font-weight property controls the thickness of text. Higher values create bolder text."
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  font-weight: bold;\n}"
+},
+
+{
+type: "output",
+html: "<h1 style='font-weight:bold'>Welcome</h1>"
+},
+
+{
+type: "paragraph",
+text: "Common values are normal, bold and numeric values from 100 to 900."
+},
+
+{
+type: "heading",
+text: "Font Style"
+},
+
+{
+type: "paragraph",
+text: "The font-style property is used to make text appear normal, italic or oblique."
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  font-style: italic;\n}"
+},
+
+{
+type: "output",
+html: "<h1 style='font-style:italic'>Welcome</h1>"
+},
+
+{
+type: "paragraph",
+text: "The italic value slants the text for emphasis. Other available values are normal and oblique."
+},
+
+
+{
+type: "heading",
+text: "What You Learned"
+},
+
+{
+type: "summary",
+items: [
+"Text Decoration",
+"Underline Text",
+"Overline Text",
+"Line Through Text",
+"Text Decoration Style",
+"Dotted Decoration",
+"Wavy Decoration",
+"Text Transform",
+"Uppercase",
+"Lowercase",
+"Capitalize",
+"Text Indent",
+"Letter Spacing",
+"Word Spacing",
+"Line Height",
+"Text Shadow"
 ]
 }
 
