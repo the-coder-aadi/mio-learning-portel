@@ -1058,6 +1058,475 @@ items: [
 
 ]
 
+},
+{
+id: 8,
+slug: "css-units",
+title: "CSS Units",
+date: "09 June 2026",
+
+description:
+"Learn the most important CSS units used in modern web development including absolute and relative units such as px, %, em, rem, vw, vh, vmin, vmax and ch.",
+
+content: [
+
+{
+type: "heading",
+text: "Introduction to CSS Units"
+},
+
+{
+type: "paragraph",
+text: "CSS units are used to define the size of text, elements, spacing and layouts. Whenever you set a width, height, margin, padding or font size, you usually use a CSS unit."
+},
+
+{
+type: "paragraph",
+text: "Choosing the correct unit is important because different units behave differently. Some units always stay fixed, while others automatically adjust according to the parent element or screen size."
+},
+
+{
+type: "heading",
+text: "Types of CSS Units"
+},
+
+{
+type: "paragraph",
+text: "CSS units are divided into two main categories: Absolute Units and Relative Units."
+},
+
+{
+type: "heading",
+text: "Absolute Units"
+},
+
+{
+type: "paragraph",
+text: "Absolute units have a fixed size. Their value does not depend on the parent element, root element or screen size."
+},
+
+{
+type: "paragraph",
+text: "For modern web development, the most important absolute unit is px (pixel)."
+},
+
+{
+type: "heading",
+text: "Pixels (px)"
+},
+
+{
+type: "paragraph",
+text: "The px (pixel) unit represents a fixed size on the screen. It is the most commonly used CSS unit and is considered an absolute unit."
+},
+
+{
+type: "paragraph",
+text: "A value defined in pixels remains the same regardless of the parent element or viewport size."
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  font-size: 40px;\n}"
+},
+
+{
+type: "output",
+html: "<h1 style='font-size:40px'>Welcome</h1>"
+},
+
+{
+type: "paragraph",
+text: "The heading will always remain 40 pixels in size."
+},
+
+{
+type: "paragraph",
+text: "Best for: borders, icons, fixed spacing, shadows and small UI elements."
+},
+
+{
+type: "heading",
+text: "Relative Units"
+},
+
+{
+type: "paragraph",
+text: "Relative units calculate their size based on another value such as a parent element, root element or viewport size. These units are commonly used for responsive web design."
+},
+
+{
+type: "heading",
+text: "Percentage (%)"
+},
+
+{
+type: "paragraph",
+text: "The percentage unit is relative to the size of its parent element."
+},
+
+{
+type: "paragraph",
+text: "If the parent width is 1000px and the child width is 50%, the child becomes 500px wide."
+},
+
+{
+type: "code",
+language: "css",
+text: ".child {\n  width: 50%;\n}"
+},
+
+{
+type: "output",
+html: "<div style='width:100%;background:#eee;padding:10px'><div style='width:50%;background:#bbb;padding:10px'>50% Width</div></div>"
+},
+
+{
+type: "paragraph",
+text: "As the parent size changes, the child size changes automatically."
+},
+
+{
+type: "paragraph",
+text: "Best for: layouts, containers, grids and responsive widths."
+},
+
+{
+type: "heading",
+text: "em Unit"
+},
+
+{
+type: "paragraph",
+text: "The em unit is relative to the font size of the parent element."
+},
+
+{
+type: "paragraph",
+text: "If the parent font size is 20px and the child font size is 2em, the child becomes 40px."
+},
+
+{
+type: "code",
+language: "css",
+text: ".parent {\n  font-size:20px;\n}\n\n.child {\n  font-size:2em;\n}"
+},
+
+{
+type: "output",
+html: "<div style='font-size:20px'>Parent <span style='font-size:2em'>Child Text</span></div>"
+},
+
+{
+type: "paragraph",
+text: "The em unit grows and shrinks according to the parent font size."
+},
+
+{
+type: "paragraph",
+text: "Best for: component spacing, padding, margins and buttons."
+},
+
+{
+type: "heading",
+text: "rem Unit"
+},
+
+{
+type: "paragraph",
+text: "The rem unit stands for Root EM. It is calculated using the font size of the html element instead of the parent element."
+},
+
+{
+type: "paragraph",
+text: "Most browsers use a default root font size of 16px."
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  font-size:2rem;\n}"
+},
+
+{
+type: "output",
+html: "<h1 style='font-size:2rem'>Welcome</h1>"
+},
+
+{
+type: "paragraph",
+text: "If the root font size is 16px, then 2rem becomes 32px."
+},
+
+{
+type: "paragraph",
+text: "Unlike em, rem always uses the root font size, making sizing more predictable."
+},
+
+{
+type: "paragraph",
+text: "Best for: headings, paragraphs, typography and scalable designs."
+},
+
+{
+type: "heading",
+text: "Viewport Width (vw)"
+},
+
+{
+type: "paragraph",
+text: "The vw unit is based on the width of the browser window."
+},
+
+{
+type: "paragraph",
+text: "1vw equals 1% of the viewport width."
+},
+
+{
+type: "paragraph",
+text: "If the screen width is 1000px, then 1vw equals 10px."
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  font-size:5vw;\n}"
+},
+
+{
+type: "output",
+html: "<h1 style='font-size:5vw'>Responsive Text</h1>"
+},
+
+{
+type: "paragraph",
+text: "As the screen width changes, the text size automatically changes."
+},
+
+{
+type: "paragraph",
+text: "Best for: responsive headings, banners and hero text."
+},
+
+{
+type: "heading",
+text: "Viewport Height (vh)"
+},
+
+{
+type: "paragraph",
+text: "The vh unit is based on the height of the browser window."
+},
+
+{
+type: "paragraph",
+text: "1vh equals 1% of the viewport height."
+},
+
+{
+type: "paragraph",
+text: "100vh means 100% of the screen height."
+},
+
+{
+type: "code",
+language: "css",
+text: ".hero {\n  height:100vh;\n}"
+},
+
+{
+type: "output",
+html: "<div style='height:80px;background:#ddd;display:flex;align-items:center;justify-content:center'>100vh Example</div>"
+},
+
+{
+type: "paragraph",
+text: "A height of 100vh creates a section that covers the entire visible screen."
+},
+
+{
+type: "paragraph",
+text: "Best for: hero sections, landing pages and full-screen layouts."
+},
+
+{
+type: "heading",
+text: "vmin Unit"
+},
+
+{
+type: "paragraph",
+text: "The vmin unit uses the smaller value between the viewport width and viewport height."
+},
+
+{
+type: "paragraph",
+text: "Suppose the viewport width is 1200px and the height is 800px. Since 800px is smaller, vmin calculations will use the height."
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  font-size:8vmin;\n}"
+},
+
+{
+type: "output",
+html: "<h1 style='font-size:8vmin'>vmin Text</h1>"
+},
+
+{
+type: "paragraph",
+text: "This makes elements scale safely on both portrait and landscape screens."
+},
+
+{
+type: "paragraph",
+text: "Best for: responsive logos, circles, icons and adaptive text."
+},
+
+{
+type: "heading",
+text: "vmax Unit"
+},
+
+{
+type: "paragraph",
+text: "The vmax unit uses the larger value between the viewport width and viewport height."
+},
+
+{
+type: "paragraph",
+text: "Suppose the viewport width is 1200px and the height is 800px. Since 1200px is larger, vmax calculations will use the width."
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  font-size:8vmax;\n}"
+},
+
+{
+type: "output",
+html: "<h1 style='font-size:8vmax'>vmax Text</h1>"
+},
+
+{
+type: "paragraph",
+text: "This allows elements to grow according to the larger screen dimension."
+},
+
+{
+type: "paragraph",
+text: "Best for: creative layouts, large banners and visual effects."
+},
+
+{
+type: "heading",
+text: "ch Unit"
+},
+
+{
+type: "paragraph",
+text: "The ch unit represents the width of the character '0' in the current font."
+},
+
+{
+type: "paragraph",
+text: "1ch is approximately equal to the width of one character."
+},
+
+{
+type: "code",
+language: "css",
+text: "input {\n  width:20ch;\n}"
+},
+
+{
+type: "output",
+html: "<input style='width:20ch' placeholder='20 Characters Wide'>"
+},
+
+{
+type: "paragraph",
+text: "A width of 20ch creates a field that is approximately wide enough for 20 characters."
+},
+
+{
+type: "paragraph",
+text: "Best for: forms, input fields, OTP boxes and text-based layouts."
+},
+
+{
+type: "heading",
+text: "Absolute vs Relative Units"
+},
+
+{
+type: "paragraph",
+text: "px is an absolute unit because it always remains fixed. Percentage, em, rem, vw, vh, vmin, vmax and ch are relative units because they depend on another value."
+},
+
+{
+type: "heading",
+text: "Which Unit Should You Use?"
+},
+
+{
+type: "paragraph",
+text: "Use px when you need an exact fixed size. Use % when an element should take a percentage of its parent. Use rem for fonts and typography. Use em for component spacing. Use vw and vh for responsive screen-based layouts. Use vmin and vmax for adaptive scaling. Use ch when working with text inputs and character-based widths."
+},
+
+{
+type: "heading",
+text: "Quick Reference Guide"
+},
+
+{
+type: "paragraph",
+text: "px → Fixed sizes. % → Responsive layouts. rem → Fonts and typography. em → Component spacing. vw → Responsive width-based sizing. vh → Full-screen height sections. vmin → Safe responsive scaling. vmax → Large responsive scaling. ch → Forms and input fields."
+},
+
+{
+type: "heading",
+text: "Best Practices"
+},
+
+{
+type: "paragraph",
+text: "Modern websites mostly use px, %, rem, em, vw and vh. These units provide the best balance between consistency and responsiveness. Beginners should focus on mastering these units before using advanced units."
+},
+
+{
+type: "heading",
+text: "What You Learned"
+},
+
+{
+type: "summary",
+items: [
+"CSS Units",
+"Absolute Units",
+"Relative Units",
+"px Unit",
+"Percentage (%)",
+"em Unit",
+"rem Unit",
+"Viewport Width (vw)",
+"Viewport Height (vh)",
+"vmin Unit",
+"vmax Unit",
+"ch Unit",
+"Absolute vs Relative Units",
+"Quick Reference Guide",
+"Best Practices"
+]
 }
+
+]
+}
+
 
 ]
