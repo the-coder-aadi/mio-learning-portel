@@ -1066,7 +1066,7 @@ title: "CSS Units",
 date: "09 June 2026",
 
 description:
-"Learn the most important CSS units used in modern web development including absolute and relative units such as px, %, em, rem, vw, vh, vmin, vmax and ch.",
+"CSS units including absolute and relative units such as px, %, em, rem, vw, vh, vmin, vmax and ch.",
 
 content: [
 
@@ -1522,6 +1522,271 @@ items: [
 "Absolute vs Relative Units",
 "Quick Reference Guide",
 "Best Practices"
+]
+}
+
+]
+},
+{
+id: 9,
+slug: "css-visual-styling",
+title: "CSS Visual Styling",
+date: "09 June 2026",
+
+description:
+"Learn margin, padding, border radius, outline, opacity, cursor, text shadow and box shadow.",
+
+content: [
+
+{
+type: "heading",
+text: "Margin"
+},
+
+{
+type: "paragraph",
+text: "The margin property adds space outside an element. It creates distance between the element and surrounding elements."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  margin: 20px;\n}"
+},
+
+{
+type: "output",
+html: "<div style='margin:20px;background:#ddd;padding:10px'>Margin Example</div>"
+},
+
+{
+type: "heading",
+text: "Padding"
+},
+
+{
+type: "paragraph",
+text: "The padding property adds space inside an element between the content and border."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  padding: 20px;\n}"
+},
+
+{
+type: "output",
+html: "<div style='padding:20px;background:#ddd'>Padding Example</div>"
+},
+
+{
+type: "heading",
+text: "Margin vs Padding"
+},
+
+{
+type: "paragraph",
+text: "Margin creates space outside an element, while padding creates space inside an element."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  margin: 20px;\n  padding: 20px;\n}"
+},
+
+{
+type: "output",
+html: "<div style='margin:20px;padding:20px;background:#ddd'>Margin and Padding</div>"
+},
+
+{
+type: "heading",
+text: "Border Radius"
+},
+
+{
+type: "paragraph",
+text: "The border-radius property creates rounded corners."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  border-radius: 10px;\n}"
+},
+
+{
+type: "output",
+html: "<div style='background:#ddd;padding:10px;border-radius:10px'>Rounded Box</div>"
+},
+
+{
+type: "paragraph",
+text: "A value of 50% creates a circle when width and height are equal."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  border-radius: 50%;\n}"
+},
+
+{
+type: "output",
+html: "<div style='width:80px;height:80px;background:#bbb;border-radius:50%'></div>"
+},
+
+{
+type: "heading",
+text: "Outline"
+},
+
+{
+type: "paragraph",
+text: "The outline property creates a line outside the border of an element."
+},
+
+{
+type: "code",
+language: "css",
+text: "button {\n  outline: 2px solid red;\n}"
+},
+
+{
+type: "output",
+html: "<button style='outline:2px solid red'>Click Me</button>"
+},
+
+{
+type: "heading",
+text: "Border vs Outline"
+},
+
+{
+type: "paragraph",
+text: "Border is part of the element and affects its size. Outline is drawn outside the border and does not affect the element size."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  border: 2px solid blue;\n  outline: 2px solid red;\n}"
+},
+
+{
+type: "output",
+html: "<div style='border:2px solid blue;outline:2px solid red;padding:10px'>Border and Outline</div>"
+},
+
+{
+type: "heading",
+text: "Opacity"
+},
+
+{
+type: "paragraph",
+text: "The opacity property controls the transparency of an element. Values range from 0 to 1."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  opacity: 0.5;\n}"
+},
+
+{
+type: "output",
+html: "<div style='background:steelblue;color:white;padding:10px;opacity:0.5'>Opacity Example</div>"
+},
+
+{
+type: "heading",
+text: "Cursor"
+},
+
+{
+type: "paragraph",
+text: "The cursor property changes the mouse pointer when it moves over an element."
+},
+
+{
+type: "code",
+language: "css",
+text: "button {\n  cursor: pointer;\n}"
+},
+
+{
+type: "output",
+html: "<button style='cursor:pointer'>Hover Me</button>"
+},
+
+{
+type: "paragraph",
+text: "Other common values are not-allowed, wait, grab and crosshair."
+},
+
+{
+type: "heading",
+text: "Text Shadow"
+},
+
+{
+type: "paragraph",
+text: "The text-shadow property adds a shadow behind text."
+},
+
+{
+type: "code",
+language: "css",
+text: "h1 {\n  text-shadow: 2px 2px 5px gray;\n}"
+},
+
+{
+type: "output",
+html: "<h1 style='text-shadow:2px 2px 5px gray'>Welcome</h1>"
+},
+
+{
+type: "heading",
+text: "Box Shadow"
+},
+
+{
+type: "paragraph",
+text: "The box-shadow property adds a shadow around an element."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  box-shadow: 0 0 10px gray;\n}"
+},
+
+{
+type: "output",
+html: "<div style='padding:10px;background:white;box-shadow:0 0 10px gray'>Card Element</div>"
+},
+
+{
+type: "heading",
+text: "What You Learned"
+},
+
+{
+type: "summary",
+items: [
+"Margin",
+"Padding",
+"Margin vs Padding",
+"Border Radius",
+"Outline",
+"Border vs Outline",
+"Opacity",
+"Cursor",
+"Text Shadow",
+"Box Shadow"
 ]
 }
 
