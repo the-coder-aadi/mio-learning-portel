@@ -1531,7 +1531,7 @@ items: [
 id: 9,
 slug: "css-visual-styling",
 title: "CSS Visual Styling",
-date: "09 June 2026",
+date: "10 June 2026",
 
 description:
 "Learn margin, padding, border radius, outline, opacity, cursor, text shadow and box shadow.",
