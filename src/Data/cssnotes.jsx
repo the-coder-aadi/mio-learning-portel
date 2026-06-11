@@ -1791,7 +1791,309 @@ items: [
 }
 
 ]
+},
+
+{
+id: 10,
+slug: "css-backgrounds-overflow-and-pseudo-classes",
+title: "CSS Backgrounds & Pseudo Classes",
+date: "11 June 2026",
+
+description:
+"Background images, sizing, overflow and some imp pseudo classes such as hover, active, focus and visited.",
+
+content: [
+
+{
+type: "heading",
+text: "Background Image"
+},
+
+{
+type: "paragraph",
+text: "The background-image property is used to place an image behind an element."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');\n}"
+},
+
+{
+type: "output",
+html: "<div style='height:420px;background-image:url(https://images.unsplash.com/photo-1506744038136-46273834b3fb);background-size:cover'></div>"
+},
+
+{
+type: "paragraph",
+text: "Background images are commonly used in banners, hero sections and website headers."
+},
+
+{
+type: "heading",
+text: "Background Repeat"
+},
+
+{
+type: "paragraph",
+text: "By default, a background image repeats if it is smaller than its container."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  background-repeat: no-repeat;\n}"
+},
+
+{
+type: "output",
+html: "<div style='height:120px;background-image:url(https://images.unsplash.com/photo-1506744038136-46273834b3fb);background-repeat:no-repeat;background-size:120px'></div>"
+},
+
+{
+type: "paragraph",
+text: "The no-repeat value displays the image only once."
+},
+
+{
+type: "heading",
+text: "Background Position"
+},
+
+{
+type: "paragraph",
+text: "The background-position property controls where the image appears inside the element."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  background-position: center;\n}"
+},
+
+{
+type: "output",
+html: "<div style='height:120px;background-image:url(https://images.unsplash.com/photo-1506744038136-46273834b3fb);background-size:cover;background-position:center'></div>"
+},
+
+{
+type: "paragraph",
+text: "Common values are left, center, right, top and bottom."
+},
+
+{
+type: "heading",
+text: "Background Size"
+},
+
+{
+type: "paragraph",
+text: "The background-size property controls the size of the background image."
+},
+
+{
+type: "heading",
+text: "Cover"
+},
+
+{
+type: "paragraph",
+text: "The cover value fills the entire container. Some parts of the image may be cropped."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  background-size: cover;\n}"
+},
+
+{
+type: "output",
+html: "<div style='height:120px;background-image:url(https://images.unsplash.com/photo-1506744038136-46273834b3fb);background-size:cover;background-position:center'></div>"
+},
+
+{
+type: "heading",
+text: "Contain"
+},
+
+{
+type: "paragraph",
+text: "The contain value shows the complete image without cropping. Empty space may appear around the image."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  background-size: contain;\n}"
+},
+
+{
+type: "output",
+html: "<div style='height:120px;background-image:url(https://images.unsplash.com/photo-1506744038136-46273834b3fb);background-size:contain;background-repeat:no-repeat;background-position:center'></div>"
+},
+
+{
+type: "paragraph",
+text: "Use cover when filling a section is more important. Use contain when showing the full image is more important."
+},
+
+{
+type: "heading",
+text: "Overflow"
+},
+
+{
+type: "paragraph",
+text: "The overflow property controls what happens when content becomes larger than its container."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  width: 200px;\n  height: 80px;\n  overflow: auto;\n}"
+},
+
+{
+type: "output",
+html: "<div style='width:200px;height:80px;overflow:auto;border:1px solid #999'>This is a very long content that does not fit inside the container. Scrollbars will appear automatically when needed.</div>"
+},
+
+{
+type: "paragraph",
+text: "Common values are visible, hidden, scroll and auto."
+},
+
+{
+type: "heading",
+text: "Hover Pseudo Class"
+},
+
+{
+type: "paragraph",
+text: "The :hover pseudo class applies styles when the user moves the mouse over an element."
+},
+
+{
+type: "code",
+language: "css",
+text: "button:hover {\n  background: black;\n  color: white;\n}"
+},
+
+{
+type: "output",
+html: "<button>Hover Me</button>"
+},
+
+{
+type: "paragraph",
+text: "Hover effects are commonly used on buttons, links and cards."
+},
+
+{
+type: "heading",
+text: "Active Pseudo Class"
+},
+
+{
+type: "paragraph",
+text: "The :active pseudo class applies styles while an element is being clicked."
+},
+
+{
+type: "code",
+language: "css",
+text: "button:active {\n  transform: scale(0.95);\n}"
+},
+
+{
+type: "output",
+html: "<button>Click Me</button>"
+},
+
+{
+type: "paragraph",
+text: "Active provides visual feedback when users press a button."
+},
+
+{
+type: "heading",
+text: "Focus Pseudo Class"
+},
+
+{
+type: "paragraph",
+text: "The :focus pseudo class applies styles when an input field receives focus."
+},
+
+{
+type: "code",
+language: "css",
+text: "input:focus {\n  border: 2px solid blue;\n}"
+},
+
+{
+type: "output",
+html: "<input placeholder='Click Here'>"
+},
+
+{
+type: "paragraph",
+text: "Focus is commonly used to highlight active form fields."
+},
+
+{
+type: "heading",
+text: "Visited Pseudo Class"
+},
+
+{
+type: "paragraph",
+text: "The :visited pseudo class styles links that have already been visited by the user."
+},
+
+{
+type: "code",
+language: "css",
+text: "a:visited {\n  color: purple;\n}"
+},
+
+{
+type: "output",
+html: "<a href='#'>Visited Link Example</a>"
+},
+
+{
+type: "paragraph",
+text: "It helps users identify which links they have already opened."
+},
+
+{
+type: "heading",
+text: "What You Learned"
+},
+
+{
+type: "summary",
+items: [
+"Background Image",
+"Background Repeat",
+"Background Position",
+"Background Size",
+"Cover",
+"Contain",
+"Overflow",
+"Hover Pseudo Class",
+"Active Pseudo Class",
+"Focus Pseudo Class",
+"Visited Pseudo Class"
+]
 }
+
+]
+}
+
 
 
 ]
