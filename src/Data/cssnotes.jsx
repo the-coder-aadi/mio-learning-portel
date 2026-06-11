@@ -1978,12 +1978,21 @@ text: "The :hover pseudo class applies styles when the user moves the mouse over
 {
 type: "code",
 language: "css",
-text: "button:hover {\n  background: black;\n  color: white;\n}"
+text: "button:hover {\n  background-color: black;\n  color: white;\n}"
 },
 
 {
-type: "output",
-html: "<button>Hover Me</button>"
+  type: "output",
+  html: `
+    <style>
+      .btn1:hover{
+        background:black;
+        color:white;
+      }
+    </style>
+
+    <button class="btn1">Hover Me</button>
+  `
 },
 
 {
@@ -2008,8 +2017,16 @@ text: "button:active {\n  transform: scale(0.95);\n}"
 },
 
 {
-type: "output",
-html: "<button>Click Me</button>"
+  type: "output",
+  html: `
+    <style>
+      .btn:active{
+        transform:scale(0.95);
+      }
+    </style>
+
+    <button class="btn">Click Me</button>
+  `
 },
 
 {
@@ -2034,8 +2051,22 @@ text: "input:focus {\n  border: 2px solid blue;\n}"
 },
 
 {
-type: "output",
-html: "<input placeholder='Click Here'>"
+  type: "output",
+  html: `
+    <style>
+      input{
+      outline:none;
+        border:1px solid #999;
+        padding:8px;
+      }
+
+      input:focus{
+        border:2px solid red !important;
+      }
+    </style>
+
+    <input placeholder="Click Here">
+  `
 },
 
 {
