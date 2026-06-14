@@ -2123,6 +2123,473 @@ items: [
 }
 
 ]
+},
+
+{
+id: 10,
+slug: "css-lists-filter-transform-animation",
+title: "CSS Lists, Filter, Transform & Animation",
+date: "12 June 2026",
+
+description:
+"list styling, list positions, filter effects, transform properties and CSS animations with simple explanations and examples.",
+
+content: [
+
+{
+type: "heading",
+text: "List Styling"
+},
+
+{
+type: "paragraph",
+text: "The list-style-type property is used to change the marker of lists. It works with both ul and ol lists. Common values include disc, circle, square, decimal, lower-alpha and upper-roman."
+},
+
+{
+type: "code",
+language: "css",
+text: "ul {\n  list-style-type: square;\n}"
+},
+
+{
+type: "output",
+html: `
+<ul style="list-style-type:square">
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+</ul>
+`
+},
+
+{
+type: "paragraph",
+text: "You can also use custom emojis or images instead of default markers. Emojis can be added using list-style-type with symbols, while images can be added using list-style-image."
+},
+
+{
+type: "code",
+language: "css",
+text: "ul {\n  list-style-image: url('https://cdn-icons-png.flaticon.com/16/1828/1828884.png');\n}"
+},
+
+{
+type: "output",
+html: `
+<ul style="list-style-image:url('https://cdn-icons-png.flaticon.com/16/1828/1828884.png')">
+  <li>Learn CSS</li>
+  <li>Build Projects</li>
+</ul>
+`
+},
+
+{
+type: "paragraph",
+text: "Popular list-style-type values: disc, circle, square, decimal, lower-alpha and upper-roman."
+},
+
+{
+type: "heading",
+text: "List Position"
+},
+
+{
+type: "paragraph",
+text: "The list-style-position property controls whether the marker appears inside or outside the content area."
+},
+
+{
+type: "code",
+language: "css",
+text: "ul {\n  list-style-position: inside;\n}"
+},
+
+{
+type: "output",
+html: `
+<ul style="list-style-position:inside;border:1px solid #999;padding:10px;width:250px">
+  <li>This is a long list item to show marker position.</li>
+</ul>
+`
+},
+
+{
+type: "paragraph",
+text: "Common values are outside (default) and inside."
+},
+
+{
+type: "heading",
+text: "Filter"
+},
+
+{
+type: "paragraph",
+text: "The filter property adds visual effects to images and elements without editing the original image."
+},
+
+{
+type: "code",
+language: "css",
+text: "img {\n  filter: grayscale(100%);\n}"
+},
+
+{
+type: "output",
+html: `
+<img
+src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500"
+style="width:100%;max-height:250px;object-fit:cover;filter:grayscale(100%)"
+/>
+`
+},
+
+{
+type: "paragraph",
+text: "Common filter values are blur(), brightness(), contrast(), grayscale(), sepia() and drop-shadow(). Multiple filters can be combined together."
+},
+
+{
+type: "heading",
+text: "Transform"
+},
+
+{
+type: "paragraph",
+text: "The transform property changes the position, size or rotation of an element without affecting the document layout."
+},
+
+{
+type: "heading",
+text: "Translate"
+},
+
+{
+type: "paragraph",
+text: "translate() moves an element from its original position."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  transform: translateX(50px);\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="width:100px;height:100px;background:#4caf50;transform:translateX(50px)"></div>
+`
+},
+
+{
+type: "heading",
+text: "Scale"
+},
+
+{
+type: "paragraph",
+text: "scale() increases or decreases the size of an element."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  transform: scale(1.2);\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="width:80px;height:80px;background:#2196f3;transform:scale(1.2);margin:15px"></div>
+`
+},
+
+{
+type: "heading",
+text: "Rotate"
+},
+
+{
+type: "paragraph",
+text: "rotate() rotates an element by a specified angle."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  transform: rotate(20deg);\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="width:90px;height:90px;background:#ff9800;transform:rotate(20deg);margin:20px"></div>
+`
+},
+
+{
+type: "heading",
+text: "Transform Combination"
+},
+
+{
+type: "paragraph",
+text: "Multiple transforms can be applied together."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  transform: translateX(30px) rotate(15deg) scale(1.1);\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="width:90px;height:90px;background:#e91e63;transform:translateX(30px) rotate(15deg) scale(1.1);margin:20px"></div>
+`
+},
+
+{
+type: "paragraph",
+text: "Most commonly used transform functions are translate(), scale(), rotate() and skew()."
+},
+
+{
+type: "heading",
+text: "Transition (Smooth Transform)"
+},
+
+{
+type: "paragraph",
+text: "CSS transition is used to make changes smooth instead of instant. When you hover or change a property like transform, it animates gradually instead of jumping."
+},
+
+{
+type: "paragraph",
+text: "You define transition with duration and timing function (easing)."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  transition: transform 0.5s ease;\n}\n\ndiv:hover {\n  transform: translateX(50px);\n}"
+},
+
+{
+type: "output",
+html: `
+<style>
+.box1{
+  width:80px;
+  height:80px;
+  background:#4caf50;
+  transition: transform 0.5s ease;
+}
+
+.box1:hover{
+  transform: translateX(50px);
+}
+</style>
+
+<div class="box1"></div>
+`
+},
+
+{
+type: "heading",
+text: "CSS Timing Functions (Easing)"
+},
+
+{
+type: "paragraph",
+text: "Easing controls how the speed of the animation changes over time."
+},
+
+{
+type: "paragraph",
+text: "1. ease → slow start, fast middle, slow end (default)\n2. linear → same speed throughout\n3. ease-in → slow start, fast end\n4. ease-out → fast start, slow end\n5. ease-in-out → slow start and slow end (smooth and natural)\n6. step-end → jumps directly to final state (no smooth transition)"
+},
+
+{
+type: "code",
+language: "css",
+text: ".box {\n  transition: transform 1s ease-in-out;\n}\n\n.box:hover {\n  transform: translateX(100px) rotate(20deg);\n}"
+},
+
+{
+type: "output",
+html: `
+<style>
+.box2{
+  width:80px;
+  height:80px;
+  background:#e91e63;
+  transition: transform 1s ease-in-out;
+}
+
+.box2:hover{
+  transform: translateX(100px) rotate(20deg);
+}
+</style>
+
+<div class="box2"></div>
+`
+},
+
+{
+type: "paragraph",
+text: "Best practice: use ease-in-out for UI animations because it feels smooth and natural."
+},
+
+
+{
+type: "heading",
+text: "Animation"
+},
+
+{
+type: "paragraph",
+text: "CSS animations allow elements to change styles smoothly over time without JavaScript."
+},
+
+{
+type: "heading",
+text: "Keyframes"
+},
+
+{
+type: "paragraph",
+text: "The @keyframes rule defines how an animation should progress from start to finish."
+},
+
+{
+type: "code",
+language: "css",
+text: "@keyframes move {\n  from {\n    transform: translateX(0);\n  }\n  to {\n    transform: translateX(200px);\n  }\n}"
+},
+
+{
+type: "heading",
+text: "Basic Animation"
+},
+
+{
+type: "paragraph",
+text: "The animation property applies the keyframes to an element."
+},
+
+{
+type: "code",
+language: "css",
+text: ".box {\n  animation: move 3s infinite alternate;\n}"
+},
+
+{
+type: "output",
+html: `
+<style>
+@keyframes moveBox{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(200px);
+  }
+}
+
+.move-box{
+  width:70px;
+  height:70px;
+  background:#4caf50;
+  animation:moveBox 3s infinite alternate;
+}
+</style>
+
+<div class="move-box"></div>
+`
+},
+
+{
+type: "paragraph",
+text: "Here, 3s is the duration, infinite repeats forever and alternate makes the animation move back and forth."
+},
+
+{
+type: "heading",
+text: "Loading Animation Example"
+},
+
+{
+type: "paragraph",
+text: "Animations are commonly used for loaders, buttons, cards and interactive UI effects."
+},
+
+{
+type: "code",
+language: "css",
+text: "@keyframes pulse {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.2); }\n  100% { transform: scale(1); }\n}\n\n.circle {\n  animation: pulse 1.5s infinite;\n}"
+},
+
+{
+type: "output",
+html: `
+<style>
+@keyframes pulse{
+  0%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.25);
+  }
+  100%{
+    transform:scale(1);
+  }
+}
+
+.pulse-circle{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:#2196f3;
+  animation:pulse 1.5s infinite;
+}
+</style>
+
+<div class="pulse-circle"></div>
+`
+},
+
+{
+type: "paragraph",
+text: "Important animation properties are animation-name, animation-duration, animation-delay, animation-iteration-count and animation-direction."
+},
+
+{
+type: "heading",
+text: "What You Learned"
+},
+
+{
+type: "summary",
+items: [
+"List Styling",
+"Custom List Markers",
+"List Position",
+"Filter",
+"Translate",
+"Scale",
+"Rotate",
+"Transform Combination",
+"Keyframes",
+"CSS Animation",
+"Animation Properties"
+]
+}
+
+]
 }
 
 
