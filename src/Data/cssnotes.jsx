@@ -2596,7 +2596,7 @@ items: [
 id: 10,
 slug: "css-position-float",
 title: "CSS Position & Float",
-date: "13 June 2026",
+date: "16 June 2026",
 
 description:
 "Learn CSS Position and Float in a simple and beginner-friendly way with real-life examples and practical use cases.",
@@ -2847,7 +2847,7 @@ text: "Real Life Example: If two books are placed on a table, the book placed ab
 {
 type: "code",
 language: "css",
-text: ".red {\n  z-index: 1;\n}\n\n.blue {\n  z-index: 2;\n}"
+text: ".red {\n  z-index: 1;\n position:relative; \n}\n\n.blue {\n  z-index: 2;\n position:relative; \n}"
 },
 
 {
