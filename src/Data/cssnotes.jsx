@@ -2590,7 +2590,423 @@ items: [
 }
 
 ]
+},
+
+{
+id: 10,
+slug: "css-position-float",
+title: "CSS Position & Float",
+date: "13 June 2026",
+
+description:
+"Learn CSS Position and Float in a simple and beginner-friendly way with real-life examples and practical use cases.",
+
+content: [
+
+{
+type: "heading",
+text: "What is Position?"
+},
+
+{
+type: "paragraph",
+text: "The position property is used to control where an element appears on a webpage. By default, all elements follow the normal document flow and appear one after another. Position allows us to change that behavior when needed."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Imagine students sitting in a classroom. Everyone sits in their assigned seat by default. Position helps us move a student to a different place when needed."
+},
+
+{
+type: "heading",
+text: "Position Types Overview"
+},
+
+{
+type: "paragraph",
+text: "Before learning each value, remember this simple rule:\n\nStatic → Stay where the browser places you (default position)\nRelative → Move from your original position but keep your original space\nAbsolute → Leave your original space and move according to the nearest positioned parent\nFixed → Move according to the browser screen and stay visible even while scrolling\nSticky → Behave like a normal element at first, then stick to a position when the page is scrolled"
+},
+
+{
+type: "heading",
+text: "Static Position"
+},
+
+{
+type: "paragraph",
+text: "static is the default value of position. Elements stay in the normal document flow and cannot be moved using top, right, bottom or left."
+},
+
+{
+type: "code",
+language: "css",
+text: ".box {\n  position: static;\n}"
+},
+
+{
+type: "output",
+html: `
+
+<div style="width:100px;height:100px;background:#4caf50;color:white;display:flex;align-items:center;justify-content:center">
+  Static
+</div>
+`
+},
+
+{
+type: "paragraph",
+text: "In real projects, we rarely write position: static because every element is already static by default."
+},
+
+{
+type: "heading",
+text: "Relative Position"
+},
+
+{
+type: "paragraph",
+text: "relative moves an element from its original position, but the original space remains reserved."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: A car moves slightly forward in a parking lot, but the parking space still belongs to that car."
+},
+
+{
+type: "code",
+language: "css",
+text: ".box {\n  position: relative;\n  left: 40px;\n}"
+},
+
+{
+type: "output",
+html: `
+
+<div style="width:100px;height:100px;background:#2196f3;color:white;display:flex;align-items:center;justify-content:center;position:relative;left:40px">
+  Relative
+</div>
+`
+},
+
+{
+type: "paragraph",
+text: "The box moves, but its original space is still reserved."
+},
+
+{
+type: "heading",
+text: "Absolute Position"
+},
+
+{
+type: "paragraph",
+text: "absolute removes an element from the normal document flow. The original space is no longer reserved."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: A sticker placed on a wall can be attached anywhere without affecting other objects."
+},
+
+{
+type: "code",
+language: "css",
+text: ".parent {\n  position: relative;\n}\n\n.child {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}"
+},
+
+{
+type: "output",
+html: `
+
+<div style="position:relative;width:250px;height:150px;border:2px solid #333">
+  <div style="position:absolute;top:10px;right:10px;width:70px;height:70px;background:#ff9800"></div>
+</div>
+`
+},
+
+{
+type: "paragraph",
+text: "Absolute elements search for the nearest positioned parent. If no positioned parent exists, they use the browser window."
+},
+
+{
+type: "paragraph",
+text: "Most Common Pattern:\nParent → position: relative\nChild → position: absolute"
+},
+
+{
+type: "heading",
+text: "Real World Use Cases of Absolute"
+},
+
+{
+type: "paragraph",
+text: "Notification badges, sale labels, profile status indicators, heart icons and corner buttons are commonly built using absolute positioning."
+},
+
+{
+type: "heading",
+text: "Fixed Position"
+},
+
+{
+type: "paragraph",
+text: "fixed attaches an element to the browser screen. The element stays in the same position even when the page is scrolled."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: A CCTV camera attached to a wall stays in the same place regardless of what happens around it."
+},
+
+{
+type: "code",
+language: "css",
+text: ".box {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n}"
+},
+
+{
+type: "paragraph",
+text: "Common use cases include WhatsApp buttons, chat support buttons and back-to-top buttons."
+},
+
+{
+type: "heading",
+text: "Sticky Position"
+},
+
+{
+type: "paragraph",
+text: "sticky behaves like relative at first. When the page reaches a specific scroll position, it behaves like fixed."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: A bookmark in a notebook stays visible while you continue reading."
+},
+
+{
+type: "code",
+language: "css",
+text: ".navbar {\n  position: sticky;\n  top: 0;\n}"
+},
+
+{
+type: "output",
+html: `
+
+<div style="position:sticky;top:0;background:#e91e63;color:white;padding:12px;text-align:center">
+  Sticky Navbar
+</div>
+`
+},
+
+{
+type: "paragraph",
+text: "Sticky navigation bars are commonly used in modern websites."
+},
+
+{
+type: "heading",
+text: "Top, Right, Bottom and Left"
+},
+
+{
+type: "paragraph",
+text: "These properties are used to move positioned elements."
+},
+
+{
+type: "code",
+language: "css",
+text: ".box {\n  position: relative;\n  top: 20px;\n  left: 30px;\n}"
+},
+
+{
+type: "paragraph",
+text: "Easy Trick:\nleft moves the element toward the right.\nright moves the element toward the left.\ntop moves the element downward.\nbottom moves the element upward."
+},
+
+{
+type: "heading",
+text: "Z-Index"
+},
+
+{
+type: "paragraph",
+text: "z-index decides which element appears on top when multiple elements overlap."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: If two books are placed on a table, the book placed above will be visible."
+},
+
+{
+type: "code",
+language: "css",
+text: ".red {\n  z-index: 1;\n}\n\n.blue {\n  z-index: 2;\n}"
+},
+
+{
+type: "output",
+html: `
+
+<div style="position:relative;height:150px">
+  <div style="position:absolute;width:100px;height:100px;background:red;z-index:1"></div>
+  <div style="position:absolute;left:40px;top:40px;width:100px;height:100px;background:blue;z-index:2"></div>
+</div>
+`
+},
+
+{
+type: "paragraph",
+text: "The element with the higher z-index appears above the others."
+},
+
+{
+type: "heading",
+text: "What is Float?"
+},
+
+{
+type: "paragraph",
+text: "Before Flexbox and Grid existed, developers used float for layouts. Today, float is mainly used for wrapping text around images."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Newspaper articles where text flows around an image."
+},
+
+{
+type: "heading",
+text: "Float Left"
+},
+
+{
+type: "paragraph",
+text: "float:left moves an element to the left side and allows surrounding content to wrap around it."
+},
+
+{
+type: "code",
+language: "css",
+text: "img {\n  float: left;\n  margin-right: 15px;\n}"
+},
+
+{
+type: "output",
+html: ` <img
+src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200"
+style="float:left;width:120px;margin-right:15px"
+/>
+
+<p>
+This text wraps around the image because the image is floated to the left side.
+</p>
+`
+},
+
+{
+type: "heading",
+text: "Float Right"
+},
+
+{
+type: "paragraph",
+text: "float:right moves an element to the right side and allows surrounding content to wrap around it."
+},
+
+{
+type: "code",
+language: "css",
+text: "img {\n  float: right;\n}"
+},
+
+{
+type: "output",
+html: ` <img
+src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200"
+style="float:right;width:120px"
+/>
+
+<p>
+This text wraps around the image because the image is floated to the right side.
+</p>
+`
+},
+
+{
+type: "heading",
+text: "Clear Property"
+},
+
+{
+type: "paragraph",
+text: "Sometimes floated elements affect the content below them. The clear property is used to stop that effect."
+},
+
+{
+type: "code",
+language: "css",
+text: ".next {\n  clear: both;\n}"
+},
+
+{
+type: "output",
+html: `
+
+<div style="float:left;width:100px;height:100px;background:#4caf50"></div>
+
+<div style="clear:both;padding-top:10px">
+  This content starts below the floated element.
+</div>
+`
+},
+
+{
+type: "paragraph",
+text: "Common values are left, right and both."
+},
+
+{
+type: "heading",
+text: "Position vs Float"
+},
+
+{
+type: "paragraph",
+text: "Position is used to place elements at specific locations. Float is mainly used to wrap text around images. Modern layouts should use Flexbox and Grid instead of float."
+},
+
+{
+type: "heading",
+text: "Quick Revision"
+},
+
+{
+type: "summary",
+items: [
+"Static → Default Position",
+"Relative → Move but Keep Space",
+"Absolute → Move and Leave Space",
+"Fixed → Stick to Screen",
+"Sticky → Normal then Stick",
+"Top Right Bottom Left",
+"Z-Index",
+"Float Left",
+"Float Right",
+"Clear Property",
+"Position vs Float"
+]
 }
+
+]
+}
+
 
 
 
