@@ -3005,9 +3005,293 @@ items: [
 }
 
 ]
+},
+{
+id: 11,
+slug: "css-display-values",
+title: "CSS Display Values + Flexbox Intro (Beginner Friendly)",
+date: "17 June 2026",
+
+description:
+"Learn important CSS display values and a simple introduction to Flexbox with easy real-life examples.",
+
+content: [
+
+{
+type: "heading",
+text: "What is Display in CSS?"
+},
+
+{
+type: "paragraph",
+text: "The display property in CSS decides how an element behaves on the webpage — like block, inline, hidden, or layout system (flex)."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Think of a classroom where students can sit in rows, side by side, or even be removed from the class."
+},
+
+{
+type: "heading",
+text: "1. display: block"
+},
+
+{
+type: "paragraph",
+text: "Block elements take full width and always start on a new line."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: One student takes a full bench."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  display: block;\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="display:block;background:#4caf50;color:white;padding:10px;margin-bottom:5px">Block 1</div>
+<div style="display:block;background:#2196f3;color:white;padding:10px">Block 2</div>
+`
+},
+
+{
+type: "heading",
+text: "2. display: inline"
+},
+
+{
+type: "paragraph",
+text: "Inline elements stay in the same line and take only required width."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Students sitting side by side on one bench."
+},
+
+{
+type: "code",
+language: "css",
+text: "span {\n  display: inline;\n}"
+},
+
+{
+type: "output",
+html: `
+<span style="display:inline;background:#ff9800;color:white;padding:5px">Inline 1</span>
+<span style="display:inline;background:#e91e63;color:white;padding:5px">Inline 2</span>
+`
+},
+
+{
+type: "heading",
+text: "3. display: inline-block"
+},
+
+{
+type: "paragraph",
+text: "Inline-block behaves like inline but allows width and height."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Small boxes placed in a row."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  display: inline-block;\n  width: 100px;\n  height: 100px;\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="display:inline-block;width:80px;height:80px;background:#4caf50;margin-right:10px"></div>
+<div style="display:inline-block;width:80px;height:80px;background:#2196f3"></div>
+`
+},
+
+{
+type: "heading",
+text: "4. display: none"
+},
+
+{
+type: "paragraph",
+text: "Element is completely hidden and takes no space."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: A chair removed from the room."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  display: none;\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="background:#4caf50;color:white;padding:10px;margin-bottom:10px">
+  Visible Box
+</div>
+
+<div style="display:none;background:#f44336;color:white;padding:10px">
+  Hidden Box
+</div>
+`
+},
+
+{
+type: "heading",
+text: "5. display: contents"
+},
+
+{
+type: "paragraph",
+text: "display: contents removes the element box but keeps its children visible."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: A box disappears but items inside it stay visible."
+},
+
+{
+type: "code",
+language: "css",
+text: "div {\n  display: contents;\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="display:contents">
+  <p style="background:#4caf50;color:white;padding:10px">Child 1</p>
+  <p style="background:#2196f3;color:white;padding:10px">Child 2</p>
+</div>
+`
+},
+
+{
+type: "heading",
+text: "6. display: flex (Intro - Important)"
+},
+
+{
+type: "paragraph",
+text: "Flexbox is a modern CSS layout system used to arrange items in a row or column easily with alignment and spacing control."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Imagine you are arranging students on a bench. You can easily adjust their position — center them, space them equally, or move them left/right without breaking layout."
+},
+
+{
+type: "paragraph",
+text: "Flexbox works only when we apply display: flex on a parent container. Then all child elements automatically become flex items."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n  display: flex;\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="display:flex;gap:10px;">
+  <div style="width:60px;height:60px;background:#4caf50"></div>
+  <div style="width:60px;height:60px;background:#2196f3"></div>
+  <div style="width:60px;height:60px;background:#ff9800"></div>
+</div>
+`
+},
+
+{
+type: "heading",
+text: "Basic Flex Behavior (Simple Understanding)"
+},
+
+{
+type: "paragraph",
+text: "By default, Flexbox arranges items in a row (left to right). But we can change direction, spacing, and alignment very easily."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Like sitting students in a row — you can move them closer, center them, or spread them apart without changing seats manually."
+},
+
+{
+type: "heading",
+text: "Basic Flex Properties (Just Intro Level)"
+},
+
+{
+type: "paragraph",
+text: "We will learn these in detail later, but for now just understand meaning:"
+},
+
+{
+type: "paragraph",
+text: `
+1. justify-content → items ko left, center, right ya space me arrange karta hai (horizontal alignment)
+
+Example: students ko bench par left/center/right ya equal gap me bithana
+
+------------------------------------------------
+
+2. align-items → items ko upar, center ya neeche align karta hai (vertical alignment)
+
+Example: books ko shelf me top/center/bottom me set karna
+
+------------------------------------------------
+
+3. gap → items ke beech ka space set karta hai
+
+Example: chairs ke beech equal distance
+
+------------------------------------------------
+
+4. flex-direction → items ki direction set karta hai (row ya column)
+
+Example: students ko line me (left→right) ya line me upar se neeche bithana
+`
+},
+
+{
+type: "heading",
+text: "Quick Revision"
+},
+
+{
+type: "summary",
+items: [
+"display: block → full width new line",
+"display: inline → same line",
+"display: inline-block → inline + size control",
+"display: none → hidden element",
+"display: contents → box removed, children visible",
+"display: flex → flexible layout system (row/column + alignment control)"
+]
 }
 
-
+]
+}
 
 
 ]
