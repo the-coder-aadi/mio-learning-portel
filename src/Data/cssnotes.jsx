@@ -3291,6 +3291,502 @@ items: [
 }
 
 ]
+},
+
+
+{
+id: 12,
+slug: "complete-flexbox-guide",
+title: "Complete Flexbox Guide (Beginner Friendly)",
+date: "18 June 2026",
+
+description:
+"Learn Flexbox from basic to important properties with simple real-life examples and visual understanding.",
+
+content: [
+
+{
+type: "heading",
+text: "What is Flexbox?"
+},
+
+{
+type: "paragraph",
+text: "Flexbox is a modern CSS layout system used to align and arrange items easily in row or column."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Imagine arranging students on a bench. You can place them left, center, right, with equal gaps, or even in multiple rows."
+},
+
+{
+type: "heading",
+text: "How Flexbox Works?"
+},
+
+{
+type: "paragraph",
+text: "Flexbox works on two things:"
+},
+
+{
+type: "summary",
+items: [
+"Parent = Flex Container",
+"Children = Flex Items"
+]
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n  display: flex;\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="display:flex;gap:10px">
+<div style="width:60px;height:60px;background:#4caf50"></div>
+<div style="width:60px;height:60px;background:#2196f3"></div>
+<div style="width:60px;height:60px;background:#ff9800"></div>
+</div>
+`
+},
+
+{
+type: "heading",
+text: "Important Flexbox Concept"
+},
+
+{
+type: "paragraph",
+text: "Flexbox works on two axis:"
+},
+
+{
+type: "summary",
+items: [
+"Main Axis → Horizontal (default)",
+"Cross Axis → Vertical"
+]
+},
+
+{
+type: "heading",
+text: "1. flex-direction"
+},
+
+{
+type: "paragraph",
+text: "Defines the direction of flex items."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Students sitting left→right or top→bottom."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n  display: flex;\n  flex-direction: row;\n}"
+},
+
+{
+type: "summary",
+items: [
+"row → left to right (default)",
+"row-reverse → right to left",
+"column → top to bottom",
+"column-reverse → bottom to top"
+]
+},
+
+{
+type: "output",
+html: `
+<div style="display:flex;gap:10px">
+<div style="width:50px;height:50px;background:red"></div>
+<div style="width:50px;height:50px;background:blue"></div>
+<div style="width:50px;height:50px;background:green"></div>
+</div>
+`
+},
+
+{
+type: "heading",
+text: "2. justify-content"
+},
+
+{
+type: "paragraph",
+text: "Controls alignment on main axis."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Students ko bench par left, center ya equal gap me bithana."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n display:flex;\n justify-content:center;\n}"
+},
+
+{
+type: "summary",
+items: [
+"flex-start",
+"center",
+"flex-end",
+"space-between",
+"space-around",
+"space-evenly"
+]
+},
+
+{
+type: "output",
+html: `
+<div style="display:flex;justify-content:space-evenly;border:1px solid #ccc;padding:10px">
+<div style="width:40px;height:40px;background:#4caf50"></div>
+<div style="width:40px;height:40px;background:#2196f3"></div>
+<div style="width:40px;height:40px;background:#ff9800"></div>
+</div>
+`
+},
+
+{
+type: "heading",
+text: "3. align-items"
+},
+
+{
+type: "paragraph",
+text: "Controls alignment on cross axis."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Books ko shelf me top, center, bottom set karna."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n display:flex;\n align-items:center;\n}"
+},
+
+{
+type: "summary",
+items: [
+"stretch (default)",
+"flex-start",
+"center",
+"flex-end",
+"baseline"
+]
+},
+
+{
+type: "output",
+html: `
+<div style="display:flex;align-items:center;height:120px;border:1px solid #ccc">
+<div style="width:50px;height:50px;background:red"></div>
+<div style="width:50px;height:80px;background:blue"></div>
+</div>
+`
+},
+
+{
+type: "heading",
+text: "4. flex-wrap"
+},
+
+{
+type: "paragraph",
+text: "Allows items to move to next line if space is not enough."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Bench full ho gayi to students next row me chale jayenge."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n display:flex;\n flex-wrap:wrap;\n}"
+},
+
+{
+type: "summary",
+items: [
+"nowrap (default)",
+"wrap",
+"wrap-reverse"
+]
+},
+
+{
+type: "heading",
+text: "5. gap"
+},
+
+{
+type: "paragraph",
+text: "Adds space between flex items."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Chairs ke beech distance."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n display:flex;\n gap:20px;\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="display:flex;gap:20px">
+<div style="width:50px;height:50px;background:#4caf50"></div>
+<div style="width:50px;height:50px;background:#2196f3"></div>
+</div>
+`
+},
+
+{
+type: "heading",
+text: "6. align-content"
+},
+
+{
+type: "paragraph",
+text: "Controls spacing between multiple rows (works only with wrap)."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Multiple rows ko upar/center/neeche set karna."
+},
+
+{
+type: "summary",
+items: [
+"flex-start",
+"center",
+"flex-end",
+"space-between",
+"space-around",
+"space-evenly"
+]
+},
+
+{
+type: "heading",
+text: "Flex Item Properties"
+},
+
+{
+type: "heading",
+text: "7. order"
+},
+
+{
+type: "paragraph",
+text: "Changes item order."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Student ki seat number change karna."
+},
+
+{
+type: "code",
+language: "css",
+text: ".item {\n order: 2;\n}"
+},
+
+{
+type: "heading",
+text: "8. flex-grow"
+},
+
+{
+type: "paragraph",
+text: "Defines how much item should grow."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Ek student ko extra bench space dena."
+},
+
+{
+type: "code",
+language: "css",
+text: ".item {\n flex-grow: 1;\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="display:flex">
+<div style="flex-grow:1;background:#4caf50;padding:20px">1</div>
+<div style="flex-grow:2;background:#2196f3;padding:20px">2</div>
+</div>
+`
+},
+
+{
+type: "heading",
+text: "9. flex-shrink"
+},
+
+{
+type: "paragraph",
+text: "Defines how much item should shrink."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Jagah kam ho to kaun kitna squeeze hoga."
+},
+
+{
+type: "code",
+language: "css",
+text: ".item {\n flex-shrink: 1;\n}"
+},
+
+{
+type: "heading",
+text: "10. flex-basis"
+},
+
+{
+type: "paragraph",
+text: "Sets initial size before grow/shrink."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Student ko starting me kitni seat milegi."
+},
+
+{
+type: "code",
+language: "css",
+text: ".item {\n flex-basis: 200px;\n}"
+},
+
+{
+type: "heading",
+text: "11. flex (Shortcut)"
+},
+
+{
+type: "paragraph",
+text: "Shorthand for grow shrink basis."
+},
+
+{
+type: "code",
+language: "css",
+text: ".item {\n flex: 1 1 200px;\n}"
+},
+
+{
+type: "paragraph",
+text: "Means: grow=1 shrink=1 basis=200px"
+},
+
+{
+type: "heading",
+text: "12. align-self"
+},
+
+{
+type: "paragraph",
+text: "Aligns single item differently."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Ek student ko alag seat position dena."
+},
+
+{
+type: "code",
+language: "css",
+text: ".item {\n align-self: center;\n}"
+},
+
+{
+type: "summary",
+items: [
+"auto",
+"flex-start",
+"center",
+"flex-end",
+"stretch"
+]
+},
+
+{
+type: "heading",
+text: "Most Important Beginner Rule"
+},
+
+{
+type: "paragraph",
+text: "Remember this:"
+},
+
+{
+type: "summary",
+items: [
+"justify-content = Main axis control",
+"align-items = Cross axis control",
+"flex-direction changes main axis",
+"gap adds spacing",
+"wrap moves items to next line"
+]
+},
+
+{
+type: "heading",
+text: "Quick Revision"
+},
+
+{
+type: "summary",
+items: [
+"display:flex → activate flexbox",
+"flex-direction → direction",
+"justify-content → horizontal alignment",
+"align-items → vertical alignment",
+"flex-wrap → next line",
+"gap → spacing",
+"align-content → multiple rows alignment",
+"order → item order",
+"flex-grow → expand item",
+"flex-shrink → shrink item",
+"flex-basis → initial size",
+"flex → shorthand",
+"align-self → single item alignment"
+]
+}
+
+]
 }
 
 
