@@ -3787,6 +3787,555 @@ items: [
 }
 
 ]
+},
+{
+id: 13,
+slug: "complete-grid-guide",
+title: "Complete CSS Grid Guide (Beginner Friendly)",
+date: "21 June 2026",
+
+description:
+"Learn CSS Grid from basic to advanced important properties with easy real-life examples and visual understanding.",
+
+content: [
+
+{
+type: "heading",
+text: "What is CSS Grid?"
+},
+
+{
+type: "paragraph",
+text: "CSS Grid is a powerful 2-dimensional layout system used to arrange items in rows and columns."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Imagine arranging boxes in a shop shelf with proper rows and columns."
+},
+
+{
+type: "heading",
+text: "How Grid Works?"
+},
+
+{
+type: "paragraph",
+text: "Grid works on two things:"
+},
+
+{
+type: "summary",
+items: [
+"Parent = Grid Container",
+"Children = Grid Items"
+]
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n  display: grid;\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="display:grid;grid-template-columns:repeat(3,60px);gap:10px">
+<div style="width:60px;height:60px;background:#4caf50"></div>
+<div style="width:60px;height:60px;background:#2196f3"></div>
+<div style="width:60px;height:60px;background:#ff9800"></div>
+</div>
+`
+},
+
+{
+type: "heading",
+text: "Important Grid Concept"
+},
+
+{
+type: "paragraph",
+text: "Grid works on two directions:"
+},
+
+{
+type: "summary",
+items: [
+"Rows → Horizontal lines",
+"Columns → Vertical lines"
+]
+},
+
+{
+type: "heading",
+text: "1. grid-template-columns"
+},
+
+{
+type: "paragraph",
+text: "Defines how many columns you want and their size."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Shelf me kitne vertical boxes banane hain."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n display:grid;\n grid-template-columns: 100px 100px 100px;\n}"
+},
+
+{
+type: "summary",
+items: [
+"100px 100px 100px = 3 equal columns",
+"1fr 1fr 1fr = flexible columns"
+]
+},
+
+{
+type: "output",
+html: `
+<div style="display:grid;grid-template-columns:repeat(3,60px);gap:10px">
+<div style="height:60px;background:red"></div>
+<div style="height:60px;background:blue"></div>
+<div style="height:60px;background:green"></div>
+</div>
+`
+},
+
+{
+type: "heading",
+text: "2. grid-template-rows"
+},
+
+{
+type: "paragraph",
+text: "Defines row height."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Shelf ki har row ki height fix karna."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n display:grid;\n grid-template-rows: 100px 100px;\n}"
+},
+
+{
+type: "summary",
+items: [
+"100px 100px = 2 rows"
+]
+},
+
+{
+type: "heading",
+text: "3. gap"
+},
+
+{
+type: "paragraph",
+text: "Adds space between rows and columns."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Boxes ke beech ka distance."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n display:grid;\n gap:20px;\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="display:grid;grid-template-columns:repeat(2,60px);gap:20px">
+<div style="height:60px;background:#4caf50"></div>
+<div style="height:60px;background:#2196f3"></div>
+</div>
+`
+},
+
+{
+type: "heading",
+text: "4. repeat()"
+},
+
+{
+type: "paragraph",
+text: "Used to avoid writing same values again and again."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: 4 same size shelves banana."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n grid-template-columns: repeat(4, 1fr);\n}"
+},
+
+{
+type: "summary",
+items: [
+"repeat(4,1fr) = 4 equal columns"
+]
+},
+
+{
+type: "heading",
+text: "5. fr Unit"
+},
+
+{
+type: "paragraph",
+text: "fr means fraction of available space."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Total bench ko equal parts me divide karna."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n grid-template-columns: 1fr 2fr;\n}"
+},
+
+{
+type: "paragraph",
+text: "Means second column gets double space."
+},
+
+{
+type: "output",
+html: `
+<div style="display:grid;grid-template-columns:1fr 2fr;gap:10px">
+<div style="height:60px;background:#4caf50"></div>
+<div style="height:60px;background:#2196f3"></div>
+</div>
+`
+},
+
+{
+type: "heading",
+text: "6. justify-items"
+},
+
+{
+type: "paragraph",
+text: "Aligns items horizontally inside each cell."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Box ke andar item ko left, center, right set karna."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n justify-items:center;\n}"
+},
+
+{
+type: "summary",
+items: [
+"start",
+"center",
+"end",
+"stretch"
+]
+},
+
+{
+type: "heading",
+text: "7. align-items"
+},
+
+{
+type: "paragraph",
+text: "Aligns items vertically inside each cell."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Item ko box ke top, center ya bottom rakhna."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n align-items:center;\n}"
+},
+
+{
+type: "summary",
+items: [
+"start",
+"center",
+"end",
+"stretch"
+]
+},
+
+{
+type: "heading",
+text: "8. justify-content"
+},
+
+{
+type: "paragraph",
+text: "Aligns the whole grid horizontally."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Pure shelf ko center me lana."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n justify-content:center;\n}"
+},
+
+{
+type: "summary",
+items: [
+"start",
+"center",
+"end",
+"space-between",
+"space-around",
+"space-evenly"
+]
+},
+
+{
+type: "heading",
+text: "9. align-content"
+},
+
+{
+type: "paragraph",
+text: "Aligns the whole grid vertically."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Pure shelf ko upar ya niche set karna."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n align-content:center;\n}"
+},
+
+{
+type: "summary",
+items: [
+"start",
+"center",
+"end",
+"space-between",
+"space-around",
+"space-evenly"
+]
+},
+
+{
+type: "heading",
+text: "Grid Item Properties"
+},
+
+{
+type: "heading",
+text: "10. grid-column"
+},
+
+{
+type: "paragraph",
+text: "Controls how many columns an item should take."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Ek box ko 2 shelf width dena."
+},
+
+{
+type: "code",
+language: "css",
+text: ".item {\n grid-column: span 2;\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="display:grid;grid-template-columns:repeat(3,60px);gap:10px">
+<div style="grid-column:span 2;height:60px;background:#4caf50"></div>
+<div style="height:60px;background:#2196f3"></div>
+</div>
+`
+},
+
+{
+type: "heading",
+text: "11. grid-row"
+},
+
+{
+type: "paragraph",
+text: "Controls how many rows an item should take."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Ek box ko 2 row height dena."
+},
+
+{
+type: "code",
+language: "css",
+text: ".item {\n grid-row: span 2;\n}"
+},
+
+{
+type: "heading",
+text: "12. grid-area"
+},
+
+{
+type: "paragraph",
+text: "Shortcut for row and column placement."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Exact shelf location fix karna."
+},
+
+{
+type: "code",
+language: "css",
+text: ".item {\n grid-area: 1 / 1 / 3 / 3;\n}"
+},
+
+{
+type: "paragraph",
+text: "Means start row 1, start column 1, end row 3, end column 3."
+},
+
+{
+type: "heading",
+text: "13. minmax()"
+},
+
+{
+type: "paragraph",
+text: "Sets minimum and maximum size."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Box minimum small ho sakta hai but max bada ho sakta hai."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n grid-template-columns: repeat(3, minmax(100px, 1fr));\n}"
+},
+
+{
+type: "heading",
+text: "14. auto-fit"
+},
+
+{
+type: "paragraph",
+text: "Automatically fits items based on space."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Jitni jagah ho utne boxes adjust ho jaye."
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n grid-template-columns: repeat(auto-fit, minmax(150px,1fr));\n}"
+},
+
+{
+type: "heading",
+text: "Most Important Beginner Rule"
+},
+
+{
+type: "paragraph",
+text: "Remember this:"
+},
+
+{
+type: "summary",
+items: [
+"display:grid = activate grid",
+"grid-template-columns = columns banata hai",
+"grid-template-rows = rows banata hai",
+"gap = spacing deta hai",
+"justify-items = item horizontal control",
+"align-items = item vertical control",
+"justify-content = whole grid horizontal",
+"align-content = whole grid vertical",
+"grid-column = item width control",
+"grid-row = item height control"
+]
+},
+
+{
+type: "heading",
+text: "Quick Revision"
+},
+
+{
+type: "summary",
+items: [
+"display:grid → activate grid",
+"grid-template-columns → columns",
+"grid-template-rows → rows",
+"gap → spacing",
+"repeat() → repeat values",
+"fr → flexible space",
+"justify-items → item horizontal align",
+"align-items → item vertical align",
+"justify-content → grid horizontal align",
+"align-content → grid vertical align",
+"grid-column → column span",
+"grid-row → row span",
+"grid-area → exact position",
+"minmax() → min/max size",
+"auto-fit → responsive grid"
+]
+}
+
+]
 }
 
 
