@@ -4165,56 +4165,103 @@ text: "Grid Item Properties"
 
 {
 type: "heading",
-text: "10. grid-column"
+text: "10. grid-column-start & grid-column-end"
 },
 
 {
 type: "paragraph",
-text: "Controls how many columns an item should take."
+text: "Defines where an item should start and end in columns."
 },
 
 {
 type: "paragraph",
-text: "Real Life Example: Ek box ko 2 shelf width dena."
+text: "Grid me har column line number se hota hai. Example: 3 columns means 4 vertical lines (1 to 4)."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Jaise shelf me decide karna box line 1 se start ho aur line 3 tak jaye."
 },
 
 {
 type: "code",
 language: "css",
-text: ".item {\n grid-column: span 2;\n}"
+text: ".item {\n grid-column-start: 1;\n grid-column-end: 3;\n}"
+},
+
+{
+type: "paragraph",
+text: "Means item column line 1 se start karega aur line 3 tak jayega (2 columns cover karega)."
 },
 
 {
 type: "output",
 html: `
 <div style="display:grid;grid-template-columns:repeat(3,60px);gap:10px">
-<div style="grid-column:span 2;height:60px;background:#4caf50"></div>
+<div style="grid-column-start:1;grid-column-end:3;height:60px;background:#4caf50"></div>
 <div style="height:60px;background:#2196f3"></div>
+<div style="height:60px;background:#ff9800"></div>
 </div>
 `
 },
 
 {
 type: "heading",
-text: "11. grid-row"
+text: "11. grid-row-start & grid-row-end"
 },
 
 {
 type: "paragraph",
-text: "Controls how many rows an item should take."
+text: "Defines where an item should start and end in rows."
 },
 
 {
 type: "paragraph",
-text: "Real Life Example: Ek box ko 2 row height dena."
+text: "Rows bhi line numbers pe work karti hain."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Ek box ko row line 1 se start karke line 3 tak stretch karna."
 },
 
 {
 type: "code",
 language: "css",
-text: ".item {\n grid-row: span 2;\n}"
+text: ".item {\n grid-row-start: 1;\n grid-row-end: 3;\n}"
 },
 
+{
+type: "paragraph",
+text: "Means item row line 1 se line 3 tak jayega (2 rows cover karega)."
+},
+
+{
+type: "output",
+html: `
+<div style="display:grid;grid-template-columns:repeat(2,60px);grid-template-rows:repeat(2,60px);gap:10px">
+<div style="grid-row-start:1;grid-row-end:3;background:#4caf50"></div>
+<div style="background:#2196f3"></div>
+<div style="background:#ff9800"></div>
+</div>
+`
+},
+
+{
+type: "heading",
+text: "Shortcut"
+},
+
+{
+type: "code",
+language: "css",
+text: ".item {\n grid-column: 1 / 3;\n grid-row: 1 / 3;\n}"
+},
+
+{
+type: "paragraph",
+text: "Means same ka shortcut — start line / end line."
+},
 {
 type: "heading",
 text: "12. grid-area"
@@ -4332,6 +4379,239 @@ items: [
 "grid-area → exact position",
 "minmax() → min/max size",
 "auto-fit → responsive grid"
+]
+}
+
+]
+},
+
+{
+id: 14,
+slug: "complete-media-queries-guide",
+title: "Complete Media Queries Guide (Beginner Friendly)",
+date: "22 June 2026",
+
+description:
+"Learn Media Queries in CSS with simple examples to make websites responsive for mobile, tablet and desktop.",
+
+content: [
+
+{
+type: "heading",
+text: "What are Media Queries?"
+},
+
+{
+type: "paragraph",
+text: "Media Queries are used to make websites responsive on different screen sizes."
+},
+
+{
+type: "paragraph",
+text: "Simple Meaning: Screen size change hone par layout bhi adjust ho jaye."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Same clothes, but different size for kids, adults, and elders."
+},
+
+{
+type: "heading",
+text: "Why Media Queries?"
+},
+
+{
+type: "paragraph",
+text: "Every device has different screen sizes:"
+},
+
+{
+type: "summary",
+items: [
+"Mobile",
+"Tablet",
+"Laptop",
+"Desktop"
+]
+},
+
+{
+type: "paragraph",
+text: "Agar responsive design nahi hoga to website toot sakti hai ya proper nahi dikhegi."
+},
+
+{
+type: "heading",
+text: "Basic Syntax"
+},
+
+{
+type: "code",
+language: "css",
+text: "@media (condition) {\n  selector {\n    property: value;\n  }\n}"
+},
+
+{
+type: "paragraph",
+text: "Condition true hogi tabhi andar ka CSS apply hoga."
+},
+
+{
+type: "heading",
+text: "1. max-width"
+},
+
+{
+type: "paragraph",
+text: "Means: Is width ya usse niche CSS apply karo."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Agar room chota ho jaye to furniture adjust kar do."
+},
+
+{
+type: "code",
+language: "css",
+text: "@media (max-width: 768px) {\n  .box {\n    background: red;\n  }\n}"
+},
+
+{
+type: "summary",
+items: [
+"768px = apply",
+"700px = apply",
+"500px = apply",
+"900px = not apply"
+]
+},
+
+{
+type: "heading",
+text: "2. min-width"
+},
+
+{
+type: "paragraph",
+text: "Means: Is width ya usse upar CSS apply karo."
+},
+
+{
+type: "paragraph",
+text: "Real Life Example: Room bada ho gaya to furniture spread kar do."
+},
+
+{
+type: "code",
+language: "css",
+text: "@media (min-width: 768px) {\n  .box {\n    background: blue;\n  }\n}"
+},
+
+{
+type: "summary",
+items: [
+"768px = apply",
+"900px = apply",
+"1200px = apply",
+"500px = not apply"
+]
+},
+
+{
+type: "heading",
+text: "Real Responsive Grid Example"
+},
+
+{
+type: "paragraph",
+text: "Desktop me 4 columns:"
+},
+
+{
+type: "code",
+language: "css",
+text: ".container {\n display:grid;\n grid-template-columns:repeat(4,1fr);\n}"
+},
+
+{
+type: "output",
+html: `
+<div style="display:grid;grid-template-columns:repeat(4,50px);gap:10px">
+<div style="height:50px;background:#4caf50"></div>
+<div style="height:50px;background:#2196f3"></div>
+<div style="height:50px;background:#ff9800"></div>
+<div style="height:50px;background:#f44336"></div>
+</div>
+`
+},
+
+{
+type: "paragraph",
+text: "Tablet me 2 columns:"
+},
+
+{
+type: "code",
+language: "css",
+text: "@media (max-width:768px){\n .container{\n  grid-template-columns:repeat(2,1fr);\n }\n}"
+},
+
+{
+type: "paragraph",
+text: "Mobile me 1 column:"
+},
+
+{
+type: "code",
+language: "css",
+text: "@media (max-width:480px){\n .container{\n  grid-template-columns:1fr;\n }\n}"
+},
+
+{
+type: "heading",
+text: "Common Breakpoints"
+},
+
+{
+type: "summary",
+items: [
+"480px = Mobile",
+"768px = Tablet",
+"1024px = Laptop",
+"1200px+ = Desktop"
+]
+},
+
+{
+type: "heading",
+text: "Most Important Beginner Rule"
+},
+
+{
+type: "summary",
+items: [
+"Base CSS pehle likho",
+"Responsive CSS baad me likho",
+"max-width = big to small",
+"min-width = small to big"
+]
+},
+
+{
+type: "heading",
+text: "Quick Revision"
+},
+
+{
+type: "summary",
+items: [
+"@media = responsive CSS",
+"max-width = below this size",
+"min-width = above this size",
+"Used for mobile/tablet/desktop layouts",
+"Helps make website responsive"
 ]
 }
 
