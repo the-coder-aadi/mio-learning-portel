@@ -139,5 +139,282 @@ export const jsnotes = [
         ]
       }
     ]
-  }
+  },
+  {
+  id: 2,
+  slug: "javascript-operators-complete-guide",
+  title: "JavaScript Operators (Complete Guide)",
+  date: "30 June 2026",
+
+  description:
+    "Learn JavaScript operators including arithmetic, unary, assignment, comparison, logical, and ternary operators with beginner-friendly examples.",
+
+  content: [
+
+    {
+      type: "heading",
+      text: "What are Operators?"
+    },
+    {
+      type: "paragraph",
+      text: "Operators are special symbols used to perform operations on values and variables."
+    },
+    {
+      type: "paragraph",
+      text: "Simple meaning: Variables store data, and operators help us work with that data."
+    },
+
+    {
+      type: "heading",
+      text: "Arithmetic Operators"
+    },
+    {
+      type: "paragraph",
+      text: "Arithmetic operators are used for mathematical calculations."
+    },
+    {
+      type: "summary",
+      items: [
+        "+ = Addition",
+        "- = Subtraction",
+        "* = Multiplication",
+        "/ = Division",
+        "% = Remainder"
+      ]
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let price = 1000;\nlet discount = 200;\n\nlet finalPrice = price - discount;\nconsole.log(finalPrice);"
+    },
+    {
+      type: "paragraph",
+      text: "Real-world use: Used in e-commerce apps to calculate prices, discounts, taxes, etc."
+    },
+
+    {
+      type: "heading",
+      text: "Unary Operators"
+    },
+    {
+      type: "paragraph",
+      text: "Unary operators work on only one value."
+    },
+    {
+      type: "summary",
+      items: [
+        "++ = Increment",
+        "-- = Decrement"
+      ]
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let score = 10;\n\nscore++;\nconsole.log(score);\n\nscore--;\nconsole.log(score);"
+    },
+    {
+      type: "paragraph",
+      text: "Real-world use: Used in games, cart quantity, likes counter, etc."
+    },
+    {
+  type: "heading",
+  text: "Difference Between ++a and a++"
+},
+{
+  type: "paragraph",
+  text: "Both increase the value by 1, but the difference is when the value gets updated."
+},
+{
+  type: "summary",
+  items: [
+    "a++ = Use first, then increase (Post Increment)",
+    "++a = Increase first, then use (Pre Increment)"
+  ]
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let a = 5;\n\nconsole.log(a++); // 5\nconsole.log(a);   // 6"
+},
+{
+  type: "paragraph",
+  text: "In post increment (a++), the current value is used first, then it increases."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let b = 5;\n\nconsole.log(++b); // 6\nconsole.log(b);   // 6"
+},
+{
+  type: "paragraph",
+  text: "In pre increment (++b), the value increases first, then it is used."
+},
+
+    {
+      type: "heading",
+      text: "Assignment Operators"
+    },
+    {
+      type: "paragraph",
+      text: "Assignment operators are used to assign and update values."
+    },
+    {
+      type: "summary",
+      items: [
+        "= = Assign value",
+        "+= = Add and assign",
+        "-= = Subtract and assign"
+      ]
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let balance = 500;\n\nbalance += 200;\nconsole.log(balance);\n\nbalance -= 100;\nconsole.log(balance);"
+    },
+    {
+      type: "paragraph",
+      text: "Real-world use: Used in wallet balance, game scores, bank transactions."
+    },
+
+    {
+      type: "heading",
+      text: "Comparison Operators"
+    },
+    {
+      type: "paragraph",
+      text: "Comparison operators compare two values and always return true or false."
+    },
+    {
+      type: "summary",
+      items: [
+        "== = Equal value",
+        "=== = Equal value and type",
+        "!= = Not equal",
+        "> = Greater than",
+        "< = Less than"
+      ]
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let age = 20;\n\nconsole.log(age > 18);\nconsole.log(age == 20);\nconsole.log(age === '20');"
+    },
+    {
+      type: "paragraph",
+      text: "Real-world use: Used in checking age, login validation, eligibility checks."
+    },
+
+    {
+      type: "heading",
+      text: "Logical Operators"
+    },
+    {
+      type: "paragraph",
+      text: "Logical operators combine multiple conditions."
+    },
+    {
+      type: "summary",
+      items: [
+        "&& = AND (both true)",
+        "|| = OR (at least one true)",
+        "! = NOT (reverse)"
+      ]
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let age = 20;\nlet hasID = true;\n\nconsole.log(age >= 18 && hasID);"
+    },
+    {
+      type: "paragraph",
+      text: "Real-world use: Used in login systems, permissions, and access checks."
+    },
+    {
+  type: "heading",
+  text: "If Else Conditions"
+},
+{
+  type: "paragraph",
+  text: "If else is used to make decisions in JavaScript based on conditions."
+},
+{
+  type: "paragraph",
+  text: "Simple meaning: If the condition is true, one block runs. Otherwise, another block runs."
+},
+{
+  type: "paragraph",
+  text: "Syntax:"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "if(condition){\n  // code\n} else {\n  // code\n}"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let age = 20;\n\nif(age >= 18){\n  console.log('You can vote');\n} else {\n  console.log('You cannot vote');\n}"
+},
+{
+  type: "paragraph",
+  text: "Real-world use: Used for login checks, age verification, payment success/failure, etc."
+},
+{
+  type: "heading",
+  text: "Else If Conditions"
+},
+{
+  type: "paragraph",
+  text: "Else if is used when there are multiple conditions."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let marks = 85;\n\nif(marks >= 90){\n  console.log('Grade A');\n} else if(marks >= 70){\n  console.log('Grade B');\n} else {\n  console.log('Grade C');\n}"
+},
+{
+  type: "paragraph",
+  text: "Real-world use: Used in grading systems, salary ranges, discounts, etc."
+},
+
+    {
+      type: "heading",
+      text: "Ternary Operators"
+    },
+    {
+      type: "paragraph",
+      text: "Ternary operator is a short form of if-else."
+    },
+    {
+      type: "paragraph",
+      text: "Syntax: condition ? true : false"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let age = 20;\n\nlet result = age >= 18 ? 'Adult' : 'Minor';\nconsole.log(result);"
+    },
+    {
+      type: "paragraph",
+      text: "Real-world use: Used for quick decisions like login status, stock availability, etc."
+    },
+
+    {
+      type: "heading",
+      text: "Quick Revision"
+    },
+    {
+      type: "summary",
+      items: [
+        "Arithmetic = calculations",
+        "Unary = increase/decrease value",
+        "Assignment = assign/update values",
+        "Comparison = compare values",
+        "Logical = combine conditions",
+        "Ternary = short if-else"
+      ]
+    }
+
+  ]
+}
 ];
