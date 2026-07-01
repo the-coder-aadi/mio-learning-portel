@@ -416,5 +416,221 @@ export const jsnotes = [
     }
 
   ]
+},
+{
+  id: 3,
+  slug: "javascript-loops-complete-guide",
+  title: "JavaScript Loops (Complete Guide)",
+  date: "01 July 2026",
+
+  description:
+    "Learn JavaScript loops including for loop, while loop, do while loop, nested loops, and real-world examples with beginner-friendly explanations.",
+
+  content: [
+
+    {
+      type: "heading",
+      text: "What are Loops?"
+    },
+    {
+      type: "paragraph",
+      text: "Loops are used to repeat a block of code multiple times."
+    },
+    {
+      type: "paragraph",
+      text: "Simple meaning: When you want to do the same work again and again, you use loops."
+    },
+    {
+      type: "paragraph",
+      text: "Real-life example: Sending notifications to 100 users. Instead of writing the same code 100 times, we use loops."
+    },
+
+    {
+      type: "heading",
+      text: "Why Loops?"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "console.log('Hello');\nconsole.log('Hello');\nconsole.log('Hello');"
+    },
+    {
+      type: "paragraph",
+      text: "This works, but it is repetitive. Loops make this shorter and cleaner."
+    },
+
+    {
+      type: "heading",
+      text: "For Loop"
+    },
+    {
+      type: "paragraph",
+      text: "For loop is used when we know how many times the code should run."
+    },
+    {
+      type: "paragraph",
+      text: "Syntax:"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "for(initialization; condition; increment){\n  // code\n}"
+    },
+    {
+      type: "summary",
+      items: [
+        "Initialization = starting point",
+        "Condition = until when loop runs",
+        "Increment = updates value each round"
+      ]
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "for(let i = 1; i <= 5; i++){\n  console.log(i);\n}"
+    },
+    {
+      type: "paragraph",
+      text: "This prints numbers from 1 to 5."
+    },
+
+    {
+      type: "heading",
+      text: "Reverse Loop"
+    },
+    {
+      type: "paragraph",
+      text: "Loops can also run backward."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "for(let i = 5; i >= 1; i--){\n  console.log(i);\n}"
+    },
+    {
+      type: "paragraph",
+      text: "This prints numbers from 5 to 1."
+    },
+
+    {
+      type: "heading",
+      text: "Using If Else Inside Loop"
+    },
+    {
+      type: "paragraph",
+      text: "We can combine loops with conditions."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "for(let i = 1; i <= 10; i++){\n  if(i % 2 === 0){\n    console.log(i);\n  }\n}"
+    },
+    {
+      type: "paragraph",
+      text: "This prints only even numbers from 1 to 10."
+    },
+
+    {
+      type: "heading",
+      text: "While Loop"
+    },
+    {
+      type: "paragraph",
+      text: "While loop runs as long as the condition is true."
+    },
+    {
+      type: "paragraph",
+      text: "Used when we do not know the exact number of repetitions."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let i = 1;\n\nwhile(i <= 5){\n  console.log(i);\n  i++;\n}"
+    },
+    {
+      type: "paragraph",
+      text: "Important: Always update the variable, otherwise it can create an infinite loop."
+    },
+
+    {
+      type: "heading",
+      text: "Do While Loop"
+    },
+    {
+      type: "paragraph",
+      text: "Do while loop runs at least one time, even if the condition is false."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let i = 6;\n\ndo{\n  console.log(i);\n  i++;\n}while(i <= 5);"
+    },
+    {
+      type: "paragraph",
+      text: "Even though the condition is false, it still runs once."
+    },
+
+    {
+      type: "heading",
+      text: "Nested Loops"
+    },
+    {
+      type: "paragraph",
+      text: "A loop inside another loop is called a nested loop."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "for(let i = 1; i <= 3; i++){\n  for(let j = 1; j <= 2; j++){\n    console.log(i, j);\n  }\n}"
+    },
+    {
+      type: "paragraph",
+      text: "Used in patterns, tables, and grid systems."
+    },
+
+    {
+      type: "heading",
+      text: "Real-world Example"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let notifications = 3;\n\nfor(let i = 1; i <= notifications; i++){\n  console.log('Notification sent');\n}"
+    },
+    {
+      type: "paragraph",
+      text: "This sends the same notification multiple times."
+    },
+
+    {
+      type: "heading",
+      text: "Quick Revision"
+    },
+    {
+      type: "summary",
+      items: [
+        "Loops repeat code multiple times",
+        "For loop = known repetitions",
+        "While loop = condition based",
+        "Do while = runs at least once",
+        "Nested loop = loop inside loop"
+      ]
+    },
+
+    {
+      type: "heading",
+      text: "Practice Questions"
+    },
+    {
+      type: "summary",
+      items: [
+        "Print numbers from 1 to 10 using for loop",
+        "Print numbers from 10 to 1 using reverse loop",
+        "Print even numbers from 1 to 20",
+        "Print table of 5 using loop"
+      ]
+    }
+
+  ]
 }
 ];
