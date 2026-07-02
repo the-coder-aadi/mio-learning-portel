@@ -419,12 +419,12 @@ export const jsnotes = [
 },
 {
   id: 3,
-  slug: "javascript-loops-complete-guide",
-  title: "JavaScript Loops (Complete Guide)",
+  slug: "javascript-loops-and-objects-complete-guide",
+  title: "JavaScript Loops & Objects (Complete Guide)",
   date: "01 July 2026",
 
   description:
-    "Learn JavaScript loops including for loop, while loop, do while loop, nested loops, and real-world examples with beginner-friendly explanations.",
+    "Learn JavaScript loops including for, while, do while, nested loops, for...of, objects, and for...in with beginner-friendly explanations and examples.",
 
   content: [
 
@@ -438,25 +438,7 @@ export const jsnotes = [
     },
     {
       type: "paragraph",
-      text: "Simple meaning: When you want to do the same work again and again, you use loops."
-    },
-    {
-      type: "paragraph",
-      text: "Real-life example: Sending notifications to 100 users. Instead of writing the same code 100 times, we use loops."
-    },
-
-    {
-      type: "heading",
-      text: "Why Loops?"
-    },
-    {
-      type: "code",
-      language: "javascript",
-      text: "console.log('Hello');\nconsole.log('Hello');\nconsole.log('Hello');"
-    },
-    {
-      type: "paragraph",
-      text: "This works, but it is repetitive. Loops make this shorter and cleaner."
+      text: "Simple meaning: If you want to do the same task again and again, loops help you do it."
     },
 
     {
@@ -468,39 +450,22 @@ export const jsnotes = [
       text: "For loop is used when we know how many times the code should run."
     },
     {
-      type: "paragraph",
-      text: "Syntax:"
-    },
-    {
-      type: "code",
-      language: "javascript",
-      text: "for(initialization; condition; increment){\n  // code\n}"
-    },
-    {
-      type: "summary",
-      items: [
-        "Initialization = starting point",
-        "Condition = until when loop runs",
-        "Increment = updates value each round"
-      ]
-    },
-    {
       type: "code",
       language: "javascript",
       text: "for(let i = 1; i <= 5; i++){\n  console.log(i);\n}"
     },
     {
-      type: "paragraph",
-      text: "This prints numbers from 1 to 5."
+      type: "summary",
+      items: [
+        "let i = 1 → starting point",
+        "i <= 5 → condition",
+        "i++ → increase after every round"
+      ]
     },
 
     {
       type: "heading",
       text: "Reverse Loop"
-    },
-    {
-      type: "paragraph",
-      text: "Loops can also run backward."
     },
     {
       type: "code",
@@ -509,16 +474,12 @@ export const jsnotes = [
     },
     {
       type: "paragraph",
-      text: "This prints numbers from 5 to 1."
+      text: "This prints numbers in reverse order."
     },
 
     {
       type: "heading",
-      text: "Using If Else Inside Loop"
-    },
-    {
-      type: "paragraph",
-      text: "We can combine loops with conditions."
+      text: "Using Conditions Inside Loop"
     },
     {
       type: "code",
@@ -527,7 +488,7 @@ export const jsnotes = [
     },
     {
       type: "paragraph",
-      text: "This prints only even numbers from 1 to 10."
+      text: "This prints only even numbers."
     },
 
     {
@@ -536,20 +497,12 @@ export const jsnotes = [
     },
     {
       type: "paragraph",
-      text: "While loop runs as long as the condition is true."
-    },
-    {
-      type: "paragraph",
-      text: "Used when we do not know the exact number of repetitions."
+      text: "While loop runs until the condition becomes false."
     },
     {
       type: "code",
       language: "javascript",
       text: "let i = 1;\n\nwhile(i <= 5){\n  console.log(i);\n  i++;\n}"
-    },
-    {
-      type: "paragraph",
-      text: "Important: Always update the variable, otherwise it can create an infinite loop."
     },
 
     {
@@ -558,16 +511,12 @@ export const jsnotes = [
     },
     {
       type: "paragraph",
-      text: "Do while loop runs at least one time, even if the condition is false."
+      text: "Do while runs at least one time even if the condition is false."
     },
     {
       type: "code",
       language: "javascript",
       text: "let i = 6;\n\ndo{\n  console.log(i);\n  i++;\n}while(i <= 5);"
-    },
-    {
-      type: "paragraph",
-      text: "Even though the condition is false, it still runs once."
     },
 
     {
@@ -576,44 +525,522 @@ export const jsnotes = [
     },
     {
       type: "paragraph",
-      text: "A loop inside another loop is called a nested loop."
+      text: "A loop inside another loop is called nested loop."
     },
     {
       type: "code",
       language: "javascript",
       text: "for(let i = 1; i <= 3; i++){\n  for(let j = 1; j <= 2; j++){\n    console.log(i, j);\n  }\n}"
     },
-    {
-      type: "paragraph",
-      text: "Used in patterns, tables, and grid systems."
-    },
 
     {
       type: "heading",
-      text: "Real-world Example"
+      text: "For Of Loop"
+    },
+    {
+      type: "paragraph",
+      text: "For...of loop is used to directly get values from arrays or strings."
+    },
+    {
+      type: "paragraph",
+      text: "It makes code shorter and easier compared to normal for loop."
     },
     {
       type: "code",
       language: "javascript",
-      text: "let notifications = 3;\n\nfor(let i = 1; i <= notifications; i++){\n  console.log('Notification sent');\n}"
+      text: "let fruits = ['Apple', 'Banana', 'Mango'];\n\nfor(let fruit of fruits){\n  console.log(fruit);\n}"
     },
     {
       type: "paragraph",
-      text: "This sends the same notification multiple times."
-    },
-
-    {
-      type: "heading",
-      text: "Quick Revision"
+      text: "This directly gives each value one by one."
     },
     {
       type: "summary",
       items: [
-        "Loops repeat code multiple times",
-        "For loop = known repetitions",
-        "While loop = condition based",
-        "Do while = runs at least once",
-        "Nested loop = loop inside loop"
+        "for loop = works with index",
+        "for of = works directly with values"
+      ]
+    },
+
+    {
+      type: "heading",
+      text: "What are Objects?"
+    },
+    {
+      type: "paragraph",
+      text: "Objects are used to store multiple related values in one variable."
+    },
+    {
+      type: "paragraph",
+      text: "Objects store data in key-value pairs."
+    },
+    {
+      type: "paragraph",
+      text: "Real-life example: A user profile has name, age, and city. All these can be stored inside one object."
+    },
+
+    {
+      type: "code",
+      language: "javascript",
+      text: "let user = {\n  name: 'Rahul',\n  age: 20,\n  city: 'Delhi'\n};"
+    },
+
+    {
+      type: "heading",
+      text: "Accessing Object Values"
+    },
+    {
+      type: "paragraph",
+      text: "We can access values using dot notation."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "console.log(user.name);\nconsole.log(user.age);"
+    },
+
+    {
+      type: "heading",
+      text: "Updating Object Values"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "user.age = 21;\nconsole.log(user.age);"
+    },
+    {
+      type: "paragraph",
+      text: "This updates the value of a key."
+    },
+
+    {
+      type: "heading",
+      text: "For In Loop"
+    },
+    {
+      type: "paragraph",
+      text: "For...in loop is mainly used to get keys from objects."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let user = {\n  name: 'Rahul',\n  age: 20,\n  city: 'Delhi'\n};\n\nfor(let key in user){\n  console.log(key);\n}"
+    },
+    {
+      type: "paragraph",
+      text: "This prints only keys: name, age, city."
+    },
+
+    {
+      type: "heading",
+      text: "Getting Keys and Values Together"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "for(let key in user){\n  console.log(key, user[key]);\n}"
+    },
+    {
+      type: "paragraph",
+      text: "This prints both key and value together."
+    },
+
+    {
+  type: "heading",
+  text: "Template Literals"
+},
+{
+  type: "paragraph",
+  text: "Template literals use backticks (` `) instead of quotes. They make strings easier to write and read."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let name = 'Rahul';\n\nconsole.log(`Hello ${name}`);"
+},
+{
+  type: "paragraph",
+  text: "This allows us to directly insert variables inside strings."
+},
+
+{
+  type: "heading",
+  text: "String Interpolation (${ })"
+},
+{
+  type: "paragraph",
+  text: "Interpolation means inserting variables or expressions inside a string using ${}."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let price = 200;\nlet discount = 20;\n\nconsole.log(`Final price is ${price - discount}`);"
+},
+{
+  type: "paragraph",
+  text: "Inside ${}, we can also write calculations."
+},
+
+{
+  type: "heading",
+  text: "Multiline Strings"
+},
+{
+  type: "paragraph",
+  text: "Backticks also allow writing strings in multiple lines."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let message = `Hello\nWelcome to JavaScript\nLearning`;\nconsole.log(message);"
+},
+{
+  type: "paragraph",
+  text: "This is easier than using \\n again and again."
+},
+
+{
+  type: "heading",
+  text: "Strings in JavaScript"
+},
+{
+  type: "paragraph",
+  text: "A string is used to store text in JavaScript."
+},
+{
+  type: "paragraph",
+  text: "Strings can be written using single quotes (' '), double quotes (\" \"), and backticks (` `)."
+},
+
+{
+  type: "heading",
+  text: "Single Quotes (' ')"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let name = 'Rahul';\nconsole.log(name);"
+},
+{
+  type: "paragraph",
+  text: "Single quotes are the basic and simple way to create strings."
+},
+
+{
+  type: "heading",
+  text: "Double Quotes (\" \")"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let city = \"Delhi\";\nconsole.log(city);"
+},
+{
+  type: "paragraph",
+  text: "Double quotes work the same as single quotes."
+},
+
+{
+  type: "heading",
+  text: "Backticks (` `)"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let language = `JavaScript`;\nconsole.log(language);"
+},
+{
+  type: "paragraph",
+  text: "Backticks are special because they support template literals and multiline strings."
+},
+
+{
+  type: "heading",
+  text: "Why Use Backticks?"
+},
+{
+  type: "paragraph",
+  text: "Backticks make it easier to insert variables inside strings."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let username = 'Rahul';\n\nconsole.log(`Hello ${username}`);"
+},
+{
+  type: "paragraph",
+  text: "Here ${username} directly inserts the variable value."
+},
+
+{
+  type: "heading",
+  text: "String Interpolation (${ })"
+},
+{
+  type: "paragraph",
+  text: "Interpolation means adding variables or calculations inside a string."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let price = 200;\nlet discount = 20;\n\nconsole.log(`Final price is ${price - discount}`);"
+},
+{
+  type: "paragraph",
+  text: "Inside ${}, we can use variables and even calculations."
+},
+
+{
+  type: "heading",
+  text: "Multiline Strings"
+},
+{
+  type: "paragraph",
+  text: "Backticks allow writing strings in multiple lines."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let message = `Hello\nWelcome to JavaScript\nLearning`;\nconsole.log(message);"
+},
+{
+  type: "paragraph",
+  text: "This is useful for writing long text."
+},
+{
+  type: "heading",
+  text: "Important String Methods"
+},
+{
+  type: "paragraph",
+  text: "String methods are built-in functions used to perform different operations on strings."
+},
+
+{
+  type: "heading",
+  text: "length"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let name = 'Rahul';\nconsole.log(name.length);"
+},
+{
+  type: "paragraph",
+  text: "Returns total number of characters."
+},
+
+{
+  type: "heading",
+  text: "toUpperCase()"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let city = 'delhi';\nconsole.log(city.toUpperCase());"
+},
+{
+  type: "paragraph",
+  text: "Converts string into uppercase."
+},
+
+{
+  type: "heading",
+  text: "toLowerCase()"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let country = 'INDIA';\nconsole.log(country.toLowerCase());"
+},
+{
+  type: "paragraph",
+  text: "Converts string into lowercase."
+},
+
+{
+  type: "heading",
+  text: "trim()"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let username = '   Rahul   ';\nconsole.log(username.trim());"
+},
+{
+  type: "paragraph",
+  text: "Removes extra spaces from start and end."
+},
+
+{
+  type: "heading",
+  text: "slice()"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let text = 'JavaScript';\nconsole.log(text.slice(0,4));"
+},
+{
+  type: "paragraph",
+  text: "Extracts part of a string."
+},
+
+{
+  type: "heading",
+  text: "concat()"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let firstName = 'Rahul';\nlet lastName = 'Sharma';\n\nconsole.log(firstName.concat(' ', lastName));"
+},
+{
+  type: "paragraph",
+  text: "Joins two or more strings."
+},
+
+{
+  type: "heading",
+  text: "replace()"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let msg = 'Hello Rahul';\nconsole.log(msg.replace('Rahul', 'Aman'));"
+},
+{
+  type: "paragraph",
+  text: "Replaces part of a string."
+},
+
+{
+  type: "heading",
+  text: "charAt()"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let word = 'JavaScript';\nconsole.log(word.charAt(0));"
+},
+{
+  type: "paragraph",
+  text: "Returns character at a specific index."
+},
+
+{
+  type: "heading",
+  text: "indexOf()"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let word = 'JavaScript';\nconsole.log(word.indexOf('S'));"
+},
+{
+  type: "paragraph",
+  text: "Returns the first position of a character."
+},
+
+{
+  type: "heading",
+  text: "includes()"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let text = 'I love JavaScript';\nconsole.log(text.includes('JavaScript'));"
+},
+{
+  type: "paragraph",
+  text: "Checks if a word exists inside the string."
+},
+
+{
+  type: "heading",
+  text: "startsWith()"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let text = 'JavaScript';\nconsole.log(text.startsWith('Java'));"
+},
+{
+  type: "paragraph",
+  text: "Checks if string starts with given value."
+},
+
+{
+  type: "heading",
+  text: "endsWith()"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let text = 'JavaScript';\nconsole.log(text.endsWith('Script'));"
+},
+{
+  type: "paragraph",
+  text: "Checks if string ends with given value."
+},
+
+{
+  type: "heading",
+  text: "split()"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let text = 'apple,banana,mango';\nconsole.log(text.split(','));"
+},
+{
+  type: "paragraph",
+  text: "Converts string into array."
+},
+
+{
+  type: "heading",
+  text: "repeat()"
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let word = 'Hi ';\nconsole.log(word.repeat(3));"
+},
+{
+  type: "paragraph",
+  text: "Repeats the string multiple times."
+},
+
+{
+  type: "summary",
+  items: [
+    "length = count characters",
+    "toUpperCase = uppercase",
+    "toLowerCase = lowercase",
+    "trim = remove spaces",
+    "slice = extract part",
+    "concat = join strings",
+    "replace = replace text",
+    "charAt = get character",
+    "indexOf = find position",
+    "includes = check word exists",
+    "startsWith = check starting",
+    "endsWith = check ending",
+    "split = convert to array",
+    "repeat = repeat string"
+  ]
+},
+
+    {
+      type: "summary",
+      items: [
+        "for = best when count is known",
+        "while = condition-based loop",
+        "do while = runs at least once",
+        "for of = gives values directly",
+        "object = stores data in key-value pairs",
+        "for in = gives keys from object"
       ]
     },
 
@@ -624,10 +1051,10 @@ export const jsnotes = [
     {
       type: "summary",
       items: [
-        "Print numbers from 1 to 10 using for loop",
-        "Print numbers from 10 to 1 using reverse loop",
-        "Print even numbers from 1 to 20",
-        "Print table of 5 using loop"
+        "Print all fruits using for...of loop",
+        "Create an object for a student and print name and age",
+        "Use for...in loop to print all keys of an object",
+        "Use for...in loop to print all keys and values"
       ]
     }
 
