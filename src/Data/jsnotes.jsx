@@ -1059,5 +1059,324 @@ export const jsnotes = [
     }
 
   ]
+},
+{
+  id: 4,
+  slug: "javascript-arrays-and-functions-complete-guide",
+  title: "JavaScript Arrays & Functions (Complete Guide)",
+  date: "03 July 2026",
+
+  description:
+    "Learn JavaScript Arrays and Functions with beginner-friendly explanations, important methods, loops, parameters, arguments, return, and arrow functions.",
+
+  content: [
+
+    {
+      type: "heading",
+      text: "What are Arrays?"
+    },
+    {
+      type: "paragraph",
+      text: "An array is used to store multiple values inside one variable."
+    },
+    {
+      type: "paragraph",
+      text: "Simple meaning: If you want to store many values together, use an array."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let fruits = ['Apple', 'Banana', 'Mango'];\nconsole.log(fruits);"
+    },
+
+    {
+      type: "heading",
+      text: "Array Index"
+    },
+    {
+      type: "paragraph",
+      text: "Every array value has an index. Index always starts from 0."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let fruits = ['Apple', 'Banana', 'Mango'];\n\nconsole.log(fruits[0]);\nconsole.log(fruits[1]);"
+    },
+
+    {
+      type: "heading",
+      text: "Updating Array Values"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let fruits = ['Apple', 'Banana'];\nfruits[1] = 'Mango';\nconsole.log(fruits);"
+    },
+
+    {
+      type: "heading",
+      text: "push()"
+    },
+    {
+      type: "paragraph",
+      text: "Adds a new value at the end."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let fruits = ['Apple'];\nfruits.push('Banana');\nconsole.log(fruits);"
+    },
+
+    {
+      type: "heading",
+      text: "pop()"
+    },
+    {
+      type: "paragraph",
+      text: "Removes the last value."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let fruits = ['Apple', 'Banana'];\nfruits.pop();\nconsole.log(fruits);"
+    },
+
+    {
+      type: "heading",
+      text: "unshift()"
+    },
+    {
+      type: "paragraph",
+      text: "Adds a value at the beginning."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let fruits = ['Banana'];\nfruits.unshift('Apple');\nconsole.log(fruits);"
+    },
+
+    {
+      type: "heading",
+      text: "shift()"
+    },
+    {
+      type: "paragraph",
+      text: "Removes the first value."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let fruits = ['Apple', 'Banana'];\nfruits.shift();\nconsole.log(fruits);"
+    },
+
+    {
+      type: "heading",
+      text: "slice()"
+    },
+    {
+      type: "paragraph",
+      text: "Gets part of an array."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let fruits = ['Apple', 'Banana', 'Mango'];\nconsole.log(fruits.slice(0,2));"
+    },
+
+    {
+      type: "heading",
+      text: "splice()"
+    },
+    {
+      type: "paragraph",
+      text: "Adds or removes values from any position."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let fruits = ['Apple', 'Banana'];\nfruits.splice(1,0,'Mango');\nconsole.log(fruits);"
+    },
+
+    {
+      type: "heading",
+      text: "includes()"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let fruits = ['Apple', 'Banana'];\nconsole.log(fruits.includes('Apple'));"
+    },
+
+    {
+      type: "heading",
+      text: "indexOf()"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let fruits = ['Apple', 'Banana'];\nconsole.log(fruits.indexOf('Banana'));"
+    },
+
+    {
+      type: "heading",
+      text: "Looping Through Array"
+    },
+    {
+      type: "paragraph",
+      text: "We can use loops to access all array values."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let fruits = ['Apple', 'Banana', 'Mango'];\n\nfor(let fruit of fruits){\n  console.log(fruit);\n}"
+    },
+
+    {
+      type: "heading",
+      text: "What are Functions?"
+    },
+    {
+      type: "paragraph",
+      text: "A function is a block of code used to perform a task."
+    },
+    {
+      type: "paragraph",
+      text: "Simple meaning: Write once, use many times."
+    },
+
+    {
+      type: "heading",
+      text: "Normal Function"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "function greet(){\n  console.log('Hello Student');\n}\n\ngreet();"
+    },
+
+    {
+      type: "heading",
+      text: "Function with Parameters"
+    },
+    {
+      type: "paragraph",
+      text: "Parameters are variables written when creating the function."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "function greet(name){\n  console.log('Hello ' + name);\n}\n\ngreet('Rahul');"
+    },
+
+    {
+      type: "heading",
+      text: "Arguments"
+    },
+    {
+      type: "paragraph",
+      text: "Arguments are actual values passed when calling the function."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "function add(a, b){\n  console.log(a + b);\n}\n\nadd(10, 20);"
+    },
+
+    {
+      type: "heading",
+      text: "Return Keyword"
+    },
+    {
+      type: "paragraph",
+      text: "Return sends the result back."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "function multiply(a, b){\n  return a * b;\n}\n\nlet result = multiply(5, 2);\nconsole.log(result);"
+    },
+
+    {
+      type: "heading",
+      text: "Arrow Function"
+    },
+    {
+      type: "paragraph",
+      text: "Arrow function is the short modern way to write functions."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "const greet = (name) => {\n  console.log(`Hello ${name}`);\n};\n\ngreet('Aman');"
+    },
+
+    {
+      type: "heading",
+      text: "Normal Function vs Arrow Function"
+    },
+    {
+      type: "summary",
+      items: [
+        "Normal function = old and traditional way",
+        "Arrow function = shorter and modern way",
+        "Both do the same work",
+        "Arrow functions are easier to write"
+      ]
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "function add(a,b){\n  return a+b;\n}\n\nconst add2 = (a,b) => a+b;\n\nconsole.log(add(2,3));\nconsole.log(add2(2,3));"
+    },
+
+    {
+      type: "heading",
+      text: "Real-world Example"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let cart = [100, 200, 300];\n\nfunction getTotal(items){\n  let total = 0;\n\n  for(let item of items){\n    total += item;\n  }\n\n  return total;\n}\n\nconsole.log(getTotal(cart));"
+    },
+    {
+      type: "paragraph",
+      text: "This calculates the total cart price."
+    },
+
+    {
+      type: "heading",
+      text: "Quick Revision"
+    },
+    {
+      type: "summary",
+      items: [
+        "Array = stores multiple values",
+        "push/pop = add/remove from end",
+        "shift/unshift = add/remove from start",
+        "slice = get part of array",
+        "splice = add/remove anywhere",
+        "Function = reusable block of code",
+        "Parameter = variable in function",
+        "Argument = value passed in function",
+        "Return = sends back result",
+        "Arrow function = short function syntax"
+      ]
+    },
+
+    {
+      type: "heading",
+      text: "Practice Questions"
+    },
+    {
+      type: "summary",
+      items: [
+        "Create an array of 5 fruits and print all using loop",
+        "Add and remove values using push and pop",
+        "Create a function to add two numbers",
+        "Create an arrow function to multiply two numbers"
+      ]
+    }
+
+  ]
 }
 ];
