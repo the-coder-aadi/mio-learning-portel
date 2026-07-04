@@ -1378,5 +1378,570 @@ export const jsnotes = [
     }
 
   ]
+},
+{
+  id: 5,
+  slug: "javascript-array-methods-and-dom-complete-guide",
+  title: "JavaScript Array Methods & DOM (Complete Guide)",
+  date: "04 July 2026",
+
+  description:
+    "Learn important array methods like forEach, map, filter, reduce and complete DOM manipulation from basic to advanced with beginner-friendly examples.",
+
+  content: [
+
+    {
+      type: "heading",
+      text: "forEach() Method"
+    },
+    {
+      type: "paragraph",
+      text: "forEach() runs a function for every item in an array."
+    },
+    {
+      type: "paragraph",
+      text: "Used when you want to perform an action on each item."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let fruits = ['Apple', 'Banana', 'Mango'];\n\nfruits.forEach(function(fruit){\n  console.log(fruit);\n});"
+    },
+    {
+      type: "paragraph",
+      text: "This prints every fruit one by one."
+    },
+
+    {
+      type: "heading",
+      text: "map() Method"
+    },
+    {
+      type: "paragraph",
+      text: "map() creates a new array by changing each item."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let nums = [1,2,3];\n\nlet doubled = nums.map(function(num){\n  return num * 2;\n});\n\nconsole.log(doubled);"
+    },
+    {
+      type: "paragraph",
+      text: "Used when you want to transform data."
+    },
+
+    {
+      type: "heading",
+      text: "filter() Method"
+    },
+    {
+      type: "paragraph",
+      text: "filter() selects only those values that match a condition."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let ages = [12,18,25,15,30];\n\nlet adults = ages.filter(function(age){\n  return age >= 18;\n});\n\nconsole.log(adults);"
+    },
+    {
+      type: "paragraph",
+      text: "Used to filter required data."
+    },
+
+    {
+      type: "heading",
+      text: "reduce() Method"
+    },
+    {
+      type: "paragraph",
+      text: "reduce() combines all values into one single value."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let prices = [100,200,300];\n\nlet total = prices.reduce(function(acc, curr){\n  return acc + curr;\n},0);\n\nconsole.log(total);"
+    },
+    {
+      type: "paragraph",
+      text: "Used for total price, sum, max, min, etc."
+    },
+
+    {
+      type: "heading",
+      text: "What is DOM?"
+    },
+    {
+      type: "paragraph",
+      text: "DOM stands for Document Object Model."
+    },
+    {
+      type: "paragraph",
+      text: "It allows JavaScript to access and change HTML elements."
+    },
+    {
+      type: "paragraph",
+      text: "Simple meaning: JavaScript uses DOM to control the webpage."
+    },
+
+    {
+      type: "heading",
+      text: "Window Object"
+    },
+    {
+      type: "paragraph",
+      text: "window is the main object of the browser."
+    },
+    {
+      type: "paragraph",
+      text: "Everything starts from window."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "console.log(window);"
+    },
+
+    {
+      type: "heading",
+      text: "Document Object"
+    },
+    {
+      type: "paragraph",
+      text: "document is inside window and represents the whole HTML page."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "console.log(document);"
+    },
+
+    
+    {
+      type: "heading",
+      text: "Access Element by ID"
+    },
+    {
+      type: "paragraph",
+      text: "Used to select a single element using id."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let heading = document.getElementById('title');"
+    },
+
+    {
+      type: "heading",
+      text: "Access Element by Class"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let items = document.getElementsByClassName('box');"
+    },
+
+    {
+      type: "heading",
+      text: "Access Element by Tag"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let paragraphs = document.getElementsByTagName('p');"
+    },
+
+    {
+      type: "heading",
+      text: "querySelector()"
+    },
+    {
+      type: "paragraph",
+      text: "Selects the first matching element."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let btn = document.querySelector('.btn');"
+    },
+
+    {
+      type: "heading",
+      text: "querySelectorAll()"
+    },
+    {
+      type: "paragraph",
+      text: "Selects all matching elements."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let allBtns = document.querySelectorAll('.btn');"
+    },
+
+    {
+  type: "heading",
+  text: "DOM Traversing"
+},
+{
+  type: "paragraph",
+  text: "DOM traversing means moving between elements like parent, child, and sibling."
+},
+
+{
+  type: "heading",
+  text: "parentNode"
+},
+{
+  type: "paragraph",
+  text: "Gets the parent element."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let child = document.getElementById('child');\nconsole.log(child.parentNode);"
+},
+
+{
+  type: "heading",
+  text: "childNodes"
+},
+{
+  type: "paragraph",
+  text: "Returns all child nodes including text, spaces, and elements."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let parent = document.getElementById('parent');\nconsole.log(parent.childNodes);"
+},
+
+{
+  type: "paragraph",
+  text: "Important: childNodes also counts spaces and line breaks."
+},
+
+{
+  type: "heading",
+  text: "children"
+},
+{
+  type: "paragraph",
+  text: "Returns only HTML elements (not spaces or text)."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "console.log(parent.children);"
+},
+
+{
+  type: "heading",
+  text: "firstChild"
+},
+{
+  type: "paragraph",
+  text: "Gets the first child node."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "console.log(parent.firstChild);"
+},
+
+{
+  type: "heading",
+  text: "lastChild"
+},
+{
+  type: "paragraph",
+  text: "Gets the last child node."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "console.log(parent.lastChild);"
+},
+
+{
+  type: "heading",
+  text: "firstElementChild"
+},
+{
+  type: "paragraph",
+  text: "Gets the first HTML element child."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "console.log(parent.firstElementChild);"
+},
+
+{
+  type: "heading",
+  text: "lastElementChild"
+},
+{
+  type: "paragraph",
+  text: "Gets the last HTML element child."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "console.log(parent.lastElementChild);"
+},
+
+{
+  type: "heading",
+  text: "nextSibling"
+},
+{
+  type: "paragraph",
+  text: "Gets the next node."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "let item = document.getElementById('item1');\nconsole.log(item.nextSibling);"
+},
+
+{
+  type: "heading",
+  text: "previousSibling"
+},
+{
+  type: "paragraph",
+  text: "Gets the previous node."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "console.log(item.previousSibling);"
+},
+
+{
+  type: "heading",
+  text: "nextElementSibling"
+},
+{
+  type: "paragraph",
+  text: "Gets the next HTML element only."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "console.log(item.nextElementSibling);"
+},
+
+{
+  type: "heading",
+  text: "previousElementSibling"
+},
+{
+  type: "paragraph",
+  text: "Gets the previous HTML element only."
+},
+{
+  type: "code",
+  language: "javascript",
+  text: "console.log(item.previousElementSibling);"
+},
+
+{
+  type: "heading",
+  text: "Difference Between childNodes and children"
+},
+{
+  type: "summary",
+  items: [
+    "childNodes = returns everything (elements + text + spaces)",
+    "children = returns only HTML elements"
+  ]
+},
+
+{
+  type: "code",
+  language: "javascript",
+  text: "<div id='parent'>\n   <p>Hello</p>\n   <h1>World</h1>\n</div>"
+},
+
+{
+  type: "paragraph",
+  text: "Here childNodes may count spaces also, but children will only count p and h1."
+},
+
+    {
+      type: "heading",
+      text: "Changing Text"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "document.getElementById('title').textContent = 'Hello World';"
+    },
+
+    {
+      type: "heading",
+      text: "Changing HTML"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "document.getElementById('box').innerHTML = '<h1>New Heading</h1>';"
+    },
+
+    {
+      type: "heading",
+      text: "Changing Styles"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "document.getElementById('title').style.color = 'red';"
+    },
+
+    {
+      type: "heading",
+      text: "Changing Attributes"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let img = document.querySelector('img');\nimg.setAttribute('src', 'new.jpg');"
+    },
+
+    {
+      type: "heading",
+      text: "Getting Attributes"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "console.log(img.getAttribute('src'));"
+    },
+
+    {
+      type: "heading",
+      text: "Creating New Element"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let p = document.createElement('p');\np.textContent = 'New Paragraph';"
+    },
+
+    {
+      type: "heading",
+      text: "Adding Element"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "document.body.appendChild(p);"
+    },
+
+    {
+      type: "heading",
+      text: "Removing Element"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let box = document.getElementById('box');\nbox.remove();"
+    },
+
+    {
+      type: "heading",
+      text: "Event Handling"
+    },
+    {
+      type: "paragraph",
+      text: "Events are actions like click, hover, input, etc."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let btn = document.getElementById('btn');\n\nbtn.onclick = function(){\n  alert('Button clicked');\n};"
+    },
+
+    {
+      type: "heading",
+      text: "addEventListener()"
+    },
+    {
+      type: "paragraph",
+      text: "Modern and better way to handle events."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "btn.addEventListener('click', function(){\n  console.log('Clicked');\n});"
+    },
+
+    {
+      type: "heading",
+      text: "Input Value Access"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let input = document.getElementById('username');\nconsole.log(input.value);"
+    },
+
+    {
+      type: "heading",
+      text: "Real-world Example"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let username = 'Rahul';\n\ndocument.getElementById('name').textContent = username;"
+    },
+    {
+      type: "paragraph",
+      text: "Used in profile pages, chat apps, dashboards, forms, etc."
+    },
+
+    {
+      type: "heading",
+      text: "Quick Revision"
+    },
+    {
+      type: "summary",
+      items: [
+        "forEach = loop through array",
+        "map = transform array",
+        "filter = select data",
+        "reduce = combine data",
+        "window = browser object",
+        "document = webpage object",
+        "getElementById = select by id",
+        "querySelector = select first element",
+        "textContent = change text",
+        "innerHTML = change HTML",
+        "style = change CSS",
+        "createElement = create element",
+        "appendChild = add element",
+        "remove = delete element",
+        "addEventListener = handle events"
+      ]
+    },
+
+    {
+      type: "heading",
+      text: "Practice Questions"
+    },
+    {
+      type: "summary",
+      items: [
+        "Use map() to double all numbers",
+        "Use filter() to get even numbers",
+        "Use reduce() to find total price",
+        "Change heading text using DOM",
+        "Create a button and add click event",
+        "Create a paragraph using createElement and append it"
+      ]
+    }
+
+  ]
 }
 ];
