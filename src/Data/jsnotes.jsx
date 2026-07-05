@@ -1943,5 +1943,437 @@ export const jsnotes = [
     }
 
   ]
+},
+
+{
+  id: 6,
+  slug: "javascript-events-complete-guide",
+  title: "JavaScript Events (Complete Guide)",
+  date: "05 July 2026",
+
+  description:
+    "JavaScript events including mouse events, keyboard events, form events, window events, event object, preventDefault(), stopPropagation(), and addEventListener.",
+
+  content: [
+
+    {
+      type: "heading",
+      text: "What are Events?"
+    },
+    {
+      type: "paragraph",
+      text: "Events are actions performed by the user or browser. JavaScript listens to these actions and runs code when they happen."
+    },
+    {
+      type: "paragraph",
+      text: "Examples: Clicking a button, typing in an input, moving the mouse, submitting a form, or loading a page."
+    },
+
+    {
+      type: "heading",
+      text: "Why Do We Use Events?"
+    },
+    {
+      type: "paragraph",
+      text: "Without events, a webpage cannot react to user actions. Events make websites interactive."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "alert('Hello');"
+    },
+    {
+      type: "paragraph",
+      text: "This runs immediately. But with events, JavaScript waits until the user performs an action."
+    },
+
+    {
+      type: "heading",
+      text: "Ways to Add Events"
+    },
+    {
+      type: "paragraph",
+      text: "There are three common ways to add events in JavaScript."
+    },
+
+    {
+      type: "heading",
+      text: "1. Inline Event (Not Recommended)"
+    },
+    {
+      type: "code",
+      language: "html",
+      text: "<button onclick=\"alert('Hello')\">Click</button>"
+    },
+    {
+      type: "paragraph",
+      text: "Here JavaScript is written directly inside HTML. This works, but it mixes HTML and JavaScript, making code difficult to manage."
+    },
+
+    {
+      type: "heading",
+      text: "2. JavaScript Property"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let btn = document.getElementById('btn');\n\nbtn.onclick = function(){\n  alert('Button Clicked');\n};"
+    },
+    {
+      type: "paragraph",
+      text: "Here we first select the element and then attach the event in JavaScript."
+    },
+
+    {
+      type: "heading",
+      text: "3. addEventListener() (Best Method)"
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "let btn = document.getElementById('btn');\n\nbtn.addEventListener('click', function(){\n  alert('Button Clicked');\n});"
+    },
+    {
+      type: "paragraph",
+      text: "This is the modern and recommended way because multiple events can be attached to the same element."
+    },
+
+    {
+      type: "heading",
+      text: "click"
+    },
+    {
+      type: "paragraph",
+      text: "Runs when an element is clicked."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "btn.addEventListener('click', function(){\n  console.log('Clicked');\n});"
+    },
+
+    {
+      type: "heading",
+      text: "dblclick"
+    },
+    {
+      type: "paragraph",
+      text: "Runs when the user double-clicks."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "btn.addEventListener('dblclick', function(){\n  console.log('Double Click');\n});"
+    },
+
+    {
+      type: "heading",
+      text: "mouseover"
+    },
+    {
+      type: "paragraph",
+      text: "Runs when the mouse enters an element."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "box.addEventListener('mouseover', function(){\n  box.style.background='yellow';\n});"
+    },
+
+    {
+      type: "heading",
+      text: "mouseout"
+    },
+    {
+      type: "paragraph",
+      text: "Runs when the mouse leaves an element."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "box.addEventListener('mouseout', function(){\n  box.style.background='white';\n});"
+    },
+
+    {
+      type: "heading",
+      text: "mousedown"
+    },
+    {
+      type: "paragraph",
+      text: "Runs when the mouse button is pressed."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "box.addEventListener('mousedown', function(){\n  console.log('Mouse Down');\n});"
+    },
+
+    {
+      type: "heading",
+      text: "mouseup"
+    },
+    {
+      type: "paragraph",
+      text: "Runs when the mouse button is released."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "box.addEventListener('mouseup', function(){\n  console.log('Mouse Up');\n});"
+    },
+
+    {
+      type: "heading",
+      text: "mousemove"
+    },
+    {
+      type: "paragraph",
+      text: "Runs whenever the mouse moves."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "document.addEventListener('mousemove', function(){\n  console.log('Moving');\n});"
+    },
+
+    {
+      type: "heading",
+      text: "keydown"
+    },
+    {
+      type: "paragraph",
+      text: "Runs when any key is pressed."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "document.addEventListener('keydown', function(event){\n  console.log(event.key);\n});"
+    },
+
+    {
+      type: "heading",
+      text: "keyup"
+    },
+    {
+      type: "paragraph",
+      text: "Runs when the key is released."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "document.addEventListener('keyup', function(event){\n  console.log(event.key);\n});"
+    },
+
+    {
+      type: "heading",
+      text: "input"
+    },
+    {
+      type: "paragraph",
+      text: "Runs whenever the input value changes."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "input.addEventListener('input', function(){\n  console.log(input.value);\n});"
+    },
+
+    {
+      type: "heading",
+      text: "change"
+    },
+    {
+      type: "paragraph",
+      text: "Runs after the value is changed and confirmed."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "input.addEventListener('change', function(){\n  console.log(input.value);\n});"
+    },
+
+    {
+      type: "heading",
+      text: "focus"
+    },
+    {
+      type: "paragraph",
+      text: "Runs when the input gets focus."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "input.addEventListener('focus', function(){\n  input.style.background='lightyellow';\n});"
+    },
+
+    {
+      type: "heading",
+      text: "blur"
+    },
+    {
+      type: "paragraph",
+      text: "Runs when the input loses focus."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "input.addEventListener('blur', function(){\n  input.style.background='white';\n});"
+    },
+
+    {
+      type: "heading",
+      text: "submit"
+    },
+    {
+      type: "paragraph",
+      text: "Runs when a form is submitted."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "form.addEventListener('submit', function(event){\n  event.preventDefault();\n  console.log('Form Submitted');\n});"
+    },
+
+    {
+      type: "heading",
+      text: "load"
+    },
+    {
+      type: "paragraph",
+      text: "Runs after the page is fully loaded."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "window.addEventListener('load', function(){\n  console.log('Page Loaded');\n});"
+    },
+
+    {
+      type: "heading",
+      text: "resize"
+    },
+    {
+      type: "paragraph",
+      text: "Runs when the browser window size changes."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "window.addEventListener('resize', function(){\n  console.log(window.innerWidth);\n});"
+    },
+
+    {
+      type: "heading",
+      text: "scroll"
+    },
+    {
+      type: "paragraph",
+      text: "Runs whenever the page is scrolled."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "window.addEventListener('scroll', function(){\n  console.log(window.scrollY);\n});"
+    },
+
+    {
+      type: "heading",
+      text: "Event Object"
+    },
+    {
+      type: "paragraph",
+      text: "The event object contains information about the event such as key pressed, mouse position, target element, and more."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "btn.addEventListener('click', function(event){\n  console.log(event.target);\n});"
+    },
+
+    {
+      type: "heading",
+      text: "this Keyword"
+    },
+    {
+      type: "paragraph",
+      text: "Inside a normal event function, this refers to the element that triggered the event."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "btn.addEventListener('click', function(){\n  this.style.background='green';\n});"
+    },
+
+    {
+      type: "heading",
+      text: "preventDefault()"
+    },
+    {
+      type: "paragraph",
+      text: "Stops the browser's default behavior."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "form.addEventListener('submit', function(event){\n  event.preventDefault();\n});"
+    },
+
+    {
+      type: "heading",
+      text: "stopPropagation()"
+    },
+    {
+      type: "paragraph",
+      text: "Stops the event from moving to parent elements."
+    },
+    {
+      type: "code",
+      language: "javascript",
+      text: "button.addEventListener('click', function(event){\n  event.stopPropagation();\n});"
+    },
+
+    {
+      type: "heading",
+      text: "Quick Revision"
+    },
+    {
+      type: "summary",
+      items: [
+        "Inline Event = old method",
+        "onclick = JavaScript property",
+        "addEventListener = best method",
+        "click = mouse click",
+        "dblclick = double click",
+        "mouseover / mouseout = mouse enter & leave",
+        "mousedown / mouseup = mouse press & release",
+        "mousemove = mouse movement",
+        "keydown / keyup = keyboard events",
+        "input / change = input field events",
+        "focus / blur = input focus events",
+        "submit = form submit",
+        "load / resize / scroll = window events",
+        "event = information about event",
+        "preventDefault() = stop default action",
+        "stopPropagation() = stop event bubbling"
+      ]
+    },
+
+    {
+      type: "heading",
+      text: "Practice Questions"
+    },
+    {
+      type: "summary",
+      items: [
+        "Change text when button is clicked.",
+        "Change box color on mouseover.",
+        "Show pressed key using keydown.",
+        "Display input value while typing.",
+        "Prevent a form from refreshing the page.",
+        "Print page scroll position using scroll event."
+      ]
+    }
+
+  ]
 }
 ];
