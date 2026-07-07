@@ -2375,5 +2375,114 @@ export const jsnotes = [
     }
 
   ]
+},
+{
+  "id": 7,
+  "slug": "javascript-prototypes-and-classes-beginner-guide",
+  "title": "JavaScript Prototypes & Classes (Easy Beginner Guide)",
+  "date": "07 July 2026",
+
+  "description": "Super simple guide to JavaScript Prototypes, Classes, this, extends, and super with easy real-world examples.",
+
+  "content": [
+    {
+      "type": "heading",
+      "text": "1. What is a Prototype? (The Backup Object)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Think of a prototype as a 'backup' object. If you ask an object for a property or method and it doesn't have it, JavaScript will look inside its backup (prototype) object."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "let grandfather = { gold: true };\nlet father = { cash: 1000 };\n\n// Making grandfather the backup (prototype) of father\nfather.__proto__ = grandfather;\n\nconsole.log(father.cash); // 1000 (his own)\nconsole.log(father.gold); // true (taken from backup/prototype)"
+    },
+
+    {
+      "type": "heading",
+      "text": "2. What is a Class? (The Blueprint)"
+    },
+    {
+      "type": "paragraph",
+      "text": "A class is just a template or a 'blank form'. Instead of creating 100 separate objects for 100 users manually, you make one Class and stamp out objects easily."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "class Student {\n  // constructor runs automatically to fill the form\n  constructor(name) {\n    this.name = name;\n  }\n}\n\n// Creating real objects from the template\nlet s1 = new Student('Rahul');\nlet s2 = new Student('Amit');"
+    },
+
+    {
+      "type": "heading",
+      "text": "3. The 'this' Keyword (Mera Khud Ka)"
+    },
+    {
+      "type": "paragraph",
+      "text": "The word 'this' simply means 'the current object'. Inside a class template, 'this' acts as a placeholder for whichever object is being made right now."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "class Toy {\n  constructor(color) {\n    this.color = color; // 'this' means the current toy's color\n  }\n}\nlet redToy = new Toy('Red'); // Here, 'this' becomes redToy"
+    },
+
+    {
+      "type": "heading",
+      "text": "4. What is extends? (Copy-Paste Features)"
+    },
+    {
+      "type": "paragraph",
+      "text": "When you want to create a new class but want to copy everything from an old class, you use 'extends'. It connects a Child class to a Parent class."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "class Phone {\n  call() { console.log('Calling...'); }\n}\n\n// SmartPhone copies everything from Phone\nclass SmartPhone extends Phone {\n  browse() { console.log('Browsing internet...'); }\n}\n\nlet myPhone = new SmartPhone();\nmyPhone.call();   // Works! (Copied from Parent)\nmyPhone.browse(); // Works! (Its own feature)"
+    },
+
+    {
+      "type": "heading",
+      "text": "5. The super() Keyword (Inform the Parent)"
+    },
+    {
+      "type": "paragraph",
+      "text": "If a Child class adds its own new constructor, it MUST call super() first. It is like telling the Parent class: 'Hey, initialize your properties first, then I will add mine.'"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "class Parent {\n  constructor(lastName) {\n    this.lastName = lastName;\n  }\n}\n\nclass Child extends Parent {\n  constructor(firstName, lastName) {\n    super(lastName); // Passes lastName to Parent's constructor\n    this.firstName = firstName;\n  }\n}\n\nlet person = new Child('Aryan', 'Sharma');"
+    },
+
+    {
+      "type": "heading",
+      "text": "Quick Revision"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Prototype = The backup object where JS looks if something is missing.",
+        "Class = A reusable blueprint/template to create objects.",
+        "this = Refers to the specific object currently using the code.",
+        "extends = Keyword used to inherit/copy features from a parent class.",
+        "super() = Must-call function to setup the parent class constructor inside a child."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "Practice Tasks"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Create two objects 'human' and 'coder'. Connect them using __proto__.",
+        "Make a simple 'User' class that sets a 'username' using 'this'.",
+        "Create an 'Animal' parent class and extend a 'Dog' child class from it.",
+        "Add a new constructor to 'Dog' and use super() to pass a name to 'Animal'."
+      ]
+    }
+  ]
 }
 ];
