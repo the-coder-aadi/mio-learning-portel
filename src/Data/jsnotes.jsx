@@ -2459,6 +2459,7 @@ export const jsnotes = [
       "type": "heading",
       "text": "Quick Revision"
     },
+    
     {
       "type": "summary",
       "items": [
@@ -2482,7 +2483,92 @@ export const jsnotes = [
         "Create an 'Animal' parent class and extend a 'Dog' child class from it.",
         "Add a new constructor to 'Dog' and use super() to pass a name to 'Animal'."
       ]
-    }
+    },
+    
+  {
+    "type": "heading",
+    "text": "6. setTimeout() (Run Code After Some Time)"
+  },
+  {
+    "type": "paragraph",
+    "text": "setTimeout() runs a function only once after a specified delay. The time is given in milliseconds (1000ms = 1 second). JavaScript doesn't stop while waiting; it continues executing the remaining code."
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "text": "console.log('Start');\n\nsetTimeout(() => {\n  console.log('Hello!');\n}, 2000);\n\nconsole.log('End');"
+  },
+
+  {
+    "type": "heading",
+    "text": "7. clearTimeout()"
+  },
+  {
+    "type": "paragraph",
+    "text": "setTimeout() returns a Timer ID. If you don't want the scheduled function to run, use clearTimeout() with that Timer ID."
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "text": "let timer = setTimeout(() => {\n  console.log('Hello');\n}, 5000);\n\nclearTimeout(timer);"
+  },
+
+  {
+    "type": "heading",
+    "text": "8. setInterval() (Repeat Again and Again)"
+  },
+  {
+    "type": "paragraph",
+    "text": "setInterval() runs a function repeatedly after every specified interval until it is stopped."
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "text": "let timer = setInterval(() => {\n  console.log('Running...');\n}, 1000);"
+  },
+
+  {
+    "type": "heading",
+    "text": "9. clearInterval()"
+  },
+  {
+    "type": "paragraph",
+    "text": "Use clearInterval() to stop a running interval. Pass the Timer ID returned by setInterval()."
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "text": "let timer = setInterval(() => {\n  console.log('Running...');\n}, 1000);\n\nsetTimeout(() => {\n  clearInterval(timer);\n}, 5000);"
+  },
+
+  {
+    "type": "heading",
+    "text": "Quick Revision"
+  },
+  {
+    "type": "summary",
+    "items": [
+      "setTimeout() → Runs once after a delay.",
+      "clearTimeout() → Cancels a timeout.",
+      "setInterval() → Runs repeatedly.",
+      "clearInterval() → Stops the interval.",
+      "Time is always in milliseconds."
+    ]
+  },
+
+  {
+    "type": "heading",
+    "text": "Practice Tasks"
+  },
+  {
+    "type": "summary",
+    "items": [
+      "Print a message after 3 seconds using setTimeout().",
+      "Create a counter that prints every second using setInterval().",
+      "Stop the counter after 5 seconds using clearInterval()."
+    ]
+  }
+    
   ]
 }
 ];
