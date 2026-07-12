@@ -2570,5 +2570,146 @@ export const jsnotes = [
   }
     
   ]
+},
+{
+  "id": 8,
+  "slug": "javascript-async-callbacks-promises-beginner-guide",
+  "title": "JavaScript Async, Callbacks & Promises (Easy Beginner Guide)",
+  "date": "12 July 2026",
+
+  "description": "Simple beginner guide to Synchronous, Asynchronous, Callback, Callback Hell, Promise, then() and catch() with easy real-world examples.",
+
+  "content": [
+    {
+      "type": "heading",
+      "text": "1. Synchronous JavaScript (One By One)"
+    },
+    {
+      "type": "paragraph",
+      "text": "JavaScript is synchronous by default. It executes one line at a time. The next line will not run until the current line finishes."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "console.log('Step 1');\nconsole.log('Step 2');\nconsole.log('Step 3');"
+    },
+
+    {
+      "type": "heading",
+      "text": "2. Asynchronous JavaScript (Don't Wait)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Some tasks take time, like fetching data or waiting for a timer. JavaScript doesn't stop for them. It continues running the next lines and comes back later when the task is finished."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "console.log('Start');\n\nsetTimeout(() => {\n  console.log('Hello after 2 seconds');\n}, 2000);\n\nconsole.log('End');"
+    },
+
+    {
+      "type": "heading",
+      "text": "3. Callback Function (Do This After My Work)"
+    },
+    {
+      "type": "paragraph",
+      "text": "A callback is simply a function passed to another function so it can be executed later when the main task is completed."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "function login(callback) {\n  setTimeout(() => {\n    console.log('Login Successful');\n    callback();\n  }, 2000);\n}\n\nlogin(() => {\n  console.log('Open Dashboard');\n});"
+    },
+
+    {
+      "type": "heading",
+      "text": "4. Callback Hell (Too Many Nested Callbacks)"
+    },
+    {
+      "type": "paragraph",
+      "text": "When one callback is placed inside another callback again and again, the code becomes difficult to read and maintain. This is called Callback Hell."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "login(() => {\n  getProfile(() => {\n    getPosts(() => {\n      console.log('Dashboard Ready');\n    });\n  });\n});"
+    },
+
+    {
+      "type": "heading",
+      "text": "5. Promise (A Better Way)"
+    },
+    {
+      "type": "paragraph",
+      "text": "A Promise represents the future result of an asynchronous task. Instead of passing callbacks everywhere, a function returns a Promise which can later be handled using then() or catch()."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "function login() {\n  return new Promise((resolve) => {\n    setTimeout(() => {\n      console.log('Login Successful');\n      resolve();\n    }, 2000);\n  });\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "6. then() (Run After Success)"
+    },
+    {
+      "type": "paragraph",
+      "text": "then() runs only when the Promise is successfully completed (resolved)."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "login()\n  .then(() => {\n    console.log('Open Dashboard');\n  });"
+    },
+
+    {
+      "type": "heading",
+      "text": "7. catch() (Handle Errors)"
+    },
+    {
+      "type": "paragraph",
+      "text": "If something goes wrong and the Promise is rejected, catch() receives the error so your application doesn't crash."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "function login() {\n  return new Promise((resolve, reject) => {\n    let success = false;\n\n    if (success) {\n      resolve('Login Successful');\n    } else {\n      reject('Login Failed');\n    }\n  });\n}\n\nlogin()\n  .then((res) => {\n    console.log(res);\n  })\n  .catch((err) => {\n    console.log(err);\n  });"
+    },
+
+    {
+      "type": "heading",
+      "text": "Quick Revision"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Synchronous = Runs one line at a time.",
+        "Asynchronous = Doesn't wait for slow tasks.",
+        "Callback = Function passed into another function to run later.",
+        "Callback Hell = Too many nested callbacks make code messy.",
+        "Promise = Cleaner way to handle asynchronous work.",
+        "then() = Runs when Promise is resolved.",
+        "catch() = Runs when Promise is rejected."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "Practice Tasks"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Print 'Hello' after 2 seconds using setTimeout().",
+        "Create a function that accepts a callback and runs it after 1 second.",
+        "Write three nested callbacks to understand Callback Hell.",
+        "Convert the callback example into a Promise.",
+        "Use then() to print 'Dashboard Opened'.",
+        "Reject a Promise and handle the error using catch()."
+      ]
+    }
+  ]
 }
 ];
