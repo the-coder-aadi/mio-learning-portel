@@ -2709,7 +2709,89 @@ export const jsnotes = [
         "Use then() to print 'Dashboard Opened'.",
         "Reject a Promise and handle the error using catch()."
       ]
-    }
+    },
+    {
+  "type": "heading",
+  "text": "8. Async/Await (Easier Way to Handle Promises)"
+},
+{
+  "type": "paragraph",
+  "text": "Async/Await is a cleaner and easier way to work with Promises. It makes asynchronous code look like normal synchronous code, which makes it easier to read and understand."
+},
+{
+  "type": "paragraph",
+  "text": "The async keyword is used before a function to make it return a Promise. The await keyword pauses the function until the Promise is completed."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "function login() {\n  return new Promise((resolve) => {\n    setTimeout(() => {\n      resolve('Login Successful');\n    }, 2000);\n  });\n}\n\nasync function startApp() {\n  let result = await login();\n  console.log(result);\n  console.log('Open Dashboard');\n}\n\nstartApp();"
+},
+
+{
+  "type": "heading",
+  "text": "9. try...catch (Handle Errors Easily)"
+},
+{
+  "type": "paragraph",
+  "text": "try...catch is used to handle errors in JavaScript. If an error happens inside the try block, the catch block runs and handles that error instead of crashing the program."
+},
+{
+  "type": "paragraph",
+  "text": "When using Async/Await, try...catch is commonly used to handle rejected Promises."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "function login() {\n  return new Promise((resolve, reject) => {\n    let success = false;\n\n    if (success) {\n      resolve('Login Successful');\n    } else {\n      reject('Login Failed');\n    }\n  });\n}\n\nasync function app() {\n  try {\n    let result = await login();\n    console.log(result);\n  }\n  catch(error) {\n    console.log(error);\n  }\n}\n\napp();"
+},
+
+{
+  "type": "heading",
+  "text": "10. IIFE (Immediately Invoked Function Expression)"
+},
+{
+  "type": "paragraph",
+  "text": "IIFE is a function that runs immediately after it is created. We don't need to call it separately."
+},
+{
+  "type": "paragraph",
+  "text": "IIFE is useful when we want to create a private scope and avoid creating unnecessary global variables."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "(function() {\n  console.log('Function runs automatically');\n})();"
+},
+{
+  "type": "paragraph",
+  "text": "In this example, the function is created and immediately executed because of the extra ()."
+},
+
+
+
+
+
+{
+  "type": "heading",
+  "text": "Async JavaScript Quick Revision"
+},
+{
+  "type": "summary",
+  "items": [
+    "Synchronous = Runs code one line at a time.",
+    "Asynchronous = Does not wait for slow tasks.",
+    "Callback = A function passed to another function to run later.",
+    "Callback Hell = Too many nested callbacks.",
+    "Promise = A better way to handle asynchronous operations.",
+    "then() = Runs when a Promise is successful.",
+    "catch() = Handles Promise errors.",
+    "async = Makes a function return a Promise.",
+    "await = Waits for a Promise result.",
+    "try...catch = Handles errors safely.",
+    "IIFE = A function that runs immediately after creation."
+  ]
+}
   ]
 }
 ];
