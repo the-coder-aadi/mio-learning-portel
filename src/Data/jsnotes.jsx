@@ -2793,5 +2793,486 @@ export const jsnotes = [
   ]
 }
   ]
+},
+{
+  "id": 9,
+  "slug": "javascript-api-fetch-beginner-guide",
+  "title": "JavaScript API & Fetch (Easy Beginner Guide)",
+  "date": "16 July 2026",
+
+  "description": "Learn what an API is, how Client and Server communicate, Request & Response, HTTP, URL, Endpoint, JSON, XML, fetch() and Async/Await with simple beginner-friendly explanations and examples.",
+
+  "content": [
+    {
+      "type": "heading",
+      "text": "1. What is an API?"
+    },
+    {
+      "type": "paragraph",
+      "text": "API stands for Application Programming Interface. It is a bridge that allows two different applications to communicate with each other. Instead of directly accessing another application's database or code, we send a request to its API and receive the required data as a response."
+    },
+    {
+      "type": "paragraph",
+      "text": "Think of an API as a waiter in a restaurant. You tell the waiter what food you want. The waiter takes your order to the kitchen, the kitchen prepares the food, and then the waiter brings it back to you. The waiter is like an API because it connects you with the kitchen without allowing you to enter the kitchen yourself."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "API connects two applications.",
+        "It sends requests and receives responses.",
+        "It safely shares data between applications."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "2. Real-Life Example of API"
+    },
+    {
+      "type": "paragraph",
+      "text": "Suppose you open a Weather App on your phone. The app itself doesn't know today's weather. It sends a request to a Weather API. The Weather API asks its server for the latest weather information and sends it back to your app. Your app then displays the temperature and weather condition."
+    },
+    {
+      "type": "paragraph",
+      "text": "The same thing happens on websites like Amazon, Instagram, YouTube and Facebook. Whenever you refresh the page, those websites request fresh data from their servers through APIs."
+    },
+
+    {
+      "type": "heading",
+      "text": "3. Client and Server"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Client is the application used by the user, such as a browser or mobile app. The Server is a computer that stores data and sends it when requested."
+    },
+    {
+      "type": "paragraph",
+      "text": "Whenever you click a button or open a website, the client sends a request to the server. The server processes that request and sends back a response."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Client = Requests data.",
+        "Server = Stores data.",
+        "Server sends data back to the client."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "4. Request and Response"
+    },
+    {
+      "type": "paragraph",
+      "text": "A Request is a message sent by the client asking for something. A Response is the data returned by the server after processing the request."
+    },
+    {
+      "type": "paragraph",
+      "text": "Example: When you search for a product on Amazon, your browser sends a request to Amazon's server. The server searches for matching products and sends them back as a response."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Request = Asking for data.",
+        "Response = Receiving data."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "5. HTTP (HyperText Transfer Protocol)"
+    },
+    {
+      "type": "paragraph",
+      "text": "HTTP is a communication rule (protocol) used by browsers and servers to exchange data over the internet. It defines how requests and responses should be sent."
+    },
+    {
+      "type": "paragraph",
+      "text": "Whenever you open a website or fetch data from an API, HTTP is used behind the scenes."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "HTTP is a communication protocol.",
+        "It transfers requests and responses.",
+        "Almost every website uses HTTP or HTTPS."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "6. URL and Endpoint"
+    },
+    {
+      "type": "paragraph",
+      "text": "A URL (Uniform Resource Locator) is the complete web address of a resource on the internet."
+    },
+    {
+      "type": "paragraph",
+      "text": "An Endpoint is a specific URL provided by an API to perform a particular task, such as getting users, products or weather information."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "https://catfact.ninja/fact"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here, the entire address is the URL, and this API endpoint returns one random cat fact."
+    },
+
+    {
+      "type": "heading",
+      "text": "7. JSON (JavaScript Object Notation)"
+    },
+    {
+      "type": "paragraph",
+      "text": "JSON is a lightweight text format used to store and exchange data. Most modern APIs send data in JSON because it is simple, readable and easy for JavaScript to understand."
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "text": "{\n  \"fact\": \"Cats sleep for about 16 hours a day.\"\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "JSON stores data as key-value pairs. In the example above, 'fact' is the key and the sentence is its value."
+    },
+
+    {
+      "type": "heading",
+      "text": "8. XML vs JSON"
+    },
+    {
+      "type": "paragraph",
+      "text": "Before JSON became popular, many APIs used XML to exchange data. XML works well but it is longer and harder to read. Today, most APIs use JSON because it is shorter, faster and easier to work with."
+    },
+    {
+      "type": "code",
+      "language": "xml",
+      "text": "<cat>\n  <fact>Cats sleep for about 16 hours a day.</fact>\n</cat>"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "text": "{\n  \"fact\": \"Cats sleep for about 16 hours a day.\"\n}"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "XML is older.",
+        "JSON is modern.",
+        "JSON is smaller and easier to read.",
+        "Most APIs use JSON today."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "9. fetch() Function"
+    },
+    {
+      "type": "paragraph",
+      "text": "fetch() is a built-in JavaScript function used to send HTTP requests to APIs. It returns a Promise, which means the result is received later after the request is completed."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "fetch('https://catfact.ninja/fact')\n  .then((response) => response.json())\n  .then((data) => {\n    console.log(data.fact);\n  });"
+    },
+    {
+      "type": "paragraph",
+      "text": "The first then() receives the Response object. response.json() converts the JSON data into a JavaScript object. The second then() receives the actual data."
+    },
+
+    {
+      "type": "heading",
+      "text": "10. Async/Await with fetch()"
+    },
+    {
+      "type": "paragraph",
+      "text": "Async/Await is a cleaner way to work with Promises. It makes asynchronous code look like normal synchronous code, making it easier to read."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "async function getFact() {\n  const response = await fetch('https://catfact.ninja/fact');\n  const data = await response.json();\n\n  console.log(data.fact);\n}\n\ngetFact();"
+    },
+    {
+      "type": "paragraph",
+      "text": "await waits until the Promise is completed. First, fetch() waits for the server response. Then response.json() waits until the JSON is converted into a JavaScript object."
+    },
+
+    {
+      "type": "heading",
+      "text": "11. Another API Example (Random Dog Image)"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Dog CEO API returns a random dog image every time you send a request."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "async function getDogImage() {\n  const response = await fetch('https://dog.ceo/api/breeds/image/random');\n  const result = await response.json();\n\n  console.log(result.message);\n}\n\ngetDogImage();"
+    },
+    {
+      "type": "paragraph",
+      "text": "The image URL is stored inside result.message. You can use it as the src of an image element."
+    },
+
+
+
+      {
+      "type": "heading",
+      "text": "12. response.json()"
+    },
+    {
+      "type": "paragraph",
+      "text": "When fetch() receives data from an API, it does not directly return JavaScript objects. Instead, it returns a Response object. To read the actual data, we use response.json(). This method converts the JSON response into a JavaScript object."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "async function getFact() {\n  const response = await fetch('https://catfact.ninja/fact');\n\n  console.log(response);\n\n  const data = await response.json();\n\n  console.log(data);\n}\n\ngetFact();"
+    },
+    {
+      "type": "paragraph",
+      "text": "The fetch() function first returns a Response object. After calling response.json(), we get the actual JavaScript object containing the API data."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "fetch() returns a Response object.",
+        "response.json() converts JSON into a JavaScript object.",
+        "After conversion, we can access data using object properties."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "13. Error Handling"
+    },
+    {
+      "type": "paragraph",
+      "text": "Sometimes an API request may fail because of no internet connection, an invalid URL, or a server problem. Instead of letting the application crash, we should handle these errors properly."
+    },
+    {
+      "type": "paragraph",
+      "text": "Good error handling helps users understand what went wrong and keeps the application running smoothly."
+    },
+
+    {
+      "type": "heading",
+      "text": "14. try...catch"
+    },
+    {
+      "type": "paragraph",
+      "text": "When using async/await, we usually place our code inside a try block. If any error occurs, JavaScript immediately jumps to the catch block and handles the error."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "async function getFact() {\n  try {\n    const response = await fetch('https://catfact.ninja/fact');\n    const data = await response.json();\n\n    console.log(data.fact);\n  }\n  catch(error) {\n    console.log('Something went wrong');\n    console.log(error);\n  }\n}\n\ngetFact();"
+    },
+    {
+      "type": "paragraph",
+      "text": "If the request is successful, the code inside the try block runs. If any error occurs, the catch block executes instead."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "try = Write code that may cause an error.",
+        "catch = Handles the error safely.",
+        "Most async/await code uses try...catch."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "15. HTTP Methods"
+    },
+    {
+      "type": "paragraph",
+      "text": "HTTP methods tell the server what action we want to perform. There are many HTTP methods, but in most web applications we mainly use GET, POST, PUT, PATCH and DELETE."
+    },
+
+    {
+      "type": "heading",
+      "text": "16. GET Method"
+    },
+    {
+      "type": "paragraph",
+      "text": "GET is used to request or read data from a server. It does not change or delete any data."
+    },
+    {
+      "type": "paragraph",
+      "text": "Example: Getting a random cat fact or loading products from an online shopping website."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "fetch('https://catfact.ninja/fact')\n  .then(response => response.json())\n  .then(data => {\n    console.log(data.fact);\n  });"
+    },
+
+    {
+      "type": "heading",
+      "text": "17. POST Method"
+    },
+    {
+      "type": "paragraph",
+      "text": "POST is used to send new data to the server. Whenever we create a new account, add a new product or submit a form, we usually use POST."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "fetch('https://example.com/users', {\n  method: 'POST',\n  headers: {\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    name: 'Rahul',\n    age: 20\n  })\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "The body contains the data we want to send. JSON.stringify() converts a JavaScript object into JSON before sending it to the server."
+    },
+
+    {
+      "type": "heading",
+      "text": "18. PUT Method"
+    },
+    {
+      "type": "paragraph",
+      "text": "PUT is used to completely replace an existing resource. If some fields are missing in the new data, they may be removed because the old resource is replaced with the new one."
+    },
+    {
+      "type": "paragraph",
+      "text": "Imagine updating a student's information. With PUT, we usually send the complete updated student object."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "fetch('https://example.com/users/1', {\n  method: 'PUT',\n  headers: {\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    name: 'Rahul',\n    age: 21,\n    city: 'Delhi'\n  })\n});"
+    },
+
+    {
+      "type": "heading",
+      "text": "19. PATCH Method"
+    },
+    {
+      "type": "paragraph",
+      "text": "PATCH is used to update only specific fields of an existing resource. Instead of sending the entire object, we send only the fields that need to change."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "fetch('https://example.com/users/1', {\n  method: 'PATCH',\n  headers: {\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    age: 22\n  })\n});"
+    },
+
+    {
+      "type": "heading",
+      "text": "20. PUT vs PATCH"
+    },
+    {
+      "type": "paragraph",
+      "text": "Both PUT and PATCH are used to update existing data, but they work differently."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "PUT replaces the entire resource.",
+        "PATCH updates only selected fields.",
+        "PUT usually sends all data.",
+        "PATCH sends only the changed data."
+      ]
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Old Data\nName: Rahul\nAge: 20\nCity: Delhi\n\nPUT\nName: Rahul\nAge: 21\nCity: Mumbai\n\nEntire object is replaced.\n\nPATCH\nAge: 21\n\nOnly Age changes.\nName and City remain the same."
+    },
+
+    {
+      "type": "heading",
+      "text": "21. DELETE Method"
+    },
+    {
+      "type": "paragraph",
+      "text": "DELETE is used to remove data from the server. For example, deleting a user account, removing a product or deleting a comment."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "fetch('https://example.com/users/1', {\n  method: 'DELETE'\n});"
+    },
+
+    {
+      "type": "heading",
+      "text": "22. Common HTTP Status Codes"
+    },
+    {
+      "type": "paragraph",
+      "text": "Whenever the server sends a response, it also sends a status code. The status code tells us whether the request was successful or if something went wrong."
+    },
+
+    {
+      "type": "heading",
+      "text": "200 OK"
+    },
+    {
+      "type": "paragraph",
+      "text": "The request was successful and the server returned the requested data."
+    },
+
+    {
+      "type": "heading",
+      "text": "201 Created"
+    },
+    {
+      "type": "paragraph",
+      "text": "The request was successful and a new resource was created on the server."
+    },
+
+    {
+      "type": "heading",
+      "text": "400 Bad Request"
+    },
+    {
+      "type": "paragraph",
+      "text": "The request sent by the client is invalid. Some required data may be missing or incorrect."
+    },
+
+    {
+      "type": "heading",
+      "text": "401 Unauthorized"
+    },
+    {
+      "type": "paragraph",
+      "text": "The user is not authenticated. Usually the user needs to log in before accessing the resource."
+    },
+
+    {
+      "type": "heading",
+      "text": "403 Forbidden"
+    },
+    {
+      "type": "paragraph",
+      "text": "The user is authenticated but does not have permission to access the requested resource."
+    },
+
+    {
+      "type": "heading",
+      "text": "404 Not Found"
+    },
+    {
+      "type": "paragraph",
+      "text": "The requested page or API endpoint could not be found on the server."
+    },
+
+    {
+      "type": "heading",
+      "text": "500 Internal Server Error"
+    },
+    {
+      "type": "paragraph",
+      "text": "Something went wrong on the server. The problem is on the server side, not in your code."
+    },
+  ]
 }
 ];
