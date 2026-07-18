@@ -3274,5 +3274,357 @@ export const jsnotes = [
       "text": "Something went wrong on the server. The problem is on the server side, not in your code."
     },
   ]
+},
+{
+  "id": 10,
+  "slug": "javascript-localstorage-beginner-guide",
+  "title": "JavaScript LocalStorage (Easy Beginner Guide)",
+  "date": "18 July 2026",
+
+  "description": "Learn Browser Storage and LocalStorage from scratch. Understand how LocalStorage works, all its methods, storing strings, numbers, booleans, arrays and object with easy explanations and examples.",
+
+  "content": [
+    {
+      "type": "heading",
+      "text": "1. What is Browser Storage?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Browser Storage is a feature provided by web browsers that allows websites to save data directly inside the user's browser. This data can be used later without asking the user to enter it again. Browser Storage helps websites remember information such as login status, theme preference, shopping cart items and user settings."
+    },
+    {
+      "type": "paragraph",
+      "text": "Instead of saving everything on a server, some data can be stored inside the browser itself. This makes websites faster and improves the user experience."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Browser Storage saves data inside the browser.",
+        "It helps websites remember information.",
+        "Data can be accessed later without requesting it from the server."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "2. What is LocalStorage?"
+    },
+    {
+      "type": "paragraph",
+      "text": "LocalStorage is one type of Browser Storage. It allows JavaScript to store data inside the browser permanently. The stored data remains available even after refreshing the page, closing the browser or restarting the computer. The data stays until it is manually removed."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "LocalStorage stores data permanently.",
+        "Data survives page refreshes.",
+        "Data remains until it is deleted."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "3. Why do we use LocalStorage?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Many websites need to remember information even after the user refreshes or closes the page. LocalStorage is commonly used to save dark mode, shopping cart items, language preferences, todo lists and other user settings."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Save user preferences.",
+        "Remember shopping cart items.",
+        "Store todo lists.",
+        "Keep data after refresh."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "4. LocalStorage vs Variables"
+    },
+    {
+      "type": "paragraph",
+      "text": "Variables exist only while the page is running. As soon as the page is refreshed, all variable values are lost. LocalStorage keeps data even after refreshing the page."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "let name = 'Rahul';\n\nconsole.log(name);"
+    },
+    {
+      "type": "paragraph",
+      "text": "After refreshing the page, the variable disappears."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "localStorage.setItem('name', 'Rahul');"
+    },
+    {
+      "type": "paragraph",
+      "text": "After refreshing the page, the value is still available."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Variables are temporary.",
+        "LocalStorage is persistent."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "5. How LocalStorage Works"
+    },
+    {
+      "type": "paragraph",
+      "text": "LocalStorage stores data as key-value pairs. Every value is stored using a unique key. Later, the key is used to retrieve the stored value."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Key        Value\n----------------------\nname       Rahul\nage        20\ntheme      dark"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "LocalStorage stores key-value pairs.",
+        "Each key should be unique."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "6. setItem()"
+    },
+    {
+      "type": "paragraph",
+      "text": "setItem() is used to save data inside LocalStorage."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "localStorage.setItem('name', 'Rahul');"
+    },
+
+    {
+      "type": "heading",
+      "text": "7. getItem()"
+    },
+    {
+      "type": "paragraph",
+      "text": "getItem() returns the value stored for a specific key."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const name = localStorage.getItem('name');\n\nconsole.log(name);"
+    },
+
+    {
+      "type": "heading",
+      "text": "8. removeItem()"
+    },
+    {
+      "type": "paragraph",
+      "text": "removeItem() removes one specific key and its value."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "localStorage.removeItem('name');"
+    },
+
+    {
+      "type": "heading",
+      "text": "9. clear()"
+    },
+    {
+      "type": "paragraph",
+      "text": "clear() removes every item stored in LocalStorage."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "localStorage.clear();"
+    },
+
+    {
+      "type": "heading",
+      "text": "10. key()"
+    },
+    {
+      "type": "paragraph",
+      "text": "key() returns the key name stored at a particular index."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "console.log(localStorage.key(0));"
+    },
+
+    {
+      "type": "heading",
+      "text": "11. length"
+    },
+    {
+      "type": "paragraph",
+      "text": "length returns the total number of items stored in LocalStorage."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "console.log(localStorage.length);"
+    },
+
+    {
+      "type": "heading",
+      "text": "12. Storing Numbers"
+    },
+    {
+      "type": "paragraph",
+      "text": "Although numbers can be stored, LocalStorage converts them into strings."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "localStorage.setItem('age', 20);\n\nconsole.log(localStorage.getItem('age'));"
+    },
+
+    {
+      "type": "heading",
+      "text": "13. Storing Booleans"
+    },
+    {
+      "type": "paragraph",
+      "text": "Boolean values are also stored as strings."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "localStorage.setItem('loggedIn', true);"
+    },
+
+    {
+      "type": "heading",
+      "text": "14. Why Objects Don't Work Directly"
+    },
+    {
+      "type": "paragraph",
+      "text": "LocalStorage can only store strings. If we try to store an object directly, JavaScript converts it into '[object Object]'."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const user = {\n  name: 'Rahul'\n};\n\nlocalStorage.setItem('user', user);"
+    },
+
+    {
+      "type": "heading",
+      "text": "15. JSON.stringify()"
+    },
+    {
+      "type": "paragraph",
+      "text": "JSON.stringify() converts JavaScript objects or arrays into JSON strings before storing them."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const user = {\n  name: 'Rahul',\n  age: 20\n};\n\nlocalStorage.setItem('user', JSON.stringify(user));"
+    },
+
+    {
+      "type": "heading",
+      "text": "16. JSON.parse()"
+    },
+    {
+      "type": "paragraph",
+      "text": "JSON.parse() converts JSON strings back into JavaScript objects."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const user = JSON.parse(localStorage.getItem('user'));\n\nconsole.log(user.name);"
+    },
+
+    {
+      "type": "heading",
+      "text": "17. Store Arrays"
+    },
+    {
+      "type": "paragraph",
+      "text": "Arrays are also converted into JSON before storing."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const fruits = ['Apple', 'Banana', 'Mango'];\n\nlocalStorage.setItem('fruits', JSON.stringify(fruits));"
+    },
+
+    {
+      "type": "heading",
+      "text": "18. Store Objects"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objects should always be stored using JSON.stringify()."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const student = {\n  name: 'Rahul',\n  course: 'JavaScript'\n};\n\nlocalStorage.setItem('student', JSON.stringify(student));"
+    },
+
+    {
+      "type": "heading",
+      "text": "19. Update Existing Data"
+    },
+    {
+      "type": "paragraph",
+      "text": "To update stored data, first retrieve it, modify it and then save it again."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const user = JSON.parse(localStorage.getItem('user'));\n\nuser.age = 21;\n\nlocalStorage.setItem('user', JSON.stringify(user));"
+    },
+
+    {
+      "type": "heading",
+      "text": "20. Todo App Example"
+    },
+    {
+      "type": "paragraph",
+      "text": "A Todo App is one of the most common examples of LocalStorage. Whenever a user adds a task, it is stored in LocalStorage. Even after refreshing the page, the tasks remain available."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const todos = ['Learn JavaScript', 'Practice LocalStorage'];\n\nlocalStorage.setItem('todos', JSON.stringify(todos));\n\nconst savedTodos = JSON.parse(localStorage.getItem('todos'));\n\nconsole.log(savedTodos);"
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "Browser Storage saves data inside the browser.",
+        "LocalStorage stores data permanently.",
+        "Data is stored as key-value pairs.",
+        "setItem() saves data.",
+        "getItem() reads data.",
+        "removeItem() deletes one item.",
+        "clear() deletes all items.",
+        "key() returns a key by index.",
+        "length returns the number of stored items.",
+        "Numbers and booleans are stored as strings.",
+        "Objects and arrays cannot be stored directly.",
+        "JSON.stringify() converts objects and arrays into JSON strings.",
+        "JSON.parse() converts JSON strings back into JavaScript objects or arrays.",
+        "To update data, retrieve it, modify it and store it again.",
+        "LocalStorage is commonly used for Todo Apps, shopping carts, dark mode and user preferences."
+      ]
+    }
+  ]
 }
 ];
