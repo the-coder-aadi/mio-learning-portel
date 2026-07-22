@@ -404,9 +404,217 @@ export const ReactNotes = [
       "It does not affect production.",
       "Some components may render twice in development."
     ]
-  }
+  },
+  
     
   ],
+
   
+},
+
+{
+  "id": 2,
+  "slug": "react-js-props",
+  "title": "React.js Props",
+  "date": "22 July 2026",
+
+  "description": "Learn React.js Props from scratch. Understand what props are, how to pass data between components, props destructuring, children props, function props, prop drilling, Context API, and the difference between props and state with simple examples.",
+
+  "content": [
+    {
+      "type": "heading",
+      "text": "Props in React"
+    },
+    {
+      "type": "paragraph",
+      "text": "Props stands for Properties. Props are used to pass data from one React component to another component. Props usually allow a parent component to send data to a child component."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  return <Welcome name=\"Rahul\" />;\n}\n\nfunction Welcome(props) {\n  return <h1>Hello {props.name}</h1>;\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "In this example, App is the parent component and Welcome is the child component. The name prop is passed from App to Welcome."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Props are used to pass data between components.",
+        "Props are usually passed from parent to child.",
+        "Props are read-only.",
+        "Props make components reusable and dynamic."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "Passing Props"
+    },
+    {
+      "type": "paragraph",
+      "text": "Props are passed like attributes in JSX. Strings can be written inside quotes. Numbers, booleans, arrays, objects, and JavaScript expressions are passed using curly braces."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  return (\n    <User\n      name=\"Rahul\"\n      age={22}\n      isStudent={true}\n    />\n  );\n}\n\nfunction User(props) {\n  return (\n    <div>\n      <h2>{props.name}</h2>\n      <p>Age: {props.age}</p>\n      <p>\n        Student: {props.isStudent ? 'Yes' : 'No'}\n      </p>\n    </div>\n  );\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "Props Object"
+    },
+    {
+      "type": "paragraph",
+      "text": "React passes all props to a component as an object. The prop names become object keys and the passed values become their values."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  return (\n    <User\n      name=\"Rahul\"\n      age={22}\n      city=\"Bhopal\"\n    />\n  );\n}\n\nfunction User(props) {\n  console.log(props);\n\n  return <h1>{props.name}</h1>;\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "The props object may look like this: { name: 'Rahul', age: 22, city: 'Bhopal' }."
+    },
+
+    {
+      "type": "heading",
+      "text": "Props Destructuring"
+    },
+    {
+      "type": "paragraph",
+      "text": "Instead of writing props.name, props.age, and props.city every time, we can use destructuring to access the values directly."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function User({ name, age, city }) {\n  return (\n    <div>\n      <h2>{name}</h2>\n      <p>{age}</p>\n      <p>{city}</p>\n    </div>\n  );\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "Different Types of Props"
+    },
+    {
+      "type": "paragraph",
+      "text": "React allows us to pass different types of values as props, including strings, numbers, booleans, arrays, objects, and functions."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  const user = {\n    name: 'Rahul',\n    age: 22\n  };\n\n  const skills = ['HTML', 'CSS', 'React'];\n\n  return (\n    <Profile\n      name=\"Rahul\"\n      age={22}\n      isDeveloper={true}\n      user={user}\n      skills={skills}\n    />\n  );\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "Props Are Read-Only"
+    },
+    {
+      "type": "paragraph",
+      "text": "Props are read-only. A child component should not directly change the value of its props."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function User({ name }) {\n  // Do not modify props directly\n  // name = 'Amit';\n\n  return <h1>{name}</h1>;\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "If data needs to change, use state or a function provided by the parent component."
+    },
+
+    {
+      "type": "heading",
+      "text": "Function Props"
+    },
+    {
+      "type": "paragraph",
+      "text": "A parent component can pass a function to a child component as a prop. This is commonly used for event handling."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  function handleClick() {\n    alert('Button clicked');\n  }\n\n  return <Button onClick={handleClick} />;\n}\n\nfunction Button({ onClick }) {\n  return (\n    <button onClick={onClick}>\n      Click Me\n    </button>\n  );\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "Passing Data from Child to Parent"
+    },
+    {
+      "type": "paragraph",
+      "text": "React data usually flows from parent to child. However, a child can send data back to the parent by calling a function received through props."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  function handleMessage(message) {\n    console.log(message);\n  }\n\n  return (\n    <Child sendMessage={handleMessage} />\n  );\n}\n\nfunction Child({ sendMessage }) {\n  return (\n    <button\n      onClick={() => sendMessage('Hello Parent')}\n    >\n      Send Message\n    </button>\n  );\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "Default Props"
+    },
+    {
+      "type": "paragraph",
+      "text": "Default values can be provided when a prop is not passed by the parent component."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function User({ name = 'Guest' }) {\n  return <h1>Hello {name}</h1>;\n}\n\nfunction App() {\n  return <User />;\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "The children Prop"
+    },
+    {
+      "type": "paragraph",
+      "text": "children is a special prop. It contains the content placed between the opening and closing tags of a component."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  return (\n    <Card>\n      <h2>Hello Rahul</h2>\n      <p>Welcome to React</p>\n    </Card>\n  );\n}\n\nfunction Card({ children }) {\n  return (\n    <div className=\"card\">\n      {children}\n    </div>\n  );\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "Prop Drilling"
+    },
+    {
+      "type": "paragraph",
+      "text": "Prop drilling happens when data is passed through multiple components just to reach a deeply nested component, even though the middle components do not need that data."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  const user = {\n    name: 'Rahul'\n  };\n\n  return <Parent user={user} />;\n}\n\nfunction Parent({ user }) {\n  return <Child user={user} />;\n}\n\nfunction Child({ user }) {\n  return <GrandChild user={user} />;\n}\n\nfunction GrandChild({ user }) {\n  return <h1>{user.name}</h1>;\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here, the user data is passed from App to Parent, Parent to Child, and Child to GrandChild. Parent and Child do not actually use the user data. They only pass it forward. This is called prop drilling."
+    },
+
+
+
+
+    {
+      "type": "summary",
+      "items": [
+        "Props are used to pass data between components.",
+        "Props are usually passed from parent to child.",
+        "Props are read-only.",
+        "Functions can be passed as props.",
+        "children is a special prop.",
+        "A child can send data to a parent using a function prop.",
+        "Passing props through many components is called prop drilling.",
+      ]
+    }
+  ]
 }
 ]
