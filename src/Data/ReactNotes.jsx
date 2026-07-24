@@ -616,5 +616,277 @@ export const ReactNotes = [
       ]
     }
   ]
+},
+{
+  "id": 3,
+  "slug": "react-js-usestate-and-events",
+  "title": "React.js useState and Events",
+  "date": "24 July 2026",
+
+  "description": "Learn React.js useState and Events from scratch. how state updates the UI, and how to handle common events like onClick, onChange, onSubmit, onMouseEnter, and keyboard events with simple examples.",
+
+  "content": [
+    {
+      "type": "heading",
+      "text": "What is State in React?"
+    },
+    {
+      "type": "paragraph",
+      "text": "State is data that belongs to a component and can change over time. When state changes, React re-renders the component and updates the UI with the new data."
+    },
+    {
+      "type": "paragraph",
+      "text": "Normal JavaScript variables can change, but React does not automatically know that the value has changed. Because of this, the UI does not update automatically. State is used when changing data should also update the UI."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function Counter() {\n  let count = 0;\n\n  function increase() {\n    count = count + 1;\n  }\n\n  return (\n    <div>\n      <h1>{count}</h1>\n      <button onClick={increase}>\n        Increase\n      </button>\n    </div>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "In this example, the count variable changes, but React does not know that it should update the UI. Therefore, the new value may not appear on the screen."
+    },
+
+    {
+      "type": "heading",
+      "text": "What is useState?"
+    },
+    {
+      "type": "paragraph",
+      "text": "useState is a React Hook that allows functional components to store and manage changing data. When the state update function is called, React updates the state and re-renders the component."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useState } from 'react';\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <h1>{count}</h1>\n\n      <button onClick={() => setCount(count + 1)}>\n        Increase\n      </button>\n    </div>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "The useState Hook returns two values. The first value is the current state value, and the second value is a function used to update that state. The value passed to useState is the initial state value."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "State stores changing data inside a component.",
+        "useState is used to create state in functional components.",
+        "The first value is the current state.",
+        "The second value is the state update function.",
+        "Updating state causes React to re-render the component.",
+        "State is used when changing data should update the UI."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "How useState Works"
+    },
+    {
+      "type": "paragraph",
+      "text": "When the state update function is called, React receives a signal that the component data has changed. React then re-renders the component and updates the UI with the new state value."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "const [count, setCount] = useState(0);\n\nsetCount(1);"
+    },
+    {
+      "type": "paragraph",
+      "text": "Initially, count is 0. When setCount(1) is called, React updates the state to 1, re-renders the component, and displays the new value in the UI."
+    },
+
+    {
+      "type": "heading",
+      "text": "State and Re-rendering"
+    },
+    {
+      "type": "paragraph",
+      "text": "Re-rendering means React runs the component again to calculate what the UI should look like with the latest state values. When state changes, React compares the new UI with the previous UI and updates the required parts of the screen."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function Counter() {\n  const [count, setCount] = useState(0);\n\n  function increase() {\n    setCount(count + 1);\n  }\n\n  return <h1>{count}</h1>;\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "The flow is: user action, state update, React re-render, and updated UI."
+    },
+
+    {
+      "type": "heading",
+      "text": "What are Events in React?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Events are actions performed by the user or the browser, such as clicking a button, typing in an input, submitting a form, or moving the mouse over an element. React provides event handlers to respond to these actions."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "onClick handles click events.",
+        "onChange handles input value changes.",
+        "onSubmit handles form submission.",
+        "onMouseEnter handles mouse entering an element.",
+        "onMouseLeave handles mouse leaving an element.",
+        "onKeyDown handles keyboard key presses."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "onClick Event"
+    },
+    {
+      "type": "paragraph",
+      "text": "The onClick event runs a function when the user clicks an element such as a button."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  function handleClick() {\n    alert('Button clicked');\n  }\n\n  return (\n    <button onClick={handleClick}>\n      Click Me\n    </button>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "The function is passed to onClick without immediately calling it. React calls the function when the click event occurs."
+    },
+
+    {
+      "type": "heading",
+      "text": "onClick with State"
+    },
+    {
+      "type": "paragraph",
+      "text": "onClick is commonly used with useState to update data when a user clicks a button."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <>\n      <h1>{count}</h1>\n\n      <button onClick={() => setCount(count + 1)}>\n        Increase\n      </button>\n    </>\n  );\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "onChange Event"
+    },
+    {
+      "type": "paragraph",
+      "text": "The onChange event runs when the value of an input, textarea, or select element changes. It is commonly used with state to create controlled inputs."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  const [name, setName] = useState('');\n\n  function handleChange(e) {\n    setName(e.target.value);\n  }\n\n  return (\n    <>\n      <input\n        value={name}\n        onChange={handleChange}\n        placeholder=\"Enter your name\"\n      />\n\n      <h1>Hello {name}</h1>\n    </>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "The event object contains information about the event. e.target.value gives the current value typed into the input."
+    },
+
+    {
+      "type": "heading",
+      "text": "onSubmit Event"
+    },
+    {
+      "type": "paragraph",
+      "text": "The onSubmit event is used to handle form submission. By default, the browser reloads the page after submitting a form. event.preventDefault() prevents this default behavior."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  const [name, setName] = useState('');\n\n  function handleSubmit(e) {\n    e.preventDefault();\n\n    console.log(name);\n  }\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <input\n        value={name}\n        onChange={(e) => setName(e.target.value)}\n      />\n\n      <button type=\"submit\">\n        Submit\n      </button>\n    </form>\n  );\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "onMouseEnter Event"
+    },
+    {
+      "type": "paragraph",
+      "text": "The onMouseEnter event runs when the mouse pointer enters an element."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  function handleMouseEnter() {\n    console.log('Mouse entered');\n  }\n\n  return (\n    <div onMouseEnter={handleMouseEnter}>\n      Move your mouse here\n    </div>\n  );\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "onMouseLeave Event"
+    },
+    {
+      "type": "paragraph",
+      "text": "The onMouseLeave event runs when the mouse pointer leaves an element."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  function handleMouseLeave() {\n    console.log('Mouse left');\n  }\n\n  return (\n    <div onMouseLeave={handleMouseLeave}>\n      Move your mouse away\n    </div>\n  );\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "onKeyDown Event"
+    },
+    {
+      "type": "paragraph",
+      "text": "The onKeyDown event runs when a keyboard key is pressed."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  function handleKeyDown(e) {\n    console.log(e.key);\n  }\n\n  return (\n    <input onKeyDown={handleKeyDown} />\n  );\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "Event Object"
+    },
+    {
+      "type": "paragraph",
+      "text": "React passes an event object to event handler functions. This object contains information about the event, such as the target element and the value entered by the user."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function handleChange(e) {\n  console.log(e.target);\n  console.log(e.target.value);\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "State and Events Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "State and events are commonly used together in React. An event detects a user action, the event handler performs an action, state is updated, and React re-renders the UI."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  const [name, setName] = useState('');\n\n  function handleChange(e) {\n    setName(e.target.value);\n  }\n\n  return (\n    <>\n      <input\n        value={name}\n        onChange={handleChange}\n      />\n\n      <h1>{name}</h1>\n    </>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "The complete flow is: user action, event triggers, event handler runs, state updates, React re-renders, and the UI displays the latest data."
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "useState is used to store changing data in a component.",
+        "Updating state causes React to re-render the component.",
+        "Events represent user actions such as clicks, typing, form submission, and mouse movement.",
+        "onClick handles click events.",
+        "onChange handles changes in input values.",
+        "onSubmit handles form submissions.",
+        "onMouseEnter runs when the mouse enters an element.",
+        "onMouseLeave runs when the mouse leaves an element.",
+        "onKeyDown handles keyboard key presses.",
+        "The event object provides information about the event.",
+        "State and events are commonly used together to create interactive React applications."
+      ]
+    }
+  ]
 }
 ]
