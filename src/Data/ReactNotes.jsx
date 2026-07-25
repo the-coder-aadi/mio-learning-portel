@@ -888,5 +888,305 @@ export const ReactNotes = [
       ]
     }
   ]
+},
+{
+  "id": 4,
+  "slug": "react-js-list-rendering-keys-conditional-rendering-and-form-handling",
+  "title": "List Rendering, Conditional Rendering and Form Handling",
+  "date": "25 July 2026",
+
+  "description": "list rendering with map(), conditional rendering using the ternary and && operators, and form handling using useState, controlled inputs, events, object state, and destructuring",
+
+  "content": [
+    {
+      "type": "heading",
+      "text": "What is List Rendering in React?"
+    },
+    {
+      "type": "paragraph",
+      "text": "List rendering means displaying multiple items from an array as UI elements. Instead of writing the same JSX manually for every item, React allows us to use the JavaScript map() method to create UI dynamically from array data."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  const students = ['Rahul', 'Aman', 'Priya'];\n\n  return (\n    <div>\n      {students.map((student) => (\n        <h2>{student}</h2>\n      ))}\n    </div>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "The map() method goes through every item in the array and returns JSX for each item. React then displays the generated elements on the screen."
+    },
+
+    {
+      "type": "heading",
+      "text": "Rendering Lists of Objects"
+    },
+    {
+      "type": "paragraph",
+      "text": "In real applications, list data usually comes as objects. Each object can contain properties such as id, name, email, or age."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "const students = [\n  { id: 1, name: 'Rahul', age: 20 },\n  { id: 2, name: 'Aman', age: 21 }\n];\n\nfunction App() {\n  return (\n    <div>\n      {students.map((student) => (\n        <div key={student.id}>\n          <h2>{student.name}</h2>\n          <p>Age: {student.age}</p>\n        </div>\n      ))}\n    </div>\n  );\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "What are Keys in React?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A key is a unique value that helps React identify each item in a list. When items are added, removed, or changed, React uses keys to understand which item is which."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "{students.map((student) => (\n  <h2 key={student.id}>\n    {student.name}\n  </h2>\n))}"
+    },
+    {
+      "type": "paragraph",
+      "text": "A unique and stable id is usually the best choice for a key. The array index should generally be avoided when the list can change or be reordered."
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "The map() method is used to render arrays as UI.",
+        "Each list item should have a unique key.",
+        "Keys help React identify individual list items.",
+        "A unique id is generally the best key."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "What is Conditional Rendering?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Conditional rendering means displaying different UI based on a condition. For example, a logged-in user may see a dashboard while a logged-out user may see a login button."
+    },
+
+    {
+      "type": "heading",
+      "text": "Ternary Operator"
+    },
+    {
+      "type": "paragraph",
+      "text": "The ternary operator is used when we want one UI for a true condition and another UI for a false condition."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  const isLoggedIn = true;\n\n  return (\n    <div>\n      {isLoggedIn ? (\n        <h1>Welcome to Dashboard</h1>\n      ) : (\n        <h1>Please Login</h1>\n      )}\n    </div>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "If isLoggedIn is true, the dashboard message is displayed. If it is false, the login message is displayed."
+    },
+
+    {
+      "type": "heading",
+      "text": "Logical AND (&&) Operator"
+    },
+    {
+      "type": "paragraph",
+      "text": "The && operator is used when something should be displayed only if a condition is true."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  const isAdmin = true;\n\n  return (\n    <div>\n      {isAdmin && <h1>Admin Panel</h1>}\n    </div>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "If isAdmin is true, the Admin Panel is displayed. If it is false, nothing is displayed."
+    },
+
+    {
+      "type": "heading",
+      "text": "Ternary Operator vs && Operator"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "{isLoggedIn ? <Dashboard /> : <Login />}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Use the ternary operator when both true and false conditions need different UI."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "{isAdmin && <AdminPanel />}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Use the && operator when UI should appear only when the condition is true."
+    },
+
+    {
+      "type": "heading",
+      "text": "Conditional Rendering with Lists"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  const students = ['Rahul', 'Aman'];\n\n  return (\n    <div>\n      {students.length > 0 ? (\n        students.map((student) => (\n          <h2 key={student}>{student}</h2>\n        ))\n      ) : (\n        <p>No students found</p>\n      )}\n    </div>\n  );\n}"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Conditional rendering displays UI based on a condition.",
+        "The ternary operator handles two possible UI outputs.",
+        "The && operator displays UI only when a condition is true.",
+        "Conditional rendering can be combined with list rendering."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "What is Form Handling in React?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Form handling means reading user input, storing it in state, responding to input changes, and handling form submission. In React, forms are commonly managed using useState and event handlers."
+    },
+    {
+      "type": "paragraph",
+      "text": "The basic flow is: user types in an input, onChange runs, state is updated, and React displays the latest value."
+    },
+
+    {
+      "type": "heading",
+      "text": "Controlled Input"
+    },
+    {
+      "type": "paragraph",
+      "text": "A controlled input is an input whose value is controlled by React state. The state becomes the single source of truth for the input."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useState } from 'react';\n\nfunction App() {\n  const [name, setName] = useState('');\n\n  return (\n    <input\n      value={name}\n      onChange={(e) => setName(e.target.value)}\n      placeholder=\"Enter your name\"\n    />\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "When the user types, e.target.value gives the latest input value. setName updates the state, and the input receives the updated value through the value prop."
+    },
+
+    {
+      "type": "heading",
+      "text": "Handling a Complete Form"
+    },
+    {
+      "type": "paragraph",
+      "text": "A form can contain multiple inputs. Each input can have its own state, but related form fields can also be stored together inside one object."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useState } from 'react';\n\nfunction App() {\n  const [formData, setFormData] = useState({\n    name: '',\n    email: ''\n  });\n\n  function handleChange(e) {\n    const { name, value } = e.target;\n\n    setFormData({\n      ...formData,\n      [name]: value\n    });\n  }\n\n  function handleSubmit(e) {\n    e.preventDefault();\n\n    console.log(formData);\n  }\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <input\n        name=\"name\"\n        value={formData.name}\n        onChange={handleChange}\n        placeholder=\"Enter your name\"\n      />\n\n      <input\n        name=\"email\"\n        value={formData.email}\n        onChange={handleChange}\n        placeholder=\"Enter your email\"\n      />\n\n      <button type=\"submit\">\n        Submit\n      </button>\n    </form>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here, the name and email values are stored inside one formData object. The input name attribute tells React which property should be updated."
+    },
+
+    {
+      "type": "heading",
+      "text": "Understanding Destructuring in Form Handling"
+    },
+    {
+      "type": "paragraph",
+      "text": "Destructuring is used here to extract name and value directly from the event target. Instead of writing e.target.name and e.target.value multiple times, we can write const { name, value } = e.target."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function handleChange(e) {\n  const { name, value } = e.target;\n\n  setFormData({\n    ...formData,\n    [name]: value\n  });\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "The spread operator keeps the existing form values, while [name]: value updates only the input that the user is currently changing."
+    },
+
+    {
+      "type": "heading",
+      "text": "Handling Form Submission"
+    },
+    {
+      "type": "paragraph",
+      "text": "The onSubmit event runs when the form is submitted. Browsers normally reload the page after a form submission, so event.preventDefault() is used to stop the default browser behavior."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function handleSubmit(e) {\n  e.preventDefault();\n\n  console.log(formData);\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "After preventing the default behavior, the form data can be validated, sent to an API, or used for another action."
+    },
+
+    {
+      "type": "heading",
+      "text": "Simple Form Validation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Before submitting a form, we can check whether required fields contain valid data."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function handleSubmit(e) {\n  e.preventDefault();\n\n  if (!formData.name || !formData.email) {\n    alert('Please fill all fields');\n    return;\n  }\n\n  console.log('Form submitted', formData);\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "If a required field is empty, the function returns early. Otherwise, the form data can be submitted."
+    },
+
+    {
+      "type": "heading",
+      "text": "The Complete Form Flow"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "User types\n    ↓\nonChange runs\n    ↓\nState updates\n    ↓\nReact re-renders\n    ↓\nUser submits form\n    ↓\nonSubmit runs\n    ↓\npreventDefault stops page reload\n    ↓\nValidate and use form data"
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "React forms are commonly managed with useState.",
+        "A controlled input gets its value from state.",
+        "onChange updates the state when the user types.",
+        "onSubmit handles form submission.",
+        "preventDefault prevents the browser from reloading the page.",
+        "Related form values can be stored inside one object.",
+        "Destructuring makes event data easier to read.",
+        "The spread operator helps preserve existing form values.",
+        "Form data can be validated before submission."
+      ]
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "map() is used for list rendering.",
+        "Keys help React identify list items.",
+        "The ternary operator handles two possible UI outputs.",
+        "The && operator renders UI only when a condition is true.",
+        "Controlled inputs are managed using React state.",
+        "onChange updates form state.",
+        "onSubmit handles form submission.",
+        "preventDefault prevents the default browser form behavior.",
+        "Destructuring and the spread operator make form handling cleaner."
+      ]
+    }
+  ]
 }
 ]
