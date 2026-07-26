@@ -1188,5 +1188,365 @@ export const ReactNotes = [
       ]
     }
   ]
+},
+
+{
+  "id": 5,
+  "slug": "react-js-react-router-and-api-fetching",
+  "title": "React Router and API Fetching",
+  "date": "26 July 2026",
+
+  "description": "React Router from the beginning, including installation, setup, Link, NavLink, useNavigate, navigate, useParams, dynamic routes, and how to fetch API data with useState, useEffect, loading, and error states.",
+
+  "content": [
+    {
+      "type": "heading",
+      "text": "What is React Router?"
+    },
+    {
+      "type": "paragraph",
+      "text": "React Router is a library used to create multiple pages or views in a React application. React itself is mainly used to build UI, while React Router helps us show different components for different URLs."
+    },
+    {
+      "type": "paragraph",
+      "text": "For example, a website can have a Home page, About page, Products page, and Contact page. React Router connects each URL with the component that should be displayed."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "/          → Home\n/about     → About\n/products  → Products\n/contact   → Contact"
+    },
+
+    {
+      "type": "heading",
+      "text": "Why Do We Install React Router?"
+    },
+    {
+      "type": "paragraph",
+      "text": "React does not automatically provide a routing system for creating different URL-based views. React Router is installed as an additional package to add routing functionality to a React application."
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "text": "npm install react-router-dom"
+    },
+    {
+      "type": "paragraph",
+      "text": "After installation, we can use React Router components and hooks such as BrowserRouter, Routes, Route, Link, useNavigate, and useParams."
+    },
+
+    {
+      "type": "heading",
+      "text": "BrowserRouter, Routes and Route"
+    },
+    {
+      "type": "paragraph",
+      "text": "BrowserRouter enables routing in the application. Routes contains the application's routes, and Route connects a URL path with a React component."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { BrowserRouter, Routes, Route } from 'react-router-dom';\n\nfunction App() {\n  return (\n    <BrowserRouter>\n      <Routes>\n        <Route path=\"/\" element={<Home />} />\n        <Route path=\"/about\" element={<About />} />\n      </Routes>\n    </BrowserRouter>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "When the URL is /, the Home component is displayed. When the URL is /about, the About component is displayed."
+    },
+
+    {
+      "type": "heading",
+      "text": "Creating Multiple Pages"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function Home() {\n  return <h1>Home Page</h1>;\n}\n\nfunction About() {\n  return <h1>About Page</h1>;\n}\n\nfunction App() {\n  return (\n    <BrowserRouter>\n      <Routes>\n        <Route path=\"/\" element={<Home />} />\n        <Route path=\"/about\" element={<About />} />\n      </Routes>\n    </BrowserRouter>\n  );\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "What is Link?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Link is used to navigate between routes inside a React application. It is similar to an anchor link, but it allows React Router to change the displayed component without performing a full browser page reload."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { Link } from 'react-router-dom';\n\nfunction Navbar() {\n  return (\n    <nav>\n      <Link to=\"/\">Home</Link>\n      <Link to=\"/about\">About</Link>\n    </nav>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "When the user clicks the About link, the URL changes to /about and the About route is displayed."
+    },
+
+    {
+      "type": "heading",
+      "text": "What is NavLink?"
+    },
+    {
+      "type": "paragraph",
+      "text": "NavLink works like Link but is useful for navigation menus because it can detect whether the current route is active."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { NavLink } from 'react-router-dom';\n\n<NavLink to=\"/about\">\n  About\n</NavLink>"
+    },
+    {
+      "type": "paragraph",
+      "text": "NavLink is commonly used when the active navigation item needs a different style."
+    },
+
+    {
+      "type": "heading",
+      "text": "What is useNavigate?"
+    },
+    {
+      "type": "paragraph",
+      "text": "useNavigate is a React Router Hook that allows a component to navigate to another route using JavaScript."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useNavigate } from 'react-router-dom';\n\nfunction Login() {\n  const navigate = useNavigate();\n\n  function handleLogin() {\n    navigate('/dashboard');\n  }\n\n  return (\n    <button onClick={handleLogin}>\n      Login\n    </button>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "useNavigate returns a navigate function. Calling navigate('/dashboard') changes the current route to /dashboard."
+    },
+
+    {
+      "type": "heading",
+      "text": "Link vs useNavigate"
+    },
+    {
+      "type": "paragraph",
+      "text": "Use Link or NavLink when the user directly clicks a navigation link. Use useNavigate when navigation should happen after some logic, such as after login, form submission, or a button click."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "<Link to=\"/about\">Go to About</Link>\n\nnavigate('/dashboard');"
+    },
+
+    {
+      "type": "heading",
+      "text": "What is a Dynamic Route?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A dynamic route contains a changing value in the URL. This is useful when many items have the same page structure but different data."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "<Route\n  path=\"/products/:id\"\n  element={<ProductDetails />}\n/>"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here, :id is a dynamic route parameter. The same ProductDetails component can display different products for different URLs."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "/products/1  → Product with id 1\n/products/2  → Product with id 2\n/products/3  → Product with id 3"
+    },
+
+    {
+      "type": "heading",
+      "text": "What is useParams?"
+    },
+    {
+      "type": "paragraph",
+      "text": "useParams is used to read dynamic values from the URL."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useParams } from 'react-router-dom';\n\nfunction ProductDetails() {\n  const { id } = useParams();\n\n  return <h1>Product ID: {id}</h1>;\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "If the URL is /products/5, useParams returns id as 5. The same component can therefore show different content based on the URL."
+    },
+
+    {
+      "type": "heading",
+      "text": "How One Component Shows Different Data"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "const products = [\n  { id: 1, name: 'Laptop' },\n  { id: 2, name: 'Phone' }\n];\n\nfunction ProductDetails() {\n  const { id } = useParams();\n\n  const product = products.find(\n    (item) => item.id === Number(id)\n  );\n\n  return (\n    <div>\n      <h1>{product.name}</h1>\n    </div>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "The route remains the same, but the id changes. The component reads the id and finds the matching product. This is how one details page can show different products."
+    },
+
+    {
+      "type": "heading",
+      "text": "Complete React Router Example"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import {\n  BrowserRouter,\n  Routes,\n  Route,\n  Link\n} from 'react-router-dom';\n\nfunction Home() {\n  return <h1>Home</h1>;\n}\n\nfunction About() {\n  return <h1>About</h1>;\n}\n\nfunction App() {\n  return (\n    <BrowserRouter>\n      <nav>\n        <Link to=\"/\">Home</Link>\n        <Link to=\"/about\">About</Link>\n      </nav>\n\n      <Routes>\n        <Route path=\"/\" element={<Home />} />\n        <Route path=\"/about\" element={<About />} />\n      </Routes>\n    </BrowserRouter>\n  );\n}"
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "React Router is used to create URL-based views in React.",
+        "react-router-dom is installed to add routing functionality.",
+        "BrowserRouter enables routing.",
+        "Routes contains route definitions.",
+        "Route connects a URL with a component.",
+        "Link is used for navigation.",
+        "NavLink is useful for active navigation links.",
+        "useNavigate allows navigation through JavaScript.",
+        "useParams reads dynamic values from the URL.",
+        "Dynamic routes allow one component to display different data based on an id."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "What is an API?"
+    },
+    {
+      "type": "paragraph",
+      "text": "An API allows an application to communicate with another application or server and exchange data. In React, APIs are commonly used to fetch data such as products, users, posts, or students."
+    },
+    {
+      "type": "paragraph",
+      "text": "The API usually returns data in JSON format. React can fetch that data and store it in state."
+    },
+
+    {
+      "type": "heading",
+      "text": "Fetching API Data with useEffect"
+    },
+    {
+      "type": "paragraph",
+      "text": "An API request is commonly made inside useEffect when the component loads. The fetched data is then stored using useState."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react';\n\nfunction App() {\n  const [products, setProducts] = useState([]);\n\n  useEffect(() => {\n    fetch('https://fakestoreapi.com/products')\n      .then((res) => res.json())\n      .then((data) => {\n        setProducts(data);\n      });\n  }, []);\n\n  return (\n    <div>\n      {products.map((product) => (\n        <h2 key={product.id}>\n          {product.title}\n        </h2>\n      ))}\n    </div>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "The empty dependency array means the effect runs when the component first loads. After the API response arrives, setProducts stores the data and React re-renders the UI."
+    },
+
+    {
+      "type": "heading",
+      "text": "Loading State"
+    },
+    {
+      "type": "paragraph",
+      "text": "An API request takes time. While the data is being fetched, the user should see a loading message."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "const [products, setProducts] = useState([]);\nconst [loading, setLoading] = useState(true);\n\nuseEffect(() => {\n  fetch('https://fakestoreapi.com/products')\n    .then((res) => res.json())\n    .then((data) => {\n      setProducts(data);\n      setLoading(false);\n    });\n}, []);\n\nif (loading) {\n  return <h1>Loading...</h1>;\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Initially loading is true, so Loading... is displayed. After the data is received, loading becomes false and the products can be displayed."
+    },
+
+    {
+      "type": "heading",
+      "text": "Error State"
+    },
+    {
+      "type": "paragraph",
+      "text": "An API request can fail because of a network problem or a server error. An error state allows the application to show a useful error message."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "const [error, setError] = useState('');\n\nuseEffect(() => {\n  fetch('https://fakestoreapi.com/products')\n    .then((res) => {\n      if (!res.ok) {\n        throw new Error('Something went wrong');\n      }\n\n      return res.json();\n    })\n    .then((data) => {\n      setProducts(data);\n      setLoading(false);\n    })\n    .catch((error) => {\n      setError(error.message);\n      setLoading(false);\n    });\n}, []);"
+    },
+
+    {
+      "type": "heading",
+      "text": "Complete API Fetching Example"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react';\n\nfunction Products() {\n  const [products, setProducts] = useState([]);\n  const [loading, setLoading] = useState(true);\n  const [error, setError] = useState('');\n\n  useEffect(() => {\n    fetch('https://fakestoreapi.com/products')\n      .then((res) => {\n        if (!res.ok) {\n          throw new Error('Failed to fetch products');\n        }\n\n        return res.json();\n      })\n      .then((data) => {\n        setProducts(data);\n        setLoading(false);\n      })\n      .catch((error) => {\n        setError(error.message);\n        setLoading(false);\n      });\n  }, []);\n\n  if (loading) {\n    return <h1>Loading...</h1>;\n  }\n\n  if (error) {\n    return <h1>{error}</h1>;\n  }\n\n  return (\n    <div>\n      {products.map((product) => (\n        <div key={product.id}>\n          <h2>{product.title}</h2>\n          <p>{product.price}</p>\n        </div>\n      ))}\n    </div>\n  );\n}\n\nexport default Products;"
+    },
+
+    {
+      "type": "heading",
+      "text": "The Complete API Flow"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Component loads\n      ↓\nuseEffect runs\n      ↓\nAPI request starts\n      ↓\nloading = true\n      ↓\nAPI response arrives\n      ↓\nData stored in state\n      ↓\nloading = false\n      ↓\nReact re-renders\n      ↓\nData displayed"
+    },
+
+    {
+      "type": "heading",
+      "text": "React Router and API Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "A common real-world pattern is to fetch a list of products on one page and show the selected product's details on another page using a dynamic route."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "/products       → Show all products\n/products/1     → Fetch and show product 1\n/products/2     → Fetch and show product 2"
+    },
+    {
+      "type": "paragraph",
+      "text": "The products page can use Link to open a details page. The details page can use useParams to read the id and useEffect to fetch the matching product."
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function ProductDetails() {\n  const { id } = useParams();\n  const [product, setProduct] = useState(null);\n\n  useEffect(() => {\n    fetch(`https://fakestoreapi.com/products/${id}`)\n      .then((res) => res.json())\n      .then((data) => setProduct(data));\n  }, [id]);\n\n  return (\n    <div>\n      {product && <h1>{product.title}</h1>}\n    </div>\n  );\n}"
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "An API allows applications to exchange data with a server.",
+        "fetch() can be used to request API data.",
+        "useEffect is commonly used for API requests when a component loads.",
+        "useState stores fetched API data.",
+        "Loading state shows that data is being fetched.",
+        "Error state handles failed API requests.",
+        "API data can be rendered using map().",
+        "useParams can provide an id for fetching a specific item.",
+        "A common application flow is list page, dynamic details page, and API fetching."
+      ]
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "React Router connects URLs with React components.",
+        "BrowserRouter enables routing.",
+        "Routes and Route define application routes.",
+        "Link and NavLink are used for navigation.",
+        "useNavigate performs navigation through JavaScript.",
+        "useParams reads dynamic route values.",
+        "Dynamic routes allow one details component to display different data.",
+        "API data is commonly fetched with useEffect and stored with useState.",
+        "Loading and error states make API-based applications better for users."
+      ]
+    }
+  ]
 }
 ]
