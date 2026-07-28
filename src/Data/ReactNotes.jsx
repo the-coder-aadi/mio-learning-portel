@@ -1548,5 +1548,123 @@ export const ReactNotes = [
       ]
     }
   ]
+},
+{
+  "id": 6,
+  "slug": "react-usememo-and-react-memo",
+  "title": "useMemo and React.memo",
+  "date": "28 July 2026",
+
+  "description": "Learn useMemo and React.memo from the beginning with simple examples. memoizing a value and preventing unnecessary component re-renders.",
+
+  "content": [
+    {
+      "type": "heading",
+      "text": "Why Do We Need Optimization?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Whenever a React component's state changes, the component renders again. Sometimes a render also repeats expensive calculations or re-renders child components that did not actually change. React provides useMemo and React.memo to avoid this unnecessary work."
+    },
+
+    {
+      "type": "heading",
+      "text": "What is useMemo?"
+    },
+    {
+      "type": "paragraph",
+      "text": "useMemo is a React Hook that remembers (memoizes) the result of a calculation. If the dependencies do not change, React returns the previously saved value instead of calculating it again."
+    },
+
+    {
+      "type": "heading",
+      "text": "Syntax"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "const value = useMemo(() => {\n  return calculation();\n}, [dependencies]);"
+    },
+
+    {
+      "type": "heading",
+      "text": "Simple Example"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useMemo, useState } from 'react';\n\nfunction App() {\n  const [count, setCount] = useState(0);\n  const [number, setNumber] = useState(2);\n\n  function multiply(num) {\n    console.log('Calculating...');\n\n    for (let i = 0; i < 1000000000; i++) {}\n\n    return num * 2;\n  }\n\n  const result = useMemo(() => {\n    return multiply(number);\n  }, [number]);\n\n  return (\n    <div>\n      <button onClick={() => setCount(count + 1)}>\n        Count: {count}\n      </button>\n\n      <input\n        type=\"number\"\n        value={number}\n        onChange={(e) => setNumber(Number(e.target.value))}\n      />\n\n      <h2>Result: {result}</h2>\n    </div>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Clicking the Count button re-renders the component, but multiply() is not called again because number did not change. When number changes, useMemo runs the calculation again and stores the new result."
+    },
+
+    {
+      "type": "heading",
+      "text": "What is React.memo?"
+    },
+    {
+      "type": "paragraph",
+      "text": "React.memo is used to stop a child component from re-rendering when its props have not changed. It improves performance by skipping unnecessary child renders."
+    },
+
+    {
+      "type": "heading",
+      "text": "Without React.memo"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child() {\n  console.log('Child Render');\n\n  return <h2>Child Component</h2>;\n}\n\nfunction App() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <>\n      <button onClick={() => setCount(count + 1)}>\n        Count: {count}\n      </button>\n\n      <Child />\n    </>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Every time the Count button is clicked, both App and Child render again."
+    },
+
+    {
+      "type": "heading",
+      "text": "With React.memo"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { memo } from 'react';\n\nconst Child = memo(function Child() {\n  console.log('Child Render');\n\n  return <h2>Child Component</h2>;\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "Now if the Child component receives the same props, React skips rendering it even when the parent component renders again."
+    },
+
+    {
+      "type": "heading",
+      "text": "When Should You Use Them?"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Use useMemo when a calculation is expensive and should not run on every render.",
+        "Use React.memo when a child component renders again even though its props did not change.",
+        "Do not use them everywhere. Use them only when unnecessary calculations or renders are causing performance problems."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "Difference Between useMemo and React.memo"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "useMemo remembers a value.",
+        "React.memo remembers a component.",
+        "useMemo prevents unnecessary calculations.",
+        "React.memo prevents unnecessary child component renders.",
+        "useMemo is a Hook.",
+        "React.memo is a Higher Order Component (HOC)."
+      ]
+    }
+  ]
 }
 ]
