@@ -1666,5 +1666,191 @@ export const ReactNotes = [
       ]
     }
   ]
+},
+{
+  "id": 7,
+  "slug": "react-usecallback-and-useref",
+  "title": "useCallback and useRef",
+  "date": "29 July 2026",
+
+  "description": "Learn useCallback and useRef from the beginning with practical examples. Understand why useCallback is used with React.memo and how useRef stores DOM references and values without causing re-renders.",
+
+  "content": [
+    {
+      "type": "heading",
+      "text": "What is useCallback?"
+    },
+    {
+      "type": "paragraph",
+      "text": "useCallback is a React Hook that remembers a function. Normally, whenever a component re-renders, JavaScript creates a new function again. useCallback keeps the same function reference until its dependencies change."
+    },
+
+    {
+      "type": "heading",
+      "text": "Why Do We Need useCallback?"
+    },
+    {
+      "type": "paragraph",
+      "text": "useCallback is mainly used with React.memo. React.memo prevents a child component from re-rendering when props are the same, but a function passed as a prop gets recreated on every render. useCallback prevents the function from being recreated unnecessarily."
+    },
+
+    {
+      "type": "heading",
+      "text": "Problem Without useCallback"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child({ handleClick }) {\n  console.log('Child Render');\n\n  return (\n    <button onClick={handleClick}>\n      Click Child\n    </button>\n  );\n}\n\nfunction App() {\n  const [count, setCount] = useState(0);\n\n  function handleClick() {\n    console.log('Hello');\n  }\n\n  return (\n    <>\n      <button onClick={() => setCount(count + 1)}>\n        Count: {count}\n      </button>\n\n      <Child handleClick={handleClick} />\n    </>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Every time App renders, a new handleClick function is created. Even if the function does the same work, React sees it as a new prop and Child renders again."
+    },
+
+    {
+      "type": "heading",
+      "text": "Using useCallback"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useCallback } from 'react';\n\nconst handleClick = useCallback(() => {\n  console.log('Hello');\n}, []);"
+    },
+    {
+      "type": "paragraph",
+      "text": "Now React keeps the same function reference. The function will only be recreated when the dependencies inside the array change."
+    },
+
+    {
+      "type": "heading",
+      "text": "Complete useCallback Example With React.memo"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useState, useCallback, memo } from 'react';\n\nconst Child = memo(function Child({ handleClick }) {\n  console.log('Child Render');\n\n  return (\n    <button onClick={handleClick}>\n      Child Button\n    </button>\n  );\n});\n\nfunction App() {\n  const [count, setCount] = useState(0);\n\n  const handleClick = useCallback(() => {\n    console.log('Child button clicked');\n  }, []);\n\n  return (\n    <div>\n      <button onClick={() => setCount(count + 1)}>\n        Count: {count}\n      </button>\n\n      <Child handleClick={handleClick} />\n    </div>\n  );\n}"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "Here, when the Count button is clicked, App re-renders but Child does not render again because the handleClick function reference remains the same."
+    },
+
+    {
+      "type": "heading",
+      "text": "What is useRef?"
+    },
+    {
+      "type": "paragraph",
+      "text": "useRef is a React Hook that stores a value or a reference to a DOM element. Changing a useRef value does not cause the component to re-render."
+    },
+
+    {
+      "type": "heading",
+      "text": "useRef Syntax"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "const reference = useRef(initialValue);"
+    },
+
+    {
+      "type": "heading",
+      "text": "useRef Example 1: Accessing DOM Element (Input Focus)"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useRef, useEffect } from 'react';\n\nfunction App() {\n  const inputRef = useRef();\n\n  useEffect(() => {\n    inputRef.current.focus();\n  }, []);\n\n  return (\n    <input\n      ref={inputRef}\n      placeholder=\"Enter name\"\n    />\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "After the component loads, React gives access to the input element through inputRef.current. We can call DOM methods like focus(), click(), play(), pause(), and scrollIntoView()."
+    },
+
+    {
+      "type": "heading",
+      "text": "useRef Example 2: Storing Values Without Re-render"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useRef } from 'react';\n\nfunction App() {\n  const count = useRef(0);\n\n  function increase() {\n    count.current++;\n    console.log(count.current);\n  }\n\n  return (\n    <button onClick={increase}>\n      Increase\n    </button>\n  );\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Every click changes count.current, but React does not re-render the component. The value is stored in memory and remains available between renders."
+    },
+
+    {
+      "type": "heading",
+      "text": "useRef Example 3: Previous Value Store Karna"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useState, useEffect, useRef } from 'react';\n\nfunction App() {\n  const [count, setCount] = useState(0);\n\n  const previousCount = useRef();\n\n  useEffect(() => {\n    previousCount.current = count;\n  }, [count]);\n\n  return (\n    <div>\n      <h1>Current: {count}</h1>\n      <h2>Previous: {previousCount.current}</h2>\n\n      <button onClick={() => setCount(count + 1)}>\n        Increase\n      </button>\n    </div>\n  );\n}"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "useRef does not automatically store the previous value. We manually save the current value inside useEffect after every update. On the next render, that saved value becomes the previous value."
+    },
+
+    {
+      "type": "heading",
+      "text": "Does useRef Always Store Previous Value?"
+    },
+    {
+      "type": "paragraph",
+      "text": "No. useRef normally stores the current value that we assign to it. In the previous value example, we make it behave like a previous value container by updating it after the render using useEffect."
+    },
+
+    {
+      "type": "heading",
+      "text": "useRef Example 4: Video Play and Pause"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useRef } from 'react';\n\nfunction App() {\n  const videoRef = useRef();\n\n  function playVideo() {\n    videoRef.current.play();\n  }\n\n  function pauseVideo() {\n    videoRef.current.pause();\n  }\n\n  return (\n    <div>\n      <video ref={videoRef} width=\"400\">\n        <source src=\"video.mp4\" type=\"video/mp4\" />\n      </video>\n\n      <button onClick={playVideo}>Play</button>\n      <button onClick={pauseVideo}>Pause</button>\n    </div>\n  );\n}"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "The video element is controlled directly using videoRef.current. React does not control the play() and pause() methods, so useRef is used to access the DOM element."
+    },
+
+    {
+      "type": "heading",
+      "text": "Difference Between useCallback and useRef"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "useCallback remembers a function.",
+        "useRef stores a value or DOM reference.",
+        "useCallback is mostly used with React.memo for performance optimization.",
+        "useRef does not cause re-render when its value changes.",
+        "useCallback prevents creating the same function again.",
+        "useRef helps access DOM elements and store mutable values."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "Easy Rule To Remember"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Need to remember a function? Use useCallback.",
+        "Need to remember a DOM element or value without re-render? Use useRef.",
+        "Need to show changing data on UI? Use useState."
+      ]
+    }
+  ]
 }
 ]
