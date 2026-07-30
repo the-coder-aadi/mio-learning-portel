@@ -1852,5 +1852,238 @@ export const ReactNotes = [
       ]
     }
   ]
+},
+{
+  "id": 8,
+  "slug": "react-usecontext-and-context-api",
+  "title": "useContext and Context API",
+
+  "date": "30 July 2026",
+
+  "description": "Learn useContext and Context API from the beginning. Understand why prop drilling happens, how Context API solves it, and how to share global data between components without passing props manually.",
+
+  "content": [
+
+    {
+      "type": "heading",
+      "text": "What is Context API?"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "Context API is a React feature that allows us to share data between multiple components without passing props manually through every component. It creates a global data source that any component inside the provider tree can access."
+    },
+
+
+    {
+      "type": "heading",
+      "text": "Why Do We Need Context API?"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "Normally in React, data is passed from parent component to child component using props. This works well for small applications, but when many components need the same data, passing props again and again becomes difficult."
+    },
+
+
+    {
+      "type": "heading",
+      "text": "Problem Without Context API (Prop Drilling)"
+    },
+
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "function App(){\n\n const user = 'Rahul';\n\n return (\n   <Parent user={user}/>\n );\n}\n\nfunction Parent({user}){\n return <Child user={user}/>;\n}\n\nfunction Child({user}){\n return <GrandChild user={user}/>;\n}\n\nfunction GrandChild({user}){\n return <h1>{user}</h1>;\n}"
+    },
+
+
+    {
+      "type": "paragraph",
+      "text": "Here GrandChild needs the user data, but Parent and Child do not use it. Still, we have to pass the prop through every component. This problem is called prop drilling."
+    },
+
+
+    {
+      "type": "heading",
+      "text": "How Context API Solves This Problem?"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "Context API creates a shared storage where data can be placed. Any component inside the Context Provider can directly access that data without receiving props from every parent."
+    },
+
+
+    {
+      "type": "heading",
+      "text": "Context API Flow"
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "Create Context",
+        "Provide data using Context Provider",
+        "Access data using useContext Hook"
+      ]
+    },
+
+
+    {
+      "type": "heading",
+      "text": "Step 1: Create Context"
+    },
+
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { createContext } from 'react';\n\nexport const UserContext = createContext();"
+    },
+
+
+    {
+      "type": "paragraph",
+      "text": "createContext creates a Context object. This object will store and share our data between components."
+    },
+
+
+    {
+      "type": "heading",
+      "text": "Step 2: Provide Data Using Provider"
+    },
+
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { UserContext } from './UserContext';\n\nfunction App(){\n\n const user = 'Rahul';\n\n return (\n  <UserContext.Provider value={user}>\n      <Profile />\n  </UserContext.Provider>\n );\n}"
+    },
+
+
+    {
+      "type": "paragraph",
+      "text": "Provider makes data available to all child components. Any component inside UserContext.Provider can access the value."
+    },
+
+
+    {
+      "type": "heading",
+      "text": "Step 3: Access Data Using useContext"
+    },
+
+
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useContext } from 'react';\nimport { UserContext } from './UserContext';\n\nfunction Profile(){\n\n const user = useContext(UserContext);\n\n return (\n   <h1>Hello {user}</h1>\n );\n}"
+    },
+
+
+    {
+      "type": "paragraph",
+      "text": "useContext directly reads the value stored inside Context. No props are required."
+    },
+
+
+    {
+      "type": "heading",
+      "text": "Complete Context API Example"
+    },
+
+
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { createContext, useContext } from 'react';\n\nconst ThemeContext = createContext();\n\nfunction App(){\n\n return (\n  <ThemeContext.Provider value='dark'>\n      <Home />\n  </ThemeContext.Provider>\n );\n}\n\nfunction Home(){\n\n const theme = useContext(ThemeContext);\n\n return <h1>Theme: {theme}</h1>;\n}"
+    },
+
+
+    {
+      "type": "heading",
+      "text": "Where Do We Use Context API?"
+    },
+
+
+    {
+      "type": "summary",
+      "items": [
+        "User authentication data",
+        "Dark and light theme",
+        "Language selection",
+        "Shopping cart data",
+        "Global application settings"
+      ]
+    },
+
+
+    {
+      "type": "heading",
+      "text": "Context API With State"
+    },
+
+
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { createContext, useState } from 'react';\n\nexport const UserContext = createContext();\n\nfunction UserProvider({children}){\n\n const [user,setUser] = useState(null);\n\n return (\n  <UserContext.Provider value={{user,setUser}}>\n    {children}\n  </UserContext.Provider>\n );\n}"
+    },
+
+
+    {
+      "type": "paragraph",
+      "text": "Usually Context is combined with useState so components can both read and update shared data."
+    },
+
+
+    {
+      "type": "heading",
+      "text": "Common Mistakes"
+    },
+
+
+    {
+      "type": "summary",
+      "items": [
+        "Using Context for every small piece of data.",
+        "Updating large global state frequently causing unnecessary re-renders.",
+        "Forgetting to wrap components inside Provider.",
+        "Creating multiple unnecessary contexts."
+      ]
+    },
+
+
+    {
+      "type": "heading",
+      "text": "Context API vs Props"
+    },
+
+
+    {
+      "type": "summary",
+      "items": [
+        "Props are best for passing data between nearby components.",
+        "Context is best for sharing data across many components.",
+        "Props follow parent-child flow.",
+        "Context creates a global data source."
+      ]
+    },
+
+
+    {
+      "type": "heading",
+      "text": "Easy Rule To Remember"
+    },
+
+
+    {
+      "type": "summary",
+      "items": [
+        "Need data only in a few components? Use props.",
+        "Need the same data everywhere? Use Context API.",
+        "Need complex state management? Consider Redux or Zustand."
+      ]
+    }
+
+  ]
 }
 ]
