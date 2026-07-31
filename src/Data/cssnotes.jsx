@@ -1794,7 +1794,7 @@ items: [
 },
 
 {
-id: 10,
+id: 100,
 slug: "css-backgrounds-overflow-and-pseudo-classes",
 title: "CSS Backgrounds & Pseudo Classes",
 date: "11 June 2026",
@@ -2126,7 +2126,7 @@ items: [
 },
 
 {
-id: 10,
+id: 0,
 slug: "css-lists-filter-transform-animation",
 title: "CSS Lists, Filter, Transform & Animation",
 date: "12 June 2026",

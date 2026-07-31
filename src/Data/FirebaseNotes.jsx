@@ -1,11 +1,11 @@
 export const FirebaseNotes = [
     {
-  "id": 1,
+  "id": 33,
   "slug": "firebase-introduction-setup-and-firestore-basics",
-  "title": "Firebase Introduction, Setup and Firestore Basics",
+  "title": "CRUD Operations with Firebase Firestore",
   "date": "30 July 2026",
 
-  "description": "Learn what Firebase is, why we use it, how to setup Firebase in a React application, how initialization works, and how to use Firestore with collections, documents, addDoc and getDocs.",
+  "description": "Learn what Firebase is, why we use it, how to setup Firebase in a React application, how initialization works, and how to use Firestore with collections, documents, CRUD.",
 
   "content": [
 
@@ -222,6 +222,28 @@ export const FirebaseNotes = [
     },
 
     {
+  "type": "heading",
+  "text": "Create Data Using setDoc()"
+},
+{
+  "type": "paragraph",
+  "text": "setDoc() creates a document with a custom document ID. If the document already exists, Firestore replaces its data."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "import { doc, setDoc } from 'firebase/firestore';\n\nawait setDoc(\n doc(db,'users','101'),\n {\n  name:'Rahul',\n  age:20\n }\n);"
+},
+{
+  "type": "summary",
+  "items": [
+    "You provide the document ID.",
+    "Creates a new document if it doesn't exist.",
+    "Replaces the existing document if it already exists."
+  ]
+},
+
+    {
       "type": "heading",
       "text": "Read Data Using getDocs()"
     },
@@ -238,21 +260,86 @@ export const FirebaseNotes = [
     },
 
     {
-      "type": "heading",
-      "text": "Easy Rule To Remember"
-    },
+  "type": "heading",
+  "text": "Read Single Document Using getDoc()"
+},
+{
+  "type": "paragraph",
+  "text": "getDoc() reads only one document using its document ID."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "import { doc, getDoc } from 'firebase/firestore';\n\nconst userRef = doc(db,'users','101');\nconst snapshot = await getDoc(userRef);\n\nconsole.log(snapshot.data());"
+},
+{
+  "type": "summary",
+  "items": [
+    "doc() creates the document reference.",
+    "getDoc() returns a single document.",
+    "Use getDocs() when reading multiple documents."
+  ]
+},
+
+{
+  "type": "heading",
+  "text": "Update Data Using updateDoc()"
+},
+{
+  "type": "paragraph",
+  "text": "updateDoc() updates only the specified fields without replacing the entire document."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "import { doc, updateDoc } from 'firebase/firestore';\n\nawait updateDoc(\n doc(db,'users','101'),\n {\n  age:21\n }\n);"
+},
+{
+  "type": "summary",
+  "items": [
+    "Updates only selected fields.",
+    "Other fields remain unchanged.",
+    "Document must already exist."
+  ]
+},
+
+{
+  "type": "heading",
+  "text": "Delete Data Using deleteDoc()"
+},
+{
+  "type": "paragraph",
+  "text": "deleteDoc() permanently removes a document from Firestore."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "import { doc, deleteDoc } from 'firebase/firestore';\n\nawait deleteDoc(\n doc(db,'users','101')\n);"
+},
+{
+  "type": "summary",
+  "items": [
+    "Deletes the document permanently.",
+    "The document ID is removed from the collection.",
+    "Deleted data cannot be recovered."
+  ]
+},
 
     {
-      "type": "summary",
-      "items": [
-        "Firebase is the backend platform.",
-        "Firestore is Firebase's database.",
-        "Collection stores documents.",
-        "Document stores actual data.",
-        "addDoc creates new data.",
-        "getDocs reads collection data."
-      ]
-    }
+  "type": "heading",
+  "text": "CRUD Operations Summary"
+},
+{
+  "type": "summary",
+  "items": [
+    "addDoc() → Create document with auto-generated ID.",
+    "setDoc() → Create or replace document with custom ID.",
+    "getDocs() → Read all documents from a collection.",
+    "getDoc() → Read a single document.",
+    "updateDoc() → Update specific fields.",
+    "deleteDoc() → Delete a document permanently."
+  ]
+}
 
   ]
 }

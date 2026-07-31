@@ -1,6 +1,6 @@
 export const ReactNotes = [
 {
-  "id": 1,
+  "id": 25,
   "slug": "react-js-beginner-guide",
   "title": "React.js Complete Beginner Guide",
   "date": "20 July 2026",
@@ -413,7 +413,7 @@ export const ReactNotes = [
 },
 
 {
-  "id": 2,
+  "id": 26,
   "slug": "react-js-props",
   "title": "React.js Props",
   "date": "22 July 2026",
@@ -618,7 +618,7 @@ export const ReactNotes = [
   ]
 },
 {
-  "id": 3,
+  "id": 27,
   "slug": "react-js-usestate-and-events",
   "title": "React.js useState and Events",
   "date": "24 July 2026",
@@ -890,7 +890,7 @@ export const ReactNotes = [
   ]
 },
 {
-  "id": 4,
+  "id": 28,
   "slug": "react-js-list-rendering-keys-conditional-rendering-and-form-handling",
   "title": "List Rendering, Conditional Rendering and Form Handling",
   "date": "25 July 2026",
@@ -1191,7 +1191,7 @@ export const ReactNotes = [
 },
 
 {
-  "id": 5,
+  "id": 29,
   "slug": "react-js-react-router-and-api-fetching",
   "title": "React Router and API Fetching",
   "date": "26 July 2026",
@@ -1550,7 +1550,7 @@ export const ReactNotes = [
   ]
 },
 {
-  "id": 6,
+  "id": 30,
   "slug": "react-usememo-and-react-memo",
   "title": "useMemo and React.memo",
   "date": "28 July 2026",
@@ -1668,7 +1668,7 @@ export const ReactNotes = [
   ]
 },
 {
-  "id": 7,
+  "id": 31,
   "slug": "react-usecallback-and-useref",
   "title": "useCallback and useRef",
   "date": "29 July 2026",
@@ -1854,7 +1854,7 @@ export const ReactNotes = [
   ]
 },
 {
-  "id": 8,
+  "id": 32,
   "slug": "react-usecontext-and-context-api",
   "title": "useContext and Context API",
 

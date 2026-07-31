@@ -1,6 +1,6 @@
 export const jsnotes = [
   {
-    id: 1,
+    id: 15,
     slug: "javascript-complete-beginner-guide",
     title: "JavaScript (Zero to Basics)",
     date: "24 June 2026",
@@ -141,7 +141,7 @@ export const jsnotes = [
     ]
   },
   {
-  id: 2,
+  id: 16,
   slug: "javascript-operators-complete-guide",
   title: "JavaScript Operators (Complete Guide)",
   date: "30 June 2026",
@@ -418,7 +418,7 @@ export const jsnotes = [
   ]
 },
 {
-  id: 3,
+  id: 17,
   slug: "javascript-loops-and-objects-complete-guide",
   title: "JavaScript Loops & Objects (Complete Guide)",
   date: "01 July 2026",
@@ -1061,7 +1061,7 @@ export const jsnotes = [
   ]
 },
 {
-  id: 4,
+  id: 18,
   slug: "javascript-arrays-and-functions-complete-guide",
   title: "JavaScript Arrays & Functions (Complete Guide)",
   date: "03 July 2026",
@@ -1380,7 +1380,7 @@ export const jsnotes = [
   ]
 },
 {
-  id: 5,
+  id: 19,
   slug: "javascript-array-methods-and-dom-complete-guide",
   title: "JavaScript Array Methods & DOM (Complete Guide)",
   date: "04 July 2026",
@@ -1946,7 +1946,7 @@ export const jsnotes = [
 },
 
 {
-  id: 6,
+  id: 20,
   slug: "javascript-events-complete-guide",
   title: "JavaScript Events (Complete Guide)",
   date: "05 July 2026",
@@ -2377,7 +2377,7 @@ export const jsnotes = [
   ]
 },
 {
-  "id": 7,
+  "id": 21,
   "slug": "javascript-prototypes-and-classes-beginner-guide",
   "title": "JavaScript Prototypes & Classes (Easy Beginner Guide)",
   "date": "07 July 2026",
@@ -2572,7 +2572,7 @@ export const jsnotes = [
   ]
 },
 {
-  "id": 8,
+  "id": 22,
   "slug": "javascript-async-callbacks-promises-beginner-guide",
   "title": "JavaScript Async, Callbacks & Promises (Easy Beginner Guide)",
   "date": "12 July 2026",
@@ -2795,7 +2795,7 @@ export const jsnotes = [
   ]
 },
 {
-  "id": 9,
+  "id": 23,
   "slug": "javascript-api-fetch-beginner-guide",
   "title": "JavaScript API & Fetch (Easy Beginner Guide)",
   "date": "16 July 2026",
@@ -3276,7 +3276,7 @@ export const jsnotes = [
   ]
 },
 {
-  "id": 10,
+  "id": 24,
   "slug": "javascript-localstorage-beginner-guide",
   "title": "JavaScript LocalStorage (Easy Beginner Guide)",
   "date": "18 July 2026",
