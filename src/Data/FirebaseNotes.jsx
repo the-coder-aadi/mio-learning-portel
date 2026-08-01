@@ -342,5 +342,163 @@ export const FirebaseNotes = [
 }
 
   ]
-}
+},
+  {
+    "id": 34,
+    "slug": "firebase-firestore-onsnapshot-realtime-listener",
+    "title": "Realtime Data with onSnapshot()",
+    "date": "01 August 2026",
+
+    "description": "Learn how Firestore's onSnapshot() works, what a snapshot is, how real-time listeners update the UI automatically, and how to use onSnapshot() in React with simple beginner-friendly examples.",
+
+    "content": [
+
+      {
+        "type": "heading",
+        "text": "What is onSnapshot()?"
+      },
+
+      {
+        "type": "paragraph",
+        "text": "onSnapshot() is a real-time listener provided by Firestore. It continuously listens for changes in your database. Whenever data is added, updated or deleted, it automatically provides the latest data without refreshing the page."
+      },
+
+      {
+        "type": "heading",
+        "text": "Real Life Example"
+      },
+
+      {
+        "type": "paragraph",
+        "text": "Imagine you are using WhatsApp. When your friend sends a new message, it appears instantly without refreshing the application. This happens because the application is listening for changes in real time."
+      },
+
+      {
+        "type": "code",
+        "language": "text",
+        "text": "User A\n   |\n   |\nFirestore\n   |\n   |\nUser B\n\nNew Message\n      ↓\nonSnapshot()\n      ↓\nScreen Updates Automatically"
+      },
+
+      {
+        "type": "heading",
+        "text": "What is a Snapshot?"
+      },
+
+      {
+        "type": "paragraph",
+        "text": "A snapshot is simply the current state of your Firestore data. Whenever data changes, Firestore creates a new snapshot and sends it to your callback function."
+      },
+
+      {
+        "type": "code",
+        "language": "text",
+        "text": "Database\n   ↓\nSnapshot\n   ↓\nLatest Data"
+      },
+
+      {
+        "type": "heading",
+        "text": "Basic Syntax"
+      },
+
+      {
+        "type": "code",
+        "language": "javascript",
+        "text": "import { collection, onSnapshot } from 'firebase/firestore';\n\nonSnapshot(\n  collection(db,'users'),\n  (snapshot)=>{\n\n  }\n);"
+      },
+
+      {
+        "type": "paragraph",
+        "text": "The first argument tells Firestore which collection or document to listen to. The second argument is a callback function that runs every time the data changes."
+      },
+
+      {
+        "type": "heading",
+        "text": "Reading Realtime Data"
+      },
+
+      {
+        "type": "code",
+        "language": "javascript",
+        "text": "onSnapshot(\n collection(db,'users'),\n (snapshot)=>{\n\n const users = snapshot.docs.map((doc)=>({\n   id: doc.id,\n   ...doc.data()\n }));\n\n console.log(users);\n\n }\n);"
+      },
+
+      {
+        "type": "heading",
+        "text": "How This Code Works"
+      },
+
+      {
+        "type": "summary",
+        "items": [
+          "collection() selects the Firestore collection.",
+          "onSnapshot() starts listening for changes.",
+          "snapshot.docs contains all documents.",
+          "map() converts documents into a normal JavaScript array.",
+          "doc.id gives the document ID.",
+          "doc.data() gives the document data."
+        ]
+      },
+
+      {
+        "type": "heading",
+        "text": "Using onSnapshot() in React"
+      },
+
+      {
+        "type": "code",
+        "language": "javascript",
+        "text": "useEffect(()=>{\n\n const unsubscribe = onSnapshot(\n  collection(db,'users'),\n  (snapshot)=>{\n\n   const data = snapshot.docs.map((doc)=>({\n    id:doc.id,\n    ...doc.data()\n   }));\n\n   setUsers(data);\n\n  }\n );\n\n return ()=>unsubscribe();\n\n},[]);"
+      },
+
+      {
+        "type": "paragraph",
+        "text": "Whenever the Firestore collection changes, React state updates automatically, causing the UI to re-render with the latest data."
+      },
+
+      {
+        "type": "heading",
+        "text": "getDocs() vs onSnapshot()"
+      },
+
+      {
+        "type": "code",
+        "language": "text",
+        "text": "getDocs()\n↓\nReads Data Once\n\nonSnapshot()\n↓\nReads Data Continuously\nAutomatically Updates UI"
+      },
+
+      {
+        "type": "heading",
+        "text": "When Should We Use onSnapshot()?"
+      },
+
+      {
+        "type": "summary",
+        "items": [
+          "Chat applications.",
+          "Live notifications.",
+          "Realtime comments.",
+          "Admin dashboards.",
+          "Online user lists.",
+          "Applications where data changes frequently."
+        ]
+      },
+
+      {
+        "type": "heading",
+        "text": "Important Points"
+      },
+
+      {
+        "type": "summary",
+        "items": [
+          "onSnapshot() listens for realtime changes.",
+          "snapshot represents the latest database state.",
+          "snapshot.docs contains all documents.",
+          "Always use snapshot.docs.map() for collections.",
+          "Use unsubscribe() inside useEffect cleanup to stop listening."
+        ]
+      }
+
+    ]
+  }
 ]
