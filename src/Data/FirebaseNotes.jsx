@@ -497,8 +497,89 @@ export const FirebaseNotes = [
           "Always use snapshot.docs.map() for collections.",
           "Use unsubscribe() inside useEffect cleanup to stop listening."
         ]
-      }
-
+      },
+        {
+    "type": "heading",
+    "text": "What is query()?"
+  },
+  {
+    "type": "paragraph",
+    "text": "query() is used to tell Firestore how you want your data. By default, Firestore returns documents without any guaranteed order. Using query(), we can sort, filter or limit the data before listening to it."
+  },
+  {
+    "type": "heading",
+    "text": "Real Life Example"
+  },
+  {
+    "type": "paragraph",
+    "text": "Imagine you visit a library and ask for all books. The librarian gives every book. But if you say 'Show only Java books arranged from newest to oldest', you are giving instructions. In Firestore, query() is that instruction."
+  },
+  {
+    "type": "code",
+    "language": "text",
+    "text": "Collection\n     ↓\nquery()\n     ↓\nSort / Filter / Limit\n     ↓\nonSnapshot()\n     ↓\nOrdered Data"
+  },
+  {
+    "type": "heading",
+    "text": "Sorting Data Using orderBy()"
+  },
+  {
+    "type": "paragraph",
+    "text": "orderBy() is used inside query() to arrange documents in a specific order. It can sort data by any field such as name, age or createdAt."
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "text": "import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';\n\nconst q = query(\n collection(db,'users'),\n orderBy('createdAt','asc')\n);\n\nonSnapshot(q,(snapshot)=>{\n\n const users = snapshot.docs.map((doc)=>({\n  id:doc.id,\n  ...doc.data()\n }));\n\n setUsers(users);\n\n});"
+  },
+  {
+    "type": "heading",
+    "text": "How This Code Works"
+  },
+  {
+    "type": "summary",
+    "items": [
+      "collection() selects the Firestore collection.",
+      "query() creates instructions for Firestore.",
+      "orderBy('createdAt','asc') sorts documents from oldest to newest.",
+      "The query object is stored inside the variable q.",
+      "onSnapshot(q) listens to the ordered data in real time.",
+      "snapshot.docs returns documents in the same order defined by query().",
+      "map() converts Firestore documents into a normal JavaScript array.",
+      "setUsers() updates the React state automatically."
+    ]
+  },
+  {
+    "type": "heading",
+    "text": "Ascending vs Descending"
+  },
+  {
+    "type": "code",
+    "language": "text",
+    "text": "orderBy('createdAt','asc')\nOldest\n   ↓\nNewest\n\norderBy('createdAt','desc')\nNewest\n   ↓\nOldest"
+  },
+  {
+    "type": "paragraph",
+    "text": "Use 'asc' when you want the oldest records first. Use 'desc' when you want the latest records first, such as chat messages, notifications or recent posts."
+  },
+  {
+    "type": "heading",
+    "text": "Easy Rule To Remember"
+  },
+  {
+    "type": "summary",
+    "items": [
+      "collection() tells Firestore where the data is.",
+      "query() tells Firestore how the data should be returned.",
+      "orderBy() decides the sorting order.",
+      "onSnapshot() keeps listening for realtime updates.",
+      "Whenever data changes, Firestore sends a new ordered snapshot automatically."
     ]
   }
+
+    ],
+    
+  },
+  
+  
 ]
