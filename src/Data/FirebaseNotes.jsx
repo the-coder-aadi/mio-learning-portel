@@ -580,6 +580,309 @@ export const FirebaseNotes = [
     ],
     
   },
+
+  {
+  "id": 35,
+  "slug": "firebase-authentication-email-password-and-google-login",
+  "title": "Firebase Authentication (Email & Google Login)",
+  "date": "04 August 2026",
+
+  "description": "Learn what Firebase Authentication is, why we use it, how Email & Password authentication works, how to create an account, login users, understand the returned user object, handle common errors, and finally implement Google Sign-In in React.",
+
+  "content": [
+
+    {
+      "type": "heading",
+      "text": "What is Firebase Authentication?"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "Firebase Authentication is a service provided by Firebase that allows users to securely create accounts and log into your application. Instead of building your own authentication system, Firebase manages user accounts, passwords and security for you."
+    },
+
+    {
+      "type": "heading",
+      "text": "Why Do We Use Authentication?"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "Most applications need to know who is using the app. Authentication helps identify users so every person can securely access their own account and personal data."
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "Create user accounts.",
+        "Allow existing users to login.",
+        "Keep user data secure.",
+        "Identify the currently logged-in user."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "How Authentication Works"
+    },
+
+    {
+      "type": "code",
+      "language": "text",
+      "text": "User\n   |\n   |\nReact App\n   |\n   |\nFirebase Authentication\n   |\n   |\nAccount Created / User Logged In"
+    },
+
+    {
+      "type": "heading",
+      "text": "Step 1: Enable Authentication"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "Before writing any code, open Firebase Console and enable the authentication provider you want to use."
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "Open Firebase Console.",
+        "Go to Authentication.",
+        "Click Get Started.",
+        "Enable Email/Password provider.",
+        "Save the changes."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "Step 2: Initialize Authentication"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "getAuth() creates the Authentication instance. We use this object whenever we create accounts, login users or logout users."
+    },
+
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import { initializeApp } from 'firebase/app';\nimport { getAuth } from 'firebase/auth';\n\nconst app = initializeApp(firebaseConfig);\n\nexport const auth = getAuth(app);"
+    },
+
+    {
+      "type": "heading",
+      "text": "Create Account Using Email & Password"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "createUserWithEmailAndPassword() creates a new Firebase account using an email address and password."
+    },
+
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import { createUserWithEmailAndPassword } from 'firebase/auth';\n\nawait createUserWithEmailAndPassword(\n auth,\n email,\n password\n);"
+    },
+
+    {
+      "type": "heading",
+      "text": "How This Code Works"
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "auth tells Firebase which project to use.",
+        "email is the user's email address.",
+        "password is the user's password.",
+        "Firebase creates a new account.",
+        "If successful, the user is automatically logged in."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "What Does Firebase Return?"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "After creating an account, Firebase returns a UserCredential object. Inside it, the user property contains information about the logged-in user."
+    },
+
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const result = await createUserWithEmailAndPassword(auth,email,password);\n\nconsole.log(result.user);"
+    },
+
+    {
+      "type": "code",
+      "language": "text",
+      "text": "result\n |\n |-- user\n      |\n      |-- uid\n      |-- email\n      |-- emailVerified"
+    },
+
+    {
+      "type": "heading",
+      "text": "Handling Common Errors"
+    },
+
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "try{\n\n await createUserWithEmailAndPassword(auth,email,password);\n\n}\ncatch(error){\n\n if(error.code==='auth/email-already-in-use'){\n  console.log('User already exists');\n }\n else if(error.code==='auth/weak-password'){\n  console.log('Password must be at least 6 characters');\n }\n else{\n  console.log('Something went wrong');\n }\n\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "Login Using Email & Password"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "signInWithEmailAndPassword() allows an existing user to log into the application."
+    },
+
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import { signInWithEmailAndPassword } from 'firebase/auth';\n\nawait signInWithEmailAndPassword(\n auth,\n email,\n password\n);"
+    },
+
+    {
+      "type": "heading",
+      "text": "How Login Works"
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "Firebase checks whether the email exists.",
+        "It verifies the password.",
+        "If both are correct, the user is logged in.",
+        "Firebase returns the logged-in user's information."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "Login Error Handling"
+    },
+
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "try{\n\n await signInWithEmailAndPassword(auth,email,password);\n\n}\ncatch(error){\n\n if(error.code==='auth/invalid-credential'){\n  console.log('Invalid Email or Password');\n }\n else{\n  console.log('Login Failed');\n }\n\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "Google Sign-In"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "Instead of asking users to create another account, Firebase can directly use their Google account. Users simply choose a Google account and Firebase logs them into your application."
+    },
+
+    {
+      "type": "heading",
+      "text": "Enable Google Provider"
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "Open Firebase Console.",
+        "Go to Authentication.",
+        "Open Sign-in Method.",
+        "Enable Google.",
+        "Select a support email.",
+        "Save the changes."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "Create Google Provider"
+    },
+
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import { GoogleAuthProvider } from 'firebase/auth';\n\nconst provider = new GoogleAuthProvider();"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "GoogleAuthProvider tells Firebase that we want users to authenticate using their Google account."
+    },
+
+    {
+      "type": "heading",
+      "text": "Login With Google"
+    },
+
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import {\n GoogleAuthProvider,\n signInWithPopup\n} from 'firebase/auth';\n\nconst provider = new GoogleAuthProvider();\n\nconst result = await signInWithPopup(auth,provider);\n\nconsole.log(result.user);"
+    },
+
+    {
+      "type": "heading",
+      "text": "How Google Login Works"
+    },
+
+    {
+      "type": "code",
+      "language": "text",
+      "text": "User\n   |\nClick Google Login\n   |\nGoogle Popup Opens\n   |\nUser Selects Account\n   |\nFirebase Authentication\n   |\nUser Logged In"
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "Google popup opens.",
+        "User selects a Google account.",
+        "Firebase verifies the account.",
+        "Firebase logs the user in.",
+        "The logged-in user's information is returned."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "Authentication Flow"
+    },
+
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Create Account\n        ↓\nFirebase Stores User\n        ↓\nUser Logs In\n        ↓\nFirebase Verifies User\n        ↓\nReturns User Object\n        ↓\nApplication Shows Protected Content"
+    },
+
+    {
+      "type": "heading",
+      "text": "Important Points"
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "Authentication identifies users.",
+        "getAuth() creates the authentication instance.",
+        "createUserWithEmailAndPassword() creates a new account.",
+        "signInWithEmailAndPassword() logs in an existing user.",
+        "GoogleAuthProvider() enables Google authentication.",
+        "signInWithPopup() opens the Google login popup.",
+        "Firebase automatically returns the logged-in user object after successful authentication."
+      ]
+    }
+
+  ]
+}
   
   
 ]
