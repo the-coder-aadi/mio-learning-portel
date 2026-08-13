@@ -950,7 +950,7 @@ export const NodeJSNotes = [
     {
       "type": "code",
       "language": "text",
-      "text": "Frontend\n   |\n   | POST + URL + Headers + JSON Body\n   v\nExpress Route\n   |\n   | express.json()\n   v\nreq.body\n   |\n   | Process\n   v\nres.json()\n   |\n   v\nFrontend"
+      "text": "Frontend\n   |\n   | POST + URL + Headers + JSON Body\n   v\nExpress Route\n   |\n   | express.json()\n   v\nreq.body\n   |\n   | Process\n   v\nres.json()\n   |\n   v\nFrontend "
     }
   ]
 }
