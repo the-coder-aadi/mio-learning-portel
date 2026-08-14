@@ -2085,5 +2085,99 @@ export const ReactNotes = [
     }
 
   ]
+},
+{
+  "id": 300,
+  "slug": "cloudinary-file-upload",
+  "title": "Cloudinary File Upload",
+  "date": "14 August 2026",
+  "description": "Learn how to upload files to Cloudinary using React and get the uploaded file URL.",
+
+  "content": [
+
+    {
+      "type": "heading",
+      "text": "What is Cloudinary?"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "Cloudinary is a cloud service used to store and manage images, videos, PDFs and other files. Instead of storing large files directly in Firestore, we can store the file on Cloudinary and save its URL in Firestore."
+    },
+
+    {
+      "type": "heading",
+      "text": "Cloudinary Upload Flow"
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "Select a file from React form.",
+        "Send the file to Cloudinary.",
+        "Cloudinary stores the file.",
+        "Cloudinary returns a file URL.",
+        "Save that URL in Firestore."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "Upload Preset"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "An Upload Preset tells Cloudinary how to handle files uploaded from our application. For direct uploads from React, we can create an Unsigned Upload Preset."
+    },
+
+    {
+      "type": "heading",
+      "text": "Upload File to Cloudinary"
+    },
+
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "const formdata = new FormData();\n\nformdata.append('file', file);\nformdata.append('upload_preset', 'resume_upload');\n\nconst response = await fetch(\n  'https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/raw/upload',\n  {\n    method: 'POST',\n    body: formdata\n  }\n);\n\nconst result = await response.json();\n\nconst pdfurl = result.secure_url;"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "The file is uploaded to Cloudinary and secure_url contains the URL of the uploaded file."
+    },
+
+    {
+      "type": "heading",
+      "text": "Save URL in Firestore"
+    },
+
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "await addDoc(collection(db, 'users'), {\n  name: name,\n  email: email,\n  pdfUrl: pdfurl\n});"
+    },
+
+    {
+      "type": "paragraph",
+      "text": "We store the Cloudinary URL in Firestore instead of storing the actual PDF file."
+    },
+
+    {
+      "type": "heading",
+      "text": "Important"
+    },
+
+    {
+      "type": "summary",
+      "items": [
+        "Cloud Name is used in the Cloudinary upload URL.",
+        "Upload Preset is required for unsigned uploads.",
+        "API Secret should never be exposed in React frontend code.",
+        "Store the Cloudinary URL in Firestore, not the actual file."
+      ]
+    }
+
+  ]
 }
 ]
