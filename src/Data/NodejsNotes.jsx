@@ -953,5 +953,265 @@ export const NodeJSNotes = [
       "text": "Frontend\n   |\n   | POST + URL + Headers + JSON Body\n   v\nExpress Route\n   |\n   | express.json()\n   v\nreq.body\n   |\n   | Process\n   v\nres.json()\n   |\n   v\nFrontend "
     }
   ]
+},
+
+{
+"id": 38,
+"slug": "express-http-methods-get-put-patch-delete",
+"title": "Express.js API Basics — GET, PUT, PATCH and DELETE",
+"date": "15 August 2026",
+"description": "Learn how GET, PUT, PATCH and DELETE APIs work in Express, what each method is used for, common status codes, and how frontend and backend communicate with simple beginner-friendly examples.",
+"content": [
+{
+"type": "heading",
+"text": "HTTP Methods — Quick Overview"
+},
+{
+"type": "paragraph",
+"text": "HTTP methods tell the backend what the frontend wants to do with data. The main methods we are learning are GET, POST, PUT, PATCH and DELETE."
+},
+{
+"type": "summary",
+"items": [
+"GET — data read karna.",
+"POST — naya data create karna.",
+"PUT — existing data ko complete update/replace karna.",
+"PATCH — existing data ka sirf kuch part update karna.",
+"DELETE — existing data delete karna."
+]
+},
+{
+"type": "code",
+"language": "text",
+"text": "GET     /users/1  -> User ko read karo\nPOST    /users    -> Naya user banao\nPUT     /users/1  -> User 1 ko completely update karo\nPATCH   /users/1  -> User 1 ka kuch part update karo\nDELETE  /users/1  -> User 1 ko delete karo"
+},
+{
+"type": "heading",
+"text": "Example Data"
+},
+{
+"type": "code",
+"language": "javascript",
+"text": "let usersdata = [\n  { id: 1, name: 'Aman', age: 20 },\n  { id: 2, name: 'Rohit', age: 25 }\n];"
+},
+{
+"type": "heading",
+"text": "GET Request — Data Read Karna"
+},
+{
+"type": "paragraph",
+"text": "GET ka use backend se data lene ke liye hota hai. GET request mein normally request body nahi bhejte."
+},
+{
+"type": "code",
+"language": "javascript",
+"text": "server.get('/users', (req, res) => {\n  res.status(200).json({\n    success: true,\n    data: usersdata\n  });\n});"
+},
+{
+"type": "paragraph",
+"text": "Yahan 200 ka matlab hai request successfully process ho gayi."
+},
+{
+"type": "heading",
+"text": "Frontend GET Example"
+},
+{
+"type": "code",
+"language": "javascript",
+"text": "async function getUsers() {\n  try {\n    const response = await fetch('http://localhost:7000/users');\n\n    const data = await response.json();\n\n    console.log(data);\n  } catch (error) {\n    console.log(error);\n  }\n}"
+},
+{
+"type": "code",
+"language": "text",
+"text": "Frontend\n   |\n   | GET /users\n   v\nExpress Backend\n   |\n   | Find/read data\n   v\nres.json()\n   |\n   | JSON Response\n   v\nFrontend"
+},
+{
+"type": "heading",
+"text": "GET — User By ID"
+},
+{
+"type": "paragraph",
+"text": "Agar hume sirf ek user chahiye, to URL mein id bhej sakte hain."
+},
+{
+"type": "code",
+"language": "javascript",
+"text": "server.get('/users/:id', (req, res) => {\n  const id = Number(req.params.id);\n\n  const user = usersdata.find(user => user.id === id);\n\n  if (!user) {\n    return res.status(404).json({\n      success: false,\n      msg: 'User not found'\n    });\n  }\n\n  res.status(200).json({\n    success: true,\n    data: user\n  });\n});"
+},
+{
+"type": "paragraph",
+"text": "req.params.id URL se id read karta hai. Number() isliye use kiya gaya hai kyunki URL parameters string ke form mein aate hain."
+},
+{
+"type": "heading",
+"text": "PUT Request — Complete Update"
+},
+{
+"type": "paragraph",
+"text": "PUT ka use existing resource ko complete updated data se replace/update karne ke liye hota hai. Beginner level par ise 'poora user update' ke roop mein yaad rakho."
+},
+{
+"type": "code",
+"language": "javascript",
+"text": "server.put('/users/:id', (req, res) => {\n  const id = Number(req.params.id);\n\n  const index = usersdata.findIndex(user => user.id === id);\n\n  if (index === -1) {\n    return res.status(404).json({\n      success: false,\n      msg: 'User not found'\n    });\n  }\n\n  usersdata[index] = {\n    id: id,\n    name: req.body.name,\n    age: req.body.age\n  };\n\n  res.status(200).json({\n    success: true,\n    msg: 'User completely updated',\n    data: usersdata[index]\n  });\n});"
+},
+{
+"type": "heading",
+"text": "Frontend PUT Example"
+},
+{
+"type": "code",
+"language": "javascript",
+"text": "async function updateUser() {\n  const response = await fetch('http://localhost:7000/users/1', {\n    method: 'PUT',\n    headers: {\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify({\n      name: 'Shinchan',\n      age: 12\n    })\n  });\n\n  const data = await response.json();\n  console.log(data);\n}"
+},
+{
+"type": "paragraph",
+"text": "PUT request mein backend ko complete required user data diya ja raha hai. Id URL se aa rahi hai aur name aur age body se."
+},
+{
+"type": "code",
+"language": "text",
+"text": "Before\n{id: 1, name: 'Aman', age: 20}\n\nPUT\n{id: 1, name: 'Shinchan', age: 12}\n\nAfter\n{id: 1, name: 'Shinchan', age: 12}"
+},
+{
+"type": "heading",
+"text": "PATCH Request — Partial Update"
+},
+{
+"type": "paragraph",
+"text": "PATCH ka use existing resource ke sirf kuch fields change karne ke liye hota hai. Jo field request mein nahi aayi, usko same rehne dete hain."
+},
+{
+"type": "code",
+"language": "javascript",
+"text": "server.patch('/users/:id', (req, res) => {\n  const id = Number(req.params.id);\n\n  const index = usersdata.findIndex(user => user.id === id);\n\n  if (index === -1) {\n    return res.status(404).json({\n      success: false,\n      msg: 'User not found'\n    });\n  }\n\n  usersdata[index] = {\n    ...usersdata[index],\n    ...req.body\n  };\n\n  res.status(200).json({\n    success: true,\n    msg: 'User partially updated',\n    data: usersdata[index]\n  });\n});"
+},
+{
+"type": "heading",
+"text": "Frontend PATCH Example"
+},
+{
+"type": "code",
+"language": "javascript",
+"text": "async function updateAge() {\n  const response = await fetch('http://localhost:7000/users/1', {\n    method: 'PATCH',\n    headers: {\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify({\n      age: 15\n    })\n  });\n\n  const data = await response.json();\n  console.log(data);\n}"
+},
+{
+"type": "code",
+"language": "text",
+"text": "Before\n{id: 1, name: 'Shinchan', age: 12}\n\nPATCH\n{age: 15}\n\nAfter\n{id: 1, name: 'Shinchan', age: 15}"
+},
+{
+"type": "paragraph",
+"text": "Spread operator purana user copy karta hai aur req.body mein jo fields aati hain unko overwrite karta hai. Isliye PATCH mein baaki data safe rehta hai."
+},
+{
+"type": "heading",
+"text": "PUT vs PATCH"
+},
+{
+"type": "code",
+"language": "text",
+"text": "PUT\nFrontend -> Complete updated data\n        -> Poora resource update\n\nPATCH\nFrontend -> Sirf changed data\n        -> Resource ka kuch part update"
+},
+{
+"type": "heading",
+"text": "DELETE Request — Data Delete Karna"
+},
+{
+"type": "paragraph",
+"text": "DELETE ka use existing resource ko remove karne ke liye hota hai."
+},
+{
+"type": "code",
+"language": "javascript",
+"text": "server.delete('/users/:id', (req, res) => {\n  const id = Number(req.params.id);\n\n  const index = usersdata.findIndex(user => user.id === id);\n\n  if (index === -1) {\n    return res.status(404).json({\n      success: false,\n      msg: 'User not found'\n    });\n  }\n\n  usersdata.splice(index, 1);\n\n  res.status(200).json({\n    success: true,\n    msg: 'User deleted successfully'\n  });\n});"
+},
+{
+"type": "heading",
+"text": "Frontend DELETE Example"
+},
+{
+"type": "code",
+"language": "javascript",
+"text": "async function deleteUser() {\n  const response = await fetch('http://localhost:7000/users/1', {\n    method: 'DELETE'\n  });\n\n  const data = await response.json();\n  console.log(data);\n}"
+},
+{
+"type": "paragraph",
+"text": "DELETE mein body ki zarurat nahi hai kyunki jis user ko delete karna hai uski id URL mein di gayi hai."
+},
+{
+"type": "code",
+"language": "text",
+"text": "Before\n[\n  {id: 1, name: 'Aman', age: 20},\n  {id: 2, name: 'Rohit', age: 25}\n]\n\nDELETE /users/1\n\nAfter\n[\n  {id: 2, name: 'Rohit', age: 25}\n]"
+},
+{
+"type": "heading",
+"text": "Important Status Codes"
+},
+{
+"type": "summary",
+"items": [
+"200 OK — request successfully complete hui.",
+"201 Created — naya resource successfully create hua, commonly POST ke baad.",
+"400 Bad Request — client ne invalid ya incomplete request bheji.",
+"404 Not Found — requested resource nahi mila.",
+"500 Internal Server Error — backend mein unexpected error aaya."
+]
+},
+{
+"type": "heading",
+"text": "Status Code Kab Use Karein?"
+},
+{
+"type": "code",
+"language": "text",
+"text": "GET success\n   -> 200\n\nPOST se naya data create\n   -> 201\n\nPUT/PATCH success\n   -> 200\n\nDELETE success\n   -> 200\n\nUser/data nahi mila\n   -> 404\n\nRequest galat hai\n   -> 400\n\nBackend mein error\n   -> 500"
+},
+{
+"type": "heading",
+"text": "Complete API Flow"
+},
+{
+"type": "code",
+"language": "text",
+"text": "GET\nFrontend -> Backend -> Data read -> Response\n\nPOST\nFrontend -> Backend -> New data create -> Response\n\nPUT\nFrontend -> Backend -> Complete data update -> Response\n\nPATCH\nFrontend -> Backend -> Partial data update -> Response\n\nDELETE\nFrontend -> Backend -> Data remove -> Response"
+},
+{
+"type": "heading",
+"text": "One Simple Example to Remember Everything"
+},
+{
+"type": "code",
+"language": "text",
+"text": "GET /users/1\n'Mujhe user 1 dikhao'\n\nPOST /users\n'Ye naya user create karo'\n\nPUT /users/1\n'User 1 ka complete updated data ye hai'\n\nPATCH /users/1\n'User 1 mein sirf ye changes karo'\n\nDELETE /users/1\n'User 1 ko delete karo'"
+},
+{
+"type": "summary",
+"items": [
+"GET data read karta hai.",
+"PUT complete resource ko update/replace karne ke liye use hota hai.",
+"PATCH resource ke selected fields update karta hai.",
+"DELETE resource ko remove karta hai.",
+"URL mein :id se specific resource identify kar sakte hain.",
+"req.params URL parameters ko read karta hai.",
+"req.body request ke andar bheja gaya data read karta hai.",
+"PATCH mein spread operator existing data ko preserve karke new fields update karne mein useful hai.",
+"200 successful request ke liye common status code hai.",
+"201 resource create hone par commonly use hota hai.",
+"404 ka matlab requested resource nahi mila.",
+"500 ka matlab backend mein unexpected error hua."
+]
+},
+{
+"type": "heading",
+"text": "One-Line Mental Model"
+},
+{
+"type": "code",
+"language": "text",
+"text": "GET    -> Read\nPOST   -> Create\nPUT    -> Complete Update\nPATCH  -> Partial Update\nDELETE -> Delete"
 }
+]
+}
+
 ];
