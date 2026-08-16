@@ -1212,6 +1212,504 @@ export const NodeJSNotes = [
 "text": "GET    -> Read\nPOST   -> Create\nPUT    -> Complete Update\nPATCH  -> Partial Update\nDELETE -> Delete"
 }
 ]
+},
+
+{
+  "id": 39,
+  "slug": "express-routers-and-middlewares",
+  "title": "Express.js Routers and Middleware — Simple Beginner Notes",
+  "date": "16 August 2026",
+  "description": "Learn Express.js routes, routers and different types of middleware with simple English explanations and practical examples.",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Routes and Middleware — Quick Overview"
+    },
+    {
+      "type": "paragraph",
+      "text": "A route tells Express what to do when a request comes to a specific URL. Middleware is a function that runs between the request and the final route response. Middleware can check, modify, or stop a request."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Route — handles a specific URL and HTTP method.",
+        "Router — groups related routes together.",
+        "Middleware — runs between the request and the route.",
+        "next() — sends the request to the next middleware or route.",
+        "Application-level middleware — can run for many or all routes.",
+        "Route-level middleware — runs only on selected routes.",
+        "Built-in middleware — already provided by Express.",
+        "Third-party middleware — installed from npm packages.",
+        "Error-handling middleware — handles errors in one central place."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "What is a Route?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A route defines what the server should do when it receives a request for a particular URL and HTTP method."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.get('/users', (req, res) => {\n  res.json({\n    success: true,\n    message: 'Users data'\n  });\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "This route runs when the frontend sends a GET request to /users."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend\n   |\n   | GET /users\n   v\nExpress Route\n   |\n   v\nResponse\n   |\n   v\nFrontend"
+    },
+    {
+      "type": "heading",
+      "text": "What is a Router?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A router is used to keep related routes together. It helps keep a large Express project clean and organized."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "routes/\n   |\n   |-- userRoutes.js\n   |-- productRoutes.js\n   |-- orderRoutes.js"
+    },
+    {
+      "type": "heading",
+      "text": "Creating a Router"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const express = require('express');\n\nconst router = express.Router();\n\nrouter.get('/users', (req, res) => {\n  res.json({\n    success: true,\n    message: 'All users'\n  });\n});\n\nrouter.get('/users/:id', (req, res) => {\n  res.json({\n    success: true,\n    message: `User ${req.params.id}`\n  });\n});\n\nmodule.exports = router;"
+    },
+    {
+      "type": "paragraph",
+      "text": "express.Router() creates a separate router. We can put related routes inside this router."
+    },
+    {
+      "type": "heading",
+      "text": "Using Router in server.js"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const express = require('express');\nconst userRoutes = require('./routes/userRoutes');\n\nconst server = express();\n\nserver.use('/api', userRoutes);"
+    },
+    {
+      "type": "paragraph",
+      "text": "The router has /users, but /api is added in server.js. So the final URL becomes /api/users."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "router.get('/users')\n        +\nserver.use('/api', userRoutes)\n        |\n        v\nGET /api/users"
+    },
+    {
+      "type": "heading",
+      "text": "Why Do We Use Routers?"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "They keep the project organized.",
+        "Related routes can stay in one file.",
+        "The main server.js file stays smaller.",
+        "Large projects become easier to manage.",
+        "Users, products, and orders can have separate route files."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "What is Middleware?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Middleware is a function that runs between the incoming request and the final route. It can check the request, change the request, log information, check authentication, or stop the request."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "function middleware(req, res, next) {\n  console.log('Middleware is running');\n\n  next();\n}"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend\n   |\n   v\nRequest\n   |\n   v\nMiddleware\n   |\n   | next()\n   v\nRoute\n   |\n   v\nResponse"
+    },
+    {
+      "type": "heading",
+      "text": "What is next()?"
+    },
+    {
+      "type": "paragraph",
+      "text": "next() tells Express that the current middleware has finished its work and the request can continue to the next middleware or route."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "function middleware(req, res, next) {\n  console.log('Checking request');\n\n  next();\n}\n\nserver.get('/home', middleware, (req, res) => {\n  res.send('Home Page');\n});"
+    },
+    {
+      "type": "heading",
+      "text": "What Happens If We Do Not Call next()?"
+    },
+    {
+      "type": "paragraph",
+      "text": "If middleware does not send a response and does not call next(), the request will stop at that middleware."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "function middleware(req, res, next) {\n  console.log('Middleware running');\n\n  // No next()\n  // No response\n}"
+    },
+    {
+      "type": "heading",
+      "text": "Middleware Can Stop a Request"
+    },
+    {
+      "type": "paragraph",
+      "text": "Middleware can stop a request when a condition is not satisfied. For example, we can allow only users who are 18 or older."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "function checkAge(req, res, next) {\n  const { age } = req.body;\n\n  if (age < 18) {\n    return res.status(403).json({\n      success: false,\n      message: 'You must be 18 or older'\n    });\n  }\n\n  next();\n}"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "age = 16\n   |\n   v\nMiddleware\n   |\n   v\nage < 18\n   |\n   v\n403 Response\n   |\n   X Route stops\n\n\nage = 20\n   |\n   v\nMiddleware\n   |\n   v\nage >= 18\n   |\n   v\nnext()\n   |\n   v\nRoute runs"
+    },
+    {
+      "type": "heading",
+      "text": "Types of Middleware"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "1. Application-level middleware",
+        "2. Route-level middleware",
+        "3. Built-in middleware",
+        "4. Third-party middleware",
+        "5. Error-handling middleware"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "1. Application-Level Middleware"
+    },
+    {
+      "type": "paragraph",
+      "text": "Application-level middleware is added to the Express application using server.use(). It can run for many or all routes."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.use((req, res, next) => {\n  console.log(req.method, req.url);\n  next();\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "This middleware can run whenever a request comes to the application."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "GET /users\n   -> middleware\n\nPOST /users\n   -> middleware\n\nDELETE /users/1\n   -> middleware"
+    },
+    {
+      "type": "heading",
+      "text": "Real-World Example — Request Logger"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.use((req, res, next) => {\n  console.log(`${req.method} ${req.url}`);\n  next();\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "This middleware can be used to see which HTTP method and URL the client is requesting."
+    },
+    {
+      "type": "heading",
+      "text": "2. Route-Level Middleware"
+    },
+    {
+      "type": "paragraph",
+      "text": "Route-level middleware is used only for a specific route. It is useful when only one or a few routes need a special check."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "function checkAge(req, res, next) {\n  const { age } = req.body;\n\n  if (age < 18) {\n    return res.status(403).json({\n      success: false,\n      message: 'Access denied'\n    });\n  }\n\n  next();\n}\n\nserver.post('/getdata', checkAge, (req, res) => {\n  res.json({\n    success: true,\n    message: 'Access allowed'\n  });\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here checkAge is used only for /getdata. Other routes do not use this middleware."
+    },
+    {
+      "type": "heading",
+      "text": "Application-Level vs Route-Level"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Application-Level\n\nserver.use(middleware)\n        |\n        v\nCan run for many routes\n\n\nRoute-Level\n\nserver.get('/profile', middleware, handler)\n        |\n        v\nOnly /profile uses it"
+    },
+    {
+      "type": "heading",
+      "text": "3. Built-in Middleware"
+    },
+    {
+      "type": "paragraph",
+      "text": "Built-in middleware is already provided by Express. We do not need to install a separate package for it."
+    },
+    {
+      "type": "heading",
+      "text": "express.json()"
+    },
+    {
+      "type": "paragraph",
+      "text": "express.json() reads JSON data sent by the frontend and makes that data available in req.body."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.use(express.json());\n\nserver.post('/users', (req, res) => {\n  console.log(req.body);\n\n  res.json({\n    success: true\n  });\n});"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "fetch('http://localhost:7000/users', {\n  method: 'POST',\n  headers: {\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    name: 'Aman',\n    age: 20\n  })\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "After express.json(), the backend can access the sent data using req.body."
+    },
+    {
+      "type": "heading",
+      "text": "4. Third-Party Middleware"
+    },
+    {
+      "type": "paragraph",
+      "text": "Third-party middleware comes from npm packages. We install these packages when Express does not provide the feature we need."
+    },
+    {
+      "type": "heading",
+      "text": "Example — cors"
+    },
+    {
+      "type": "paragraph",
+      "text": "cors is commonly used when a frontend and backend are running on different origins, such as different ports during development."
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "text": "npm install cors"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const cors = require('cors');\n\nserver.use(cors());"
+    },
+    {
+      "type": "paragraph",
+      "text": "cors is third-party middleware because it comes from an npm package."
+    },
+    {
+      "type": "heading",
+      "text": "Example — morgan"
+    },
+    {
+      "type": "paragraph",
+      "text": "morgan is a popular middleware for logging HTTP requests."
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "text": "npm install morgan"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const morgan = require('morgan');\n\nserver.use(morgan('dev'));"
+    },
+    {
+      "type": "heading",
+      "text": "5. Error-Handling Middleware"
+    },
+    {
+      "type": "paragraph",
+      "text": "Error-handling middleware is used to handle errors in one central place. Its function has four parameters: err, req, res, and next."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.use((err, req, res, next) => {\n  console.log(err.message);\n\n  res.status(500).json({\n    success: false,\n    message: 'Internal Server Error'\n  });\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "The first parameter is err. This makes the middleware an error-handling middleware."
+    },
+    {
+      "type": "heading",
+      "text": "How to Send an Error to Error Middleware?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Use next(error) when you want to send an error to the error-handling middleware."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.get('/users', (req, res, next) => {\n  try {\n    throw new Error('Database failed');\n  } catch (error) {\n    next(error);\n  }\n});\n\nserver.use((err, req, res, next) => {\n  res.status(500).json({\n    success: false,\n    message: err.message\n  });\n});"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Route\n  |\n  | Error\n  v\ncatch(error)\n  |\n  | next(error)\n  v\nError Middleware\n  |\n  v\nError Response"
+    },
+    {
+      "type": "heading",
+      "text": "next() vs next(error)"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "next()\n  -> Continue normal request flow\n  -> Go to the next middleware or route\n\nnext(error)\n  -> Start error flow\n  -> Go to error-handling middleware"
+    },
+    {
+      "type": "heading",
+      "text": "Multiple Middleware on One Route"
+    },
+    {
+      "type": "paragraph",
+      "text": "We can use more than one middleware on the same route. Each middleware can do one small job."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.post(\n  '/profile',\n  checkAuth,\n  checkAge,\n  validateData,\n  (req, res) => {\n    res.json({\n      success: true,\n      message: 'Profile updated'\n    });\n  }\n);"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Request\n   |\n   v\ncheckAuth\n   |\n next()\n   v\ncheckAge\n   |\n next()\n   v\nvalidateData\n   |\n next()\n   v\nRoute Handler\n   |\n   v\nResponse"
+    },
+    {
+      "type": "heading",
+      "text": "Real-World Middleware Flow"
+    },
+    {
+      "type": "paragraph",
+      "text": "Imagine a user wants to update their profile. The backend can first check login, then validate the data, and finally update the profile."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend\n   |\n   | PATCH /profile\n   v\nAuthentication Middleware\n   |\n   | Is the user logged in?\n   v\nValidation Middleware\n   |\n   | Is the data valid?\n   v\nRoute Handler\n   |\n   | Update database\n   v\nResponse\n   |\n   v\nFrontend"
+    },
+    {
+      "type": "heading",
+      "text": "Authentication Middleware Example"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "function checkAuth(req, res, next) {\n  const token = req.headers.authorization;\n\n  if (!token) {\n    return res.status(401).json({\n      success: false,\n      message: 'Login required'\n    });\n  }\n\n  next();\n}\n\nserver.get('/profile', checkAuth, (req, res) => {\n  res.json({\n    success: true,\n    message: 'Profile data'\n  });\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "If there is no token, the middleware sends a response and stops the request. If the token exists, next() allows the request to continue. In a real application, the token should also be properly verified."
+    },
+    {
+      "type": "heading",
+      "text": "Middleware Order Is Important"
+    },
+    {
+      "type": "paragraph",
+      "text": "Express runs middleware from top to bottom. Therefore, the order in which middleware is added is important."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.use(express.json());\n\nserver.use(logger);\n\nserver.get('/users', getUsers);\n\nserver.use(errorMiddleware);"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Request\n   |\nexpress.json()\n   |\nlogger\n   |\nroute\n   |\nerror middleware"
+    },
+    {
+      "type": "paragraph",
+      "text": "Error-handling middleware is normally placed after the routes so that errors from the routes can reach it."
+    },
+    {
+      "type": "heading",
+      "text": "Complete Small Example"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const express = require('express');\nconst cors = require('cors');\n\nconst server = express();\n\n// Built-in middleware\nserver.use(express.json());\n\n// Third-party middleware\nserver.use(cors());\n\n// Application-level middleware\nserver.use((req, res, next) => {\n  console.log(req.method, req.url);\n  next();\n});\n\n// Route-level middleware\nfunction checkAge(req, res, next) {\n  if (req.body.age < 18) {\n    return res.status(403).json({\n      success: false,\n      message: 'Access denied'\n    });\n  }\n\n  next();\n}\n\n// Route\nserver.post('/getdata', checkAge, (req, res, next) => {\n  try {\n    res.json({\n      success: true,\n      message: 'Data accessed successfully'\n    });\n  } catch (error) {\n    next(error);\n  }\n});\n\n// Error-handling middleware\nserver.use((err, req, res, next) => {\n  console.log(err.message);\n\n  res.status(500).json({\n    success: false,\n    message: 'Internal Server Error'\n  });\n});\n\nserver.listen(7000, () => {\n  console.log('Server running on port 7000');\n});"
+    },
+    {
+      "type": "heading",
+      "text": "Complete Request Flow"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend\n   |\n   v\nRequest\n   |\n   v\nBuilt-in Middleware\n(express.json)\n   |\n   v\nThird-party Middleware\n(cors)\n   |\n   v\nApplication Middleware\n(logger)\n   |\n   v\nRoute-level Middleware\n(checkAge)\n   |\n   v\nRoute Handler\n   |\n   v\nResponse\n\nIf an error happens\n   |\n   v\nError Middleware\n   |\n   v\nError Response"
+    },
+    {
+      "type": "heading",
+      "text": "Router vs Route vs Middleware"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Router\n-> Organizes related routes\n\nRoute\n-> Handles the actual API request\n\nMiddleware\n-> Checks or processes the request before the route"
+    },
+    {
+      "type": "heading",
+      "text": "Quick Revision"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "A route handles a specific HTTP method and URL.",
+        "A router groups related routes together.",
+        "express.Router() creates a router.",
+        "Middleware runs between the request and the route.",
+        "next() continues the request.",
+        "A middleware can stop a request by sending a response.",
+        "Application-level middleware can run for many routes.",
+        "Route-level middleware runs only on selected routes.",
+        "Built-in middleware comes with Express.",
+        "express.json() allows us to read JSON data from req.body.",
+        "Third-party middleware comes from npm packages.",
+        "cors and morgan are common third-party middleware examples.",
+        "Error-handling middleware has four parameters: err, req, res, next.",
+        "next(error) sends an error to error-handling middleware.",
+        "Error-handling middleware is normally placed after the routes.",
+        "Middleware order is important because Express runs it from top to bottom."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "One-Line Mental Model"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Router      -> Organize routes\nRoute       -> Handle the request\nMiddleware  -> Check/process the request\nnext()      -> Continue\nBuilt-in    -> Express provides it\nThird-party -> Install from npm\nError       -> Handle errors centrally"
+    }
+  ]
 }
 
 ];
