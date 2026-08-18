@@ -1710,6 +1710,962 @@ export const NodeJSNotes = [
       "text": "Router      -> Organize routes\nRoute       -> Handle the request\nMiddleware  -> Check/process the request\nnext()      -> Continue\nBuilt-in    -> Express provides it\nThird-party -> Install from npm\nError       -> Handle errors centrally"
     }
   ]
+},
+
+{
+  "id": 40,
+  "slug": "mongodb-with-express-beginner-complete-notes",
+  "title": "MongoDB with Express — Complete Beginner Notes",
+  "date": "18 August 2026",
+  "description": "Learn MongoDB with Express.js MongoDB, SQL vs NoSQL, Atlas, clusters, environment variables, Mongoose, schemas, models, database connection and complete CRUD.",
+  "content": [
+    {
+      "type": "heading",
+      "text": "MongoDB — Quick Overview"
+    },
+    {
+      "type": "paragraph",
+      "text": "MongoDB is a NoSQL database used to store application data. In an Express application, we can use MongoDB to store users, products, orders, posts and other data permanently."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend\n   |\n   | Request\n   v\nExpress Server\n   |\n   v\nMongoose\n   |\n   v\nMongoDB\n   |\n   v\nDatabase"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "MongoDB — Database system.",
+        "Atlas — Cloud platform for MongoDB.",
+        "Cluster — MongoDB deployment where databases are stored.",
+        "Database — Container that stores collections.",
+        "Collection — Similar to a table in SQL.",
+        "Document — Similar to a row in SQL.",
+        "Mongoose — Node.js library used to work with MongoDB.",
+        "Schema — Defines the structure and rules of data.",
+        "Model — Used to create and work with MongoDB documents.",
+        "CRUD — Create, Read, Update and Delete data."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "What is a Database?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A database is a place where application data is stored. For example, a student application may need to store student names, ages, emails and courses."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Application\n     |\n     v\n  Database\n     |\n     +-- Users\n     +-- Products\n     +-- Orders\n     +-- Students"
+    },
+
+    {
+      "type": "heading",
+      "text": "Why Do We Need a Database?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Data stored only inside JavaScript variables disappears when the server restarts. A database stores data permanently so the application can use it later."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const user = {\n  name: 'Rahul',\n  age: 21\n};"
+    },
+    {
+      "type": "paragraph",
+      "text": "The variable above exists only while the application is running. MongoDB allows us to save the data permanently."
+    },
+
+    {
+      "type": "heading",
+      "text": "SQL vs NoSQL"
+    },
+    {
+      "type": "paragraph",
+      "text": "SQL databases usually store data in tables with rows and columns. NoSQL databases can store data in more flexible structures such as documents."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "SQL\n\nDatabase\n   |\n   v\nTable\n   |\n   +-- Rows\n   +-- Columns\n\n\nNoSQL / MongoDB\n\nDatabase\n   |\n   v\nCollection\n   |\n   v\nDocuments"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "SQL example: MySQL, PostgreSQL.",
+        "NoSQL example: MongoDB.",
+        "SQL commonly uses tables, rows and columns.",
+        "MongoDB uses collections and documents.",
+        "MongoDB documents look similar to JSON.",
+        "NoSQL does not mean there is no structure; MongoDB can still use schemas and validation through tools such as Mongoose."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "SQL Table vs MongoDB Collection"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "SQL\n\nusers table\n\nid | name  | age\n---|-------|----\n1  | Rahul | 21\n2  | Aman  | 22\n\n\nMongoDB\n\nusers collection\n\n{\n  name: 'Rahul',\n  age: 21\n}\n\n{\n  name: 'Aman',\n  age: 22\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "What is MongoDB?"
+    },
+    {
+      "type": "paragraph",
+      "text": "MongoDB is a NoSQL document database. Instead of storing data mainly as rows and columns, MongoDB stores data as documents inside collections."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "{\n  name: 'Rahul',\n  age: 21,\n  email: 'rahul@gmail.com'\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "MongoDB documents look very similar to JavaScript objects, which makes MongoDB comfortable to use with Node.js and Express."
+    },
+
+    {
+      "type": "heading",
+      "text": "MongoDB Important Terms"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "MongoDB\n   |\n   +-- Database\n         |\n         +-- Collection\n                |\n                +-- Document\n                       |\n                       +-- Fields"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Database — Stores collections.",
+        "Collection — Stores related documents.",
+        "Document — One piece of stored data.",
+        "Field — A property inside a document.",
+        "_id — Unique identifier automatically created for documents."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "What is MongoDB Atlas?"
+    },
+    {
+      "type": "paragraph",
+      "text": "MongoDB Atlas is MongoDB's cloud platform. Instead of running the database only on your own computer, Atlas lets you create and use MongoDB databases in the cloud."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Your Computer\n      |\n      | Internet\n      v\nMongoDB Atlas\n      |\n      v\nMongoDB Cluster\n      |\n      v\nDatabase"
+    },
+    {
+      "type": "paragraph",
+      "text": "For learning and many small projects, Atlas is convenient because you do not have to run the MongoDB database server locally."
+    },
+
+    {
+      "type": "heading",
+      "text": "What is a Cluster?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A cluster is the MongoDB deployment that your application connects to. Think of it as the main MongoDB environment containing your databases and collections."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "MongoDB Atlas\n      |\n      v\n   Cluster\n      |\n      +-- collegeDB\n      |      |\n      |      +-- students\n      |\n      +-- shopDB\n             |\n             +-- products"
+    },
+    {
+      "type": "paragraph",
+      "text": "You normally do not need a separate cluster for every database. Multiple databases can exist in the same cluster."
+    },
+
+    {
+      "type": "heading",
+      "text": "MongoDB Atlas vs MongoDB"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "MongoDB\n-> The database technology\n\nMongoDB Atlas\n-> Cloud platform for running MongoDB\n\nCluster\n-> Your MongoDB deployment inside Atlas"
+    },
+
+    {
+      "type": "heading",
+      "text": "Before MongoDB Setup — What is .env?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Before connecting MongoDB, understand the .env file. An environment file is used to store configuration values and secrets that we do not want to hard-code directly inside our source code."
+    },
+    {
+      "type": "heading",
+      "text": "Why Do We Use .env?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A MongoDB connection string can contain a username, password and other connection information. Putting these values directly inside server.js makes the code harder to manage and can accidentally expose secrets."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "// Avoid putting secrets directly in code\nmongoose.connect('mongodb+srv://username:password@cluster-url/...');"
+    },
+    {
+      "type": "paragraph",
+      "text": "Instead, keep the connection string inside .env and read it using process.env."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": ".env\n\nMONGOURL=mongodb+srv://username:password@cluster-url/collegeDB\n\nserver.js\n\nprocess.env.MONGOURL"
+    },
+    {
+      "type": "summary",
+      "items": [
+        ".env stores environment variables.",
+        "It is commonly used for passwords, database URLs, API keys and configuration.",
+        "process.env reads environment variables in Node.js.",
+        "Do not commit .env to GitHub.",
+        "Add .env to .gitignore."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "Creating .env"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "backend/\n   |\n   +-- server.js\n   +-- db.js\n   +-- model.js\n   +-- .env"
+    },
+    {
+      "type": "code",
+      "language": "env",
+      "text": "MONGOURL=mongodb+srv://USERNAME:PASSWORD@CLUSTER_URL/collegeDB"
+    },
+    {
+      "type": "paragraph",
+      "text": "The name MONGOURL is just a variable name. You can choose another name, but the name used in .env must match the name used in process.env."
+    },
+
+    {
+      "type": "heading",
+      "text": "Protecting .env"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": ".gitignore\n\nnode_modules\n.env"
+    },
+    {
+      "type": "paragraph",
+      "text": "Never share your real database password publicly. If a password is exposed, change or reset it."
+    },
+
+    {
+      "type": "heading",
+      "text": "MongoDB Project Setup — Complete Flow"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "1. Create Express project\n        |\n        v\n2. Install mongoose and dotenv\n        |\n        v\n3. Create MongoDB Atlas account/project\n        |\n        v\n4. Create cluster\n        |\n        v\n5. Create database user\n        |\n        v\n6. Allow your IP address\n        |\n        v\n7. Get MongoDB connection string\n        |\n        v\n8. Put connection string in .env\n        |\n        v\n9. Connect using Mongoose\n        |\n        v\n10. Create Schema\n        |\n        v\n11. Create Model\n        |\n        v\n12. Build CRUD APIs"
+    },
+
+    {
+      "type": "heading",
+      "text": "Step 1 — Create Express Project"
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "text": "mkdir backend\ncd backend\nnpm init -y\nnpm install express mongoose dotenv cors"
+    },
+
+    {
+      "type": "heading",
+      "text": "Step 2 — Use ES Modules"
+    },
+    {
+      "type": "paragraph",
+      "text": "In this course we will use import and export syntax instead of require and module.exports."
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "text": "{\n  \"type\": \"module\"\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Now we can write clean modern imports such as import express from 'express'."
+    },
+
+    {
+      "type": "heading",
+      "text": "Step 3 — Project Structure"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "backend/\n   |\n   +-- config/\n   |      |\n   |      +-- db.js\n   |\n   +-- models/\n   |      |\n   |      +-- User.js\n   |\n   +-- .env\n   +-- .gitignore\n   +-- server.js\n   +-- package.json"
+    },
+
+    {
+      "type": "heading",
+      "text": "Step 4 — Install Mongoose"
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "text": "npm install mongoose"
+    },
+    {
+      "type": "paragraph",
+      "text": "Mongoose is a Node.js library that makes it easier to work with MongoDB. It provides schemas, models, validation and convenient database methods."
+    },
+
+    {
+      "type": "heading",
+      "text": "What is Mongoose?"
+    },
+    {
+      "type": "paragraph",
+      "text": "MongoDB is the database. Mongoose is the library we use in our Node.js application to communicate with MongoDB and define rules for our data."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Express\n   |\n   v\nMongoose\n   |\n   v\nMongoDB"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "MongoDB stores the data.",
+        "Mongoose connects Node.js to MongoDB.",
+        "Mongoose allows us to define schemas.",
+        "Mongoose creates models from schemas.",
+        "Mongoose provides methods for CRUD operations."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "Step 5 — MongoDB Connection"
+    },
+    {
+      "type": "paragraph",
+      "text": "Create a db.js file. This file will contain only the MongoDB connection logic."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import mongoose from 'mongoose';\n\nasync function connectDB() {\n  try {\n    await mongoose.connect(process.env.MONGOURL);\n    console.log('MongoDB connected');\n  } catch (error) {\n    console.log('MongoDB connection failed:', error.message);\n  }\n}\n\nexport default connectDB;"
+    },
+
+    {
+      "type": "heading",
+      "text": "Step 6 — Express Server"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import dotenv from 'dotenv';\ndotenv.config();\n\nimport express from 'express';\nimport cors from 'cors';\nimport connectDB from './config/db.js';\n\nconst server = express();\n\nserver.use(express.json());\nserver.use(cors());\n\nconnectDB();\n\nserver.get('/', (req, res) => {\n  res.send('Server is running');\n});\n\nserver.listen(1200, () => {\n  console.log('Server running on port 1200');\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "dotenv.config() loads values from .env. express.json() allows Express to read JSON request bodies. connectDB() starts the MongoDB connection."
+    },
+
+    {
+      "type": "heading",
+      "text": "MongoDB Connection Flow"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": ".env\n  |\n  | MONGOURL\n  v\nserver.js\n  |\n  | connectDB()\n  v\ndb.js\n  |\n  | mongoose.connect()\n  v\nMongoDB Atlas Cluster"
+    },
+
+    {
+      "type": "heading",
+      "text": "Common Connection Error"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "MongooseError:\nThe uri parameter ... got undefined"
+    },
+    {
+      "type": "paragraph",
+      "text": "This usually means process.env.MONGOURL is undefined. Check that .env exists, the variable name matches exactly, dotenv.config() runs before connectDB(), and the connection string is present."
+    },
+
+    {
+      "type": "heading",
+      "text": "What is a Schema?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A schema defines the structure and rules of the data we want to store. It tells Mongoose which fields exist and what type of data they should contain."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const userSchema = new mongoose.Schema({\n  name: String,\n  age: Number,\n  email: String\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here name should be a String, age should be a Number and email should be a String."
+    },
+
+    {
+      "type": "heading",
+      "text": "Schema with Validation"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const userSchema = new mongoose.Schema({\n  name: {\n    type: String,\n    required: true\n  },\n\n  age: {\n    type: Number,\n    required: true\n  },\n\n  email: {\n    type: String,\n    required: true,\n    unique: true\n  }\n});"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "type defines the expected data type.",
+        "required: true means the field must be provided.",
+        "unique: true creates a uniqueness constraint/index; duplicate values can cause a duplicate-key error.",
+        "Schema validation helps keep application data consistent."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "What is a Model?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A model is created from a schema and is used to work with documents in MongoDB. We use the model to create, find, update and delete data."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const User = mongoose.model('User', userSchema);"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Schema\n  |\n  v\nModel\n  |\n  v\nMongoDB Collection\n  |\n  v\nDocuments"
+    },
+
+    {
+      "type": "heading",
+      "text": "Schema vs Model"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Schema\n-> Defines the structure and rules\n\nModel\n-> Used to work with the database\n\nDocument\n-> Actual stored data"
+    },
+
+    {
+      "type": "heading",
+      "text": "Create User Model"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import mongoose from 'mongoose';\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: {\n      type: String,\n      required: true\n    },\n\n    age: {\n      type: Number,\n      required: true\n    },\n\n    email: {\n      type: String,\n      required: true,\n      unique: true\n    }\n  },\n  {\n    timestamps: true\n  }\n);\n\nconst User = mongoose.model('User', userSchema);\n\nexport default User;"
+    },
+    {
+      "type": "paragraph",
+      "text": "mongoose.model('User', userSchema) creates the User model. Mongoose normally maps the model name to a pluralized collection name such as users."
+    },
+
+    {
+      "type": "heading",
+      "text": "Database, Collection, Model and Document Together"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "MongoDB Atlas\n     |\n     v\n  Cluster\n     |\n     v\n collegeDB          <- Database\n     |\n     v\n   users             <- Collection\n     |\n     v\n {                    <- Document\n   name: 'Rahul',\n   age: 21\n }\n\nUser Model            <- Mongoose Model\n"
+    },
+
+    {
+      "type": "heading",
+      "text": "Complete Basic Setup"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "backend/\n   |\n   +-- config/\n   |     +-- db.js\n   |\n   +-- models/\n   |     +-- User.js\n   |\n   +-- .env\n   +-- .gitignore\n   +-- server.js"
+    },
+
+    {
+      "type": "heading",
+      "text": "Create User — CRUD"
+    },
+    {
+      "type": "paragraph",
+      "text": "CRUD means Create, Read, Update and Delete. These are the four basic operations we perform on application data."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "C -> Create\nR -> Read\nU -> Update\nD -> Delete"
+    },
+
+    {
+      "type": "heading",
+      "text": "1. CREATE — Add Data"
+    },
+    {
+      "type": "paragraph",
+      "text": "If the frontend sends name, age and email in req.body, we can create a user with User.create(req.body)."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import User from './models/User.js';\n\nserver.post('/users', async (req, res) => {\n  try {\n    const user = await User.create(req.body);\n\n    res.status(201).json({\n      success: true,\n      data: user\n    });\n  } catch (error) {\n    res.status(400).json({\n      success: false,\n      message: error.message\n    });\n  }\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "User.create(req.body) takes the data received from the frontend, validates it using the schema and saves a new document in MongoDB."
+    },
+
+    {
+      "type": "heading",
+      "text": "Frontend Data to MongoDB"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend\n   |\n   | POST /users\n   | { name, age, email }\n   v\nExpress\n   |\n   v\nreq.body\n   |\n   v\nUser.create(req.body)\n   |\n   v\nSchema Validation\n   |\n   v\nMongoDB\n   |\n   v\nNew Document"
+    },
+
+    {
+      "type": "heading",
+      "text": "What if Data Does Not Match the Schema?"
+    },
+    {
+      "type": "paragraph",
+      "text": "If a required field is missing or the value cannot be converted to the expected type, Mongoose can throw a validation or casting error."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "// email is required\n{\n  name: 'Rahul',\n  age: 21\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "The create operation will fail because email is required."
+    },
+
+    {
+      "type": "heading",
+      "text": "2. READ — Get All Users"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.get('/users', async (req, res) => {\n  try {\n    const users = await User.find();\n\n    res.json({\n      success: true,\n      data: users\n    });\n  } catch (error) {\n    res.status(500).json({\n      success: false,\n      message: error.message\n    });\n  }\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "User.find() returns the users stored in the collection."
+    },
+
+    {
+      "type": "heading",
+      "text": "3. READ — Get One User"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.get('/users/:id', async (req, res) => {\n  try {\n    const user = await User.findById(req.params.id);\n\n    res.json({\n      success: true,\n      data: user\n    });\n  } catch (error) {\n    res.status(400).json({\n      success: false,\n      message: error.message\n    });\n  }\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "req.params.id gets the id from the URL. User.findById() searches for the matching document."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "GET /users/64abc123\n\nreq.params.id\n      |\n      v\n64abc123\n      |\n      v\nUser.findById()\n      |\n      v\nUser document"
+    },
+
+    {
+      "type": "heading",
+      "text": "4. UPDATE — Update a User"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.put('/users/:id', async (req, res) => {\n  try {\n    const user = await User.findByIdAndUpdate(\n      req.params.id,\n      req.body,\n      {\n        new: true,\n        runValidators: true\n      }\n    );\n\n    res.json({\n      success: true,\n      data: user\n    });\n  } catch (error) {\n    res.status(400).json({\n      success: false,\n      message: error.message\n    });\n  }\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "findByIdAndUpdate() finds a document by its id and updates it. new: true returns the updated document. runValidators: true makes update operations apply the schema validators."
+    },
+
+    {
+      "type": "heading",
+      "text": "5. DELETE — Delete a User"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.delete('/users/:id', async (req, res) => {\n  try {\n    const user = await User.findByIdAndDelete(req.params.id);\n\n    res.json({\n      success: true,\n      message: 'User deleted successfully'\n    });\n  } catch (error) {\n    res.status(400).json({\n      success: false,\n      message: error.message\n    });\n  }\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "findByIdAndDelete() finds a document using its id and removes it from the collection."
+    },
+
+    {
+      "type": "heading",
+      "text": "Complete CRUD Flow"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "CREATE\nPOST /users\n     |\n     v\nUser.create()\n\nREAD\nGET /users\n     |\n     v\nUser.find()\n\nREAD ONE\nGET /users/:id\n     |\n     v\nUser.findById()\n\nUPDATE\nPUT /users/:id\n     |\n     v\nUser.findByIdAndUpdate()\n\nDELETE\nDELETE /users/:id\n     |\n     v\nUser.findByIdAndDelete()"
+    },
+
+    {
+      "type": "heading",
+      "text": "Complete Small MongoDB + Express Example"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import dotenv from 'dotenv';\ndotenv.config();\n\nimport express from 'express';\nimport cors from 'cors';\nimport mongoose from 'mongoose';\n\nconst server = express();\n\nserver.use(express.json());\nserver.use(cors());\n\n// MongoDB connection\nmongoose.connect(process.env.MONGOURL)\n  .then(() => console.log('MongoDB connected'))\n  .catch((error) => console.log('MongoDB error:', error.message));\n\n// Schema\nconst userSchema = new mongoose.Schema({\n  name: {\n    type: String,\n    required: true\n  },\n  age: {\n    type: Number,\n    required: true\n  },\n  email: {\n    type: String,\n    required: true,\n    unique: true\n  }\n});\n\n// Model\nconst User = mongoose.model('User', userSchema);\n\n// CREATE\nserver.post('/users', async (req, res) => {\n  try {\n    const user = await User.create(req.body);\n    res.status(201).json(user);\n  } catch (error) {\n    res.status(400).json({ message: error.message });\n  }\n});\n\n// READ ALL\nserver.get('/users', async (req, res) => {\n  try {\n    const users = await User.find();\n    res.json(users);\n  } catch (error) {\n    res.status(500).json({ message: error.message });\n  }\n});\n\n// READ ONE\nserver.get('/users/:id', async (req, res) => {\n  try {\n    const user = await User.findById(req.params.id);\n    res.json(user);\n  } catch (error) {\n    res.status(400).json({ message: error.message });\n  }\n});\n\n// UPDATE\nserver.put('/users/:id', async (req, res) => {\n  try {\n    const user = await User.findByIdAndUpdate(\n      req.params.id,\n      req.body,\n      { new: true, runValidators: true }\n    );\n\n    res.json(user);\n  } catch (error) {\n    res.status(400).json({ message: error.message });\n  }\n});\n\n// DELETE\nserver.delete('/users/:id', async (req, res) => {\n  try {\n    await User.findByIdAndDelete(req.params.id);\n    res.json({ message: 'User deleted successfully' });\n  } catch (error) {\n    res.status(400).json({ message: error.message });\n  }\n});\n\nserver.listen(1200, () => {\n  console.log('Server running on port 1200');\n});"
+    },
+
+    {
+      "type": "heading",
+      "text": "Recommended Real Project Structure"
+    },
+    {
+      "type": "paragraph",
+      "text": "The complete example above is useful for learning, but in a real Express project we normally separate database connection, models, routes and controllers."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "backend/\n   |\n   +-- config/\n   |     +-- db.js\n   |\n   +-- models/\n   |     +-- User.js\n   |\n   +-- routes/\n   |     +-- userRoutes.js\n   |\n   +-- controllers/\n   |     +-- userController.js\n   |\n   +-- middleware/\n   |     +-- errorMiddleware.js\n   |\n   +-- .env\n   +-- server.js"
+    },
+
+    {
+      "type": "heading",
+      "text": "MongoDB Connection in a Separate File"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import mongoose from 'mongoose';\n\nconst connectDB = async () => {\n  try {\n    await mongoose.connect(process.env.MONGOURL);\n    console.log('MongoDB connected');\n  } catch (error) {\n    console.log('MongoDB connection failed:', error.message);\n    process.exit(1);\n  }\n};\n\nexport default connectDB;"
+    },
+
+    {
+      "type": "heading",
+      "text": "User Model in a Separate File"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import mongoose from 'mongoose';\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: {\n      type: String,\n      required: true\n    },\n    age: {\n      type: Number,\n      required: true\n    },\n    email: {\n      type: String,\n      required: true,\n      unique: true\n    }\n  },\n  {\n    timestamps: true\n  }\n);\n\nconst User = mongoose.model('User', userSchema);\n\nexport default User;"
+    },
+
+    {
+      "type": "heading",
+      "text": "Using the Model in Routes"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import express from 'express';\nimport User from '../models/User.js';\n\nconst router = express.Router();\n\nrouter.post('/users', async (req, res) => {\n  try {\n    const user = await User.create(req.body);\n    res.status(201).json(user);\n  } catch (error) {\n    res.status(400).json({\n      message: error.message\n    });\n  }\n});\n\nexport default router;"
+    },
+
+    {
+      "type": "heading",
+      "text": "Using Router in server.js"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import dotenv from 'dotenv';\ndotenv.config();\n\nimport express from 'express';\nimport cors from 'cors';\nimport connectDB from './config/db.js';\nimport userRoutes from './routes/userRoutes.js';\n\nconst server = express();\n\nserver.use(express.json());\nserver.use(cors());\n\nconnectDB();\n\nserver.use('/api', userRoutes);\n\nserver.listen(1200, () => {\n  console.log('Server running on port 1200');\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "If userRoutes contains POST /users and server.js mounts it with /api, the final endpoint becomes POST /api/users."
+    },
+
+    {
+      "type": "heading",
+      "text": "MongoDB CRUD Mental Model"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend\n   |\n   | HTTP Request\n   v\nExpress Route\n   |\n   v\nMongoose Model\n   |\n   v\nMongoDB\n   |\n   v\nCollection\n   |\n   v\nDocument"
+    },
+
+    {
+      "type": "heading",
+      "text": "Important Mongoose Methods"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Model.create(data) — Create a new document.",
+        "Model.find() — Get multiple documents.",
+        "Model.findById(id) — Get one document by id.",
+        "Model.findOne(filter) — Get one document matching a condition.",
+        "Model.findByIdAndUpdate(id, data, options) — Update one document by id.",
+        "Model.findByIdAndDelete(id) — Delete one document by id."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "req.body vs req.params"
+    },
+    {
+      "type": "paragraph",
+      "text": "req.body is commonly used for data sent inside POST, PUT or PATCH requests. req.params is used for values included in the URL."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "POST /users\nBody:\n{\n  name: 'Rahul',\n  age: 21\n}\n\nreq.body\n   |\n   v\n{ name, age }\n\n\nGET /users/123\n\nreq.params.id\n   |\n   v\n123"
+    },
+
+    {
+      "type": "heading",
+      "text": "Why express.json() is Important"
+    },
+    {
+      "type": "paragraph",
+      "text": "When the frontend sends JSON data, express.json() parses the JSON body and makes it available as req.body."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.use(express.json());\n\nserver.post('/users', (req, res) => {\n  console.log(req.body);\n  res.json(req.body);\n});"
+    },
+
+    {
+      "type": "heading",
+      "text": "MongoDB Automatically Creates _id"
+    },
+    {
+      "type": "paragraph",
+      "text": "When a document is created, MongoDB normally gives it a unique _id. This id is useful when reading, updating or deleting a particular document."
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "text": "{\n  \"_id\": \"66abc123...\",\n  \"name\": \"Rahul\",\n  \"age\": 21,\n  \"email\": \"rahul@gmail.com\"\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "Complete CRUD Example with API Endpoints"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "CREATE\nPOST /api/users\n\nREAD ALL\nGET /api/users\n\nREAD ONE\nGET /api/users/:id\n\nUPDATE\nPUT /api/users/:id\n\nDELETE\nDELETE /api/users/:id"
+    },
+
+    {
+      "type": "heading",
+      "text": "Simple Postman Testing"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "CREATE\nPOST http://localhost:1200/api/users\n\nBody -> JSON\n{\n  \"name\": \"Rahul\",\n  \"age\": 21,\n  \"email\": \"rahul@gmail.com\"\n}\n\n\nREAD\nGET http://localhost:1200/api/users\n\n\nREAD ONE\nGET http://localhost:1200/api/users/USER_ID\n\n\nUPDATE\nPUT http://localhost:1200/api/users/USER_ID\n\nBody -> JSON\n{\n  \"age\": 22\n}\n\n\nDELETE\nDELETE http://localhost:1200/api/users/USER_ID"
+    },
+
+    {
+      "type": "heading",
+      "text": "What Happens During Create?"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend sends JSON\n        |\n        v\nexpress.json()\n        |\n        v\nreq.body\n        |\n        v\nUser.create(req.body)\n        |\n        v\nMongoose checks Schema\n        |\n        +---- Invalid -> Error\n        |\n        v\nMongoDB saves document\n        |\n        v\nResponse sent to frontend"
+    },
+
+    {
+      "type": "heading",
+      "text": "What Happens During Read?"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend\n   |\n   | GET /api/users\n   v\nExpress\n   |\n   v\nUser.find()\n   |\n   v\nMongoDB\n   |\n   v\nUsers collection\n   |\n   v\nArray of documents\n   |\n   v\nFrontend"
+    },
+
+    {
+      "type": "heading",
+      "text": "What Happens During Update?"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend\n   |\n   | PUT /api/users/:id\n   | { age: 22 }\n   v\nreq.params.id + req.body\n   |\n   v\nUser.findByIdAndUpdate()\n   |\n   v\nMongoDB\n   |\n   v\nUpdated document"
+    },
+
+    {
+      "type": "heading",
+      "text": "What Happens During Delete?"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend\n   |\n   | DELETE /api/users/:id\n   v\nreq.params.id\n   |\n   v\nUser.findByIdAndDelete()\n   |\n   v\nMongoDB\n   |\n   v\nDocument removed"
+    },
+
+    {
+      "type": "heading",
+      "text": "Common Beginner Mistakes"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Forgetting dotenv.config() before reading environment variables.",
+        "Using MONGOURL in code but MONGO_URI in .env.",
+        "Putting .env in the wrong folder.",
+        "Accidentally naming the file .env.txt on Windows.",
+        "Forgetting express.json().",
+        "Using the wrong MongoDB connection string.",
+        "Using the Atlas account password instead of the database user password.",
+        "Forgetting to allow the current IP in Atlas.",
+        "Forgetting to connect to MongoDB before using the database.",
+        "Forgetting to import the model.",
+        "Using the wrong document id for update or delete.",
+        "Sending invalid data that does not satisfy the schema."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "MongoDB Atlas Security Basics"
+    },
+    {
+      "type": "paragraph",
+      "text": "MongoDB Atlas uses database users for authentication and an IP access list for network access. These are different things."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Database User\n   |\n   | Username + Password\n   v\nWho are you?\n\nIP Access List\n   |\n   | Allowed IP\n   v\nAre you allowed to connect from this network?"
+    },
+    {
+      "type": "paragraph",
+      "text": "The database user password is not the same thing as the Atlas account password. Atlas does not show the old database-user password; if it is forgotten, it must be reset."
+    },
+
+    {
+      "type": "heading",
+      "text": "Do We Need to Install MongoDB Locally?"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you are using MongoDB Atlas, you do not need to install and run the MongoDB server locally just to connect your Express application to Atlas."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Using Atlas\n\nExpress\n   |\n   | Internet\n   v\nMongoDB Atlas\n\n\nUsing Local MongoDB\n\nExpress\n   |\n   v\nlocalhost:27017\n   |\n   v\nLocal MongoDB"
+    },
+
+    {
+      "type": "heading",
+      "text": "MongoDB Compass"
+    },
+    {
+      "type": "paragraph",
+      "text": "MongoDB Compass is a graphical application used to view and manage MongoDB data. It is optional. Your Express application can connect directly to MongoDB Atlas using Mongoose without Compass."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "MongoDB Atlas\n      |\n      +---- Express + Mongoose\n      |\n      +---- MongoDB Compass"
+    },
+
+    {
+      "type": "heading",
+      "text": "One-Line Mental Model"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "MongoDB       -> Database technology\nAtlas         -> Cloud platform\nCluster       -> MongoDB deployment\nDatabase      -> Stores collections\nCollection    -> Stores documents\nDocument      -> Actual data\nMongoose      -> Node.js MongoDB library\nSchema        -> Data structure + rules\nModel         -> Used to work with documents\n.env          -> Stores configuration/secrets\nCRUD          -> Create, Read, Update, Delete"
+    },
+
+    {
+      "type": "heading",
+      "text": "Complete MongoDB Learning Flow"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Express Basics\n      |\n      v\n.env\n      |\n      v\nMongoDB Basics\n      |\n      v\nSQL vs NoSQL\n      |\n      v\nMongoDB Atlas\n      |\n      v\nCluster\n      |\n      v\nDatabase User\n      |\n      v\nIP Access\n      |\n      v\nConnection String\n      |\n      v\nMongoose\n      |\n      v\nSchema\n      |\n      v\nModel\n      |\n      v\nCreate\n      |\n      v\nRead\n      |\n      v\nUpdate\n      |\n      v\nDelete"
+    },
+
+    {
+      "type": "heading",
+      "text": "Quick Revision"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "MongoDB is a NoSQL document database.",
+        "MongoDB stores documents inside collections.",
+        "A collection is conceptually similar to a table in SQL.",
+        "A document is conceptually similar to a row in SQL.",
+        "MongoDB Atlas provides MongoDB in the cloud.",
+        "A cluster is the MongoDB deployment your application connects to.",
+        ".env is used to store environment variables such as the MongoDB connection string.",
+        "process.env reads environment variables in Node.js.",
+        "Mongoose is used to connect and work with MongoDB from Node.js.",
+        "A schema defines the structure and validation rules.",
+        "A model is created from a schema and is used for database operations.",
+        "User.create(req.body) creates a document.",
+        "User.find() gets documents.",
+        "User.findById(id) gets one document.",
+        "User.findByIdAndUpdate(id, data, options) updates a document.",
+        "User.findByIdAndDelete(id) deletes a document.",
+        "express.json() makes JSON request data available through req.body.",
+        "req.params is used for values from the URL such as /users/:id.",
+        "MongoDB automatically creates an _id for normal documents.",
+        "Always keep database credentials out of source code and do not commit .env."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "Final Mental Model"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend\n   |\n   | HTTP Request\n   v\nExpress\n   |\n   | Route\n   v\nMongoose Model\n   |\n   | Schema Rules\n   v\nMongoDB Atlas\n   |\n   v\nCluster\n   |\n   v\nDatabase\n   |\n   v\nCollection\n   |\n   v\nDocument\n\nCRUD:\nCreate -> Add data\nRead   -> Get data\nUpdate -> Change data\nDelete -> Remove data"
+    }
+  ]
 }
 
 ];
