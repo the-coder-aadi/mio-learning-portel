@@ -2666,6 +2666,194 @@ export const NodeJSNotes = [
       "text": "Frontend\n   |\n   | HTTP Request\n   v\nExpress\n   |\n   | Route\n   v\nMongoose Model\n   |\n   | Schema Rules\n   v\nMongoDB Atlas\n   |\n   v\nCluster\n   |\n   v\nDatabase\n   |\n   v\nCollection\n   |\n   v\nDocument\n\nCRUD:\nCreate -> Add data\nRead   -> Get data\nUpdate -> Change data\nDelete -> Remove data"
     }
   ]
-}
+},
 
+{
+  "id": 41,
+"slug": "mongoose-schema-options-complete-notes",
+  "title": "Mongoose Schema Options — Complete Beginner Notes",
+  "date": "22 August 2026",
+  "description": "Learn the most commonly used Mongoose Schema options with practical examples, including type, required, default, unique, timestamps, enum, ref, trim, min/max, minlength/maxlength, select and index.",
+  "content": [
+{
+  "type": "heading",
+  "text": "Mongoose Schema — Common Options"
+},
+{
+  "type": "paragraph",
+  "text": "A Mongoose Schema defines the structure, data types and validation rules of MongoDB documents. The following options are the most commonly used in real-world Express applications."
+},
+{
+  "type": "summary",
+  "items": [
+    "type — Defines what kind of data the field stores. Use it for String, Number, Boolean, Date, Array, ObjectId, etc.",
+    "required — Makes a field mandatory. Use it when the application must have a value for that field.",
+    "default — Provides a value automatically when the user does not provide one.",
+    "unique — Creates a unique index so duplicate values are not allowed. Commonly used for email or username.",
+    "timestamps — Automatically adds and maintains createdAt and updatedAt fields.",
+    "enum — Restricts a field to a fixed list of allowed values. Useful for role, status, category, etc.",
+    "ref — Creates a reference to another Mongoose model using ObjectId. Mainly used for relationships and populate().",
+    "trim — Removes unnecessary spaces from the beginning and end of a String.",
+    "min/max — Sets minimum and maximum limits for Number values.",
+    "minlength/maxlength — Sets minimum and maximum length limits for String values.",
+    "select — Controls whether a field is returned by default in queries. Useful for sensitive fields such as passwords.",
+    "index — Creates an index to make frequently used queries faster. Use it on fields that are commonly searched, filtered or sorted."
+  ]
+},
+{
+  "type": "heading",
+  "text": "1. type"
+},
+{
+  "type": "paragraph",
+  "text": "type defines the data type of a field. It is the basic and most important Schema option. Use String for text, Number for numeric values, Boolean for true/false, Date for dates and ObjectId for references."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "name: {\n  type: String\n},\n\nage: {\n  type: Number\n},\n\nisActive: {\n  type: Boolean\n}"
+},
+{
+  "type": "heading",
+  "text": "2. required"
+},
+{
+  "type": "paragraph",
+  "text": "required makes a field mandatory. Use it when the application cannot properly work without that value, such as name, email or password."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "email: {\n  type: String,\n  required: true\n}"
+},
+{
+  "type": "paragraph",
+  "text": "If email is missing during validation, Mongoose will return a validation error."
+},
+{
+  "type": "heading",
+  "text": "3. default"
+},
+{
+  "type": "paragraph",
+  "text": "default automatically assigns a value when the field is not provided. It is commonly used for status, role, boolean flags and dates."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "role: {\n  type: String,\n  default: \"user\"\n},\n\nisActive: {\n  type: Boolean,\n  default: true\n}"
+},
+{
+  "type": "heading",
+  "text": "4. unique"
+},
+{
+  "type": "paragraph",
+  "text": "unique is commonly used when a value must not be duplicated, such as email or username. In Mongoose, unique is mainly used to create a MongoDB unique index; it is not a normal validation rule."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "email: {\n  type: String,\n  required: true,\n  unique: true\n}"
+},
+{
+  "type": "heading",
+  "text": "5. timestamps"
+},
+{
+  "type": "paragraph",
+  "text": "timestamps automatically adds createdAt and updatedAt to documents. It is highly useful in almost every CRUD application because it keeps track of when a document was created and last updated."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "const userSchema = new mongoose.Schema({\n  name: String\n}, {\n  timestamps: true\n});"
+},
+{
+  "type": "heading",
+  "text": "6. enum"
+},
+{
+  "type": "paragraph",
+  "text": "enum restricts a field to specific allowed values. Use it when a field has a fixed set of choices, such as user roles, order status or account status."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "role: {\n  type: String,\n  enum: [\"user\", \"admin\"],\n  default: \"user\"\n}"
+},
+
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "author: {\n  type: mongoose.Schema.Types.ObjectId,\n  ref: \"User\"\n}"
+},
+{
+  "type": "paragraph",
+  "text": "The referenced User can later be loaded with populate(\"author\")."
+},
+{
+  "type": "heading",
+  "text": "7. trim"
+},
+{
+  "type": "paragraph",
+  "text": "trim removes unnecessary spaces from the beginning and end of a String. It is useful for names, emails, usernames and other text fields."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "name: {\n  type: String,\n  trim: true\n}"
+},
+{
+  "type": "heading",
+  "text": "8. min / max"
+},
+{
+  "type": "paragraph",
+  "text": "min and max validate Number fields. Use them when a numeric value must stay within a specific range, such as age, quantity or rating."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "age: {\n  type: Number,\n  min: 18,\n  max: 100\n}"
+},
+{
+  "type": "heading",
+  "text": "9. minlength / maxlength"
+},
+{
+  "type": "paragraph",
+  "text": "minlength and maxlength validate the length of String values. They are useful for passwords, usernames, titles and other fields with length restrictions."
+},
+{
+  "type": "code",
+  "language": "javascript",
+  "text": "username: {\n  type: String,\n  minlength: 3,\n  maxlength: 20\n}"
+},
+
+
+
+{
+  "type": "heading",
+  "text": "Most Common Schema Options — Quick Revision"
+},
+{
+  "type": "summary",
+  "items": [
+    "type — Defines the field's data type. ⭐⭐⭐⭐⭐",
+    "required — Makes the field mandatory. ⭐⭐⭐⭐⭐",
+    "default — Gives the field a default value. ⭐⭐⭐⭐⭐",
+    "unique — Prevents duplicate indexed values. ⭐⭐⭐⭐",
+    "timestamps — Adds createdAt and updatedAt automatically. ⭐⭐⭐⭐⭐",
+    "enum — Allows only predefined values. ⭐⭐⭐⭐",
+    "trim — Removes extra spaces from Strings. ⭐⭐⭐⭐",
+    "min/max — Validates Number ranges. ⭐⭐⭐",
+    "minlength/maxlength — Validates String length. ⭐⭐⭐",
+  
+  ]
+}
+  
+]
+}
 ];
