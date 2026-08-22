@@ -2857,4 +2857,355 @@ export const NodeJSNotes = [
 ]
 },
 
+{
+  "id": 42,
+  "slug": "bcrypt-password-hashing-and-express-validation-complete-beginner-notes",
+  "title": "Bcrypt Password Hashing & Express Validation — Complete Beginner Notes",
+  "date": "22 August 2026",
+  "description": "Simple beginner notes for understanding password hashing with bcrypt and request validation in Express using express-validator.",
+  "content": [
+    {
+      "type": "heading",
+      "text": "1. Password Hashing — What Is It?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Password hashing means converting a user's plain password into a secure hashed value before saving it in the database. We should never store the original password directly in the database."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const password = \"hello123\";\n\nconst hashedPassword = await bcrypt.hash(password, 10);"
+    },
+    {
+      "type": "paragraph",
+      "text": "The original password is hello123, but the database stores a bcrypt hash instead. A hash is not meant to be converted back into the original password."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "User enters a normal password.",
+        "bcrypt.hash() converts it into a hash.",
+        "Only the hash is saved in the database.",
+        "During login, bcrypt.compare() checks the entered password against the stored hash.",
+        "The original password should never be stored."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "2. Install and Import Bcrypt"
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "text": "npm install bcrypt"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const bcrypt = require(\"bcrypt\");"
+    },
+    {
+      "type": "heading",
+      "text": "3. bcrypt.hash()"
+    },
+    {
+      "type": "paragraph",
+      "text": "bcrypt.hash() takes the user's plain password and creates a secure hash. The second argument is the salt count, also commonly called salt rounds."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const hashedPassword = await bcrypt.hash(\"hello123\", 10);"
+    },
+    {
+      "type": "heading",
+      "text": "4. What Is Salt Count?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Salt rounds tell bcrypt how much computational work should be used to create the hash. A higher number makes hashing more expensive and generally harder to brute-force, but it also takes more CPU time."
+    },
+    {
+      "type": "paragraph",
+      "text": "10 is a commonly used starting value. The exact value should be chosen according to your application's security requirements and server performance."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const hashedPassword = await bcrypt.hash(password, 10);"
+    },
+    {
+      "type": "paragraph",
+      "text": "You do not manually create or store a salt when using bcrypt.hash(). bcrypt handles the salt as part of the hashing process and includes the required information in the resulting hash."
+    },
+    {
+      "type": "heading",
+      "text": "5. Register — Hash Password Before Saving"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const { name, email, password } = req.body.data;\n\nconst hashedPassword = await bcrypt.hash(password, 10);\n\nconst user = await usermodel.create({\n  name,\n  email,\n  password: hashedPassword\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "The important point is that password: password should not be saved. Instead, password: hashedPassword should be saved."
+    },
+    {
+      "type": "heading",
+      "text": "6. Login — bcrypt.compare()"
+    },
+    {
+      "type": "paragraph",
+      "text": "During login, the user enters the normal password again. We do not hash it manually and compare two hashes using ===. Instead, bcrypt.compare() checks the entered password against the stored bcrypt hash."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const isMatch = await bcrypt.compare(password, user.password);\n\nif (isMatch) {\n  console.log(\"Login successful\");\n} else {\n  console.log(\"Wrong password\");\n}"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Register: bcrypt.hash(password, 10)",
+        "Save the generated hash in the database.",
+        "Login: bcrypt.compare(enteredPassword, storedHash)",
+        "compare() returns true when the password matches and false when it does not."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "7. Password Flow"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "REGISTER\n\nPlain password\n      ↓\nbcrypt.hash(password, 10)\n      ↓\nHashed password\n      ↓\nDatabase\n\n\nLOGIN\n\nUser enters password\n      ↓\nbcrypt.compare(password, databaseHash)\n      ↓\ntrue / false"
+    },
+    {
+      "type": "heading",
+      "text": "8. Express Validation — What Is It?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Validation means checking whether data received from the client is correct and follows the rules required by the backend. For example, checking that name is not empty, email is valid and password has at least 8 characters."
+    },
+    {
+      "type": "paragraph",
+      "text": "A commonly used package for Express validation is express-validator."
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "text": "npm install express-validator"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const { body, validationResult } = require(\"express-validator\");"
+    },
+    {
+      "type": "heading",
+      "text": "9. body()"
+    },
+    {
+      "type": "paragraph",
+      "text": "body() is used to validate a field inside req.body. If the request body directly contains name, email and password, use body(\"name\"), body(\"email\") and body(\"password\")."
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "text": "{\n  \"name\": \"Rahul\",\n  \"email\": \"rahul@gmail.com\",\n  \"password\": \"hello123\"\n}"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "body(\"name\")\nbody(\"email\")\nbody(\"password\")"
+    },
+    {
+      "type": "heading",
+      "text": "10. Nested Body Validation"
+    },
+    {
+      "type": "paragraph",
+      "text": "If the request data is inside req.body.data, use dot notation in body()."
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "text": "{\n  \"data\": {\n    \"name\": \"Rahul\",\n    \"email\": \"rahul@gmail.com\",\n    \"password\": \"hello123\"\n  }\n}"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "body(\"data.name\")\nbody(\"data.email\")\nbody(\"data.password\")"
+    },
+    {
+      "type": "paragraph",
+      "text": "This matches req.body.data.name, req.body.data.email and req.body.data.password."
+    },
+    {
+      "type": "heading",
+      "text": "11. notEmpty()"
+    },
+    {
+      "type": "paragraph",
+      "text": "notEmpty() checks that a field is not empty. It is commonly used for required input fields."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "body(\"data.name\")\n  .notEmpty()\n  .withMessage(\"Name is required\")"
+    },
+    {
+      "type": "paragraph",
+      "text": "If name is an empty string, the validation fails."
+    },
+    {
+      "type": "heading",
+      "text": "12. trim()"
+    },
+    {
+      "type": "paragraph",
+      "text": "trim() removes unnecessary whitespace from the beginning and end of a string."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "body(\"data.name\")\n  .trim()\n  .notEmpty()\n  .withMessage(\"Name is required\")"
+    },
+    {
+      "type": "heading",
+      "text": "13. isEmail()"
+    },
+    {
+      "type": "paragraph",
+      "text": "isEmail() checks whether the value looks like a valid email address."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "body(\"data.email\")\n  .isEmail()\n  .withMessage(\"Please enter a valid email\")"
+    },
+    {
+      "type": "heading",
+      "text": "14. isLength()"
+    },
+    {
+      "type": "paragraph",
+      "text": "isLength() checks the length of a string. It is commonly used for passwords, usernames and names."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "body(\"data.password\")\n  .isLength({ min: 8, max: 30 })\n  .withMessage(\"Password must be between 8 and 30 characters\")"
+    },
+
+ 
+    {
+      "type": "heading",
+      "text": "20. withMessage()"
+    },
+    {
+      "type": "paragraph",
+      "text": "withMessage() defines the error message that should be returned when the previous validation fails."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "body(\"data.email\")\n  .notEmpty()\n  .withMessage(\"Email is required\")\n  .isEmail()\n  .withMessage(\"Invalid email\")"
+    },
+    {
+      "type": "heading",
+      "text": "21. validationResult(req)"
+    },
+    {
+      "type": "paragraph",
+      "text": "After all validation rules run, validationResult(req) collects the validation errors from the current request."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const errors = validationResult(req);"
+    },
+    {
+      "type": "heading",
+      "text": "22. errors.isEmpty()"
+    },
+    {
+      "type": "paragraph",
+      "text": "isEmpty() checks whether there are any validation errors. If it returns true, there are no validation errors. If it returns false, one or more validations failed."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "if (!errors.isEmpty()) {\n  return res.status(400).json({\n    success: false,\n    errors: errors.array()\n  });\n}"
+    },
+    {
+      "type": "heading",
+      "text": "23. errors.array()"
+    },
+    {
+      "type": "paragraph",
+      "text": "errors.array() converts the collected validation errors into an array of error objects. This makes the errors easy to send in a JSON response."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "return res.status(400).json({\n  success: false,\n  errors: errors.array()\n});"
+    },
+    {
+      "type": "heading",
+      "text": "24. Complete Validation Example"
+    },
+    {
+      "type": "paragraph",
+      "text": "This example validates a registration request where name, email and password are inside req.body.data."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const { body, validationResult } = require(\"express-validator\");\n\nconst registerValidation = [\n  body(\"data.name\")\n    .trim()\n    .notEmpty()\n    .withMessage(\"Name is required\")\n    .isLength({ min: 3, max: 50 })\n    .withMessage(\"Name must be between 3 and 50 characters\"),\n\n  body(\"data.email\")\n    .trim()\n    .notEmpty()\n    .withMessage(\"Email is required\")\n    .isEmail()\n    .withMessage(\"Invalid email\"),\n\n  body(\"data.password\")\n    .notEmpty()\n    .withMessage(\"Password is required\")\n    .isLength({ min: 8 })\n    .withMessage(\"Password must be at least 8 characters\")\n];\n\napp.post(\"/register\", registerValidation, async (req, res) => {\n  const errors = validationResult(req);\n\n  if (!errors.isEmpty()) {\n    return res.status(400).json({\n      success: false,\n      errors: errors.array()\n    });\n  }\n\n  const { name, email, password } = req.body.data;\n\n  const hashedPassword = await bcrypt.hash(password, 10);\n\n  const user = await usermodel.create({\n    name,\n    email,\n    password: hashedPassword\n  });\n\n  res.status(201).json({\n    success: true,\n    message: \"User registered successfully\",\n    user\n  });\n});"
+    },
+    {
+      "type": "heading",
+      "text": "25. Complete Request Flow"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Client sends request\n        ↓\nExpress receives req.body\n        ↓\nValidation rules run\n        ↓\nvalidationResult(req)\n        ↓\nAre there errors?\n   ↙             ↘\n YES              NO\n  ↓                ↓\nerrors.array()   Continue\n  ↓                ↓\n400 response     Get req.body.data\n                   ↓\n             bcrypt.hash(password, 10)\n                   ↓\n              Save user in DB"
+    },
+    {
+      "type": "heading",
+      "text": "26. Important Validators — Quick Revision"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "body(\"data.name\") — validates a field inside req.body.data.",
+        "notEmpty() — value should not be empty.",
+        "trim() — removes surrounding spaces.",
+        "isEmail() — checks email format.",
+        "isLength() — checks string length.",
+        "isInt() — checks integer values.",
+        "isNumeric() — checks numeric values.",
+        "withMessage() — custom validation error message.",
+        "validationResult(req) — collects validation errors.",
+        "errors.isEmpty() — checks whether there are no errors.",
+        "errors.array() — returns the validation errors as an array."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "27. Most Important Beginner Rule"
+    },
+    {
+      "type": "paragraph",
+      "text": "Validation checks whether the incoming data is acceptable. bcrypt protects the password before it is stored. They solve different problems: validation checks the input, while hashing protects the password."
+    }
+  ]
+}
+
 ];
