@@ -3206,6 +3206,315 @@ export const NodeJSNotes = [
       "text": "Validation checks whether the incoming data is acceptable. bcrypt protects the password before it is stored. They solve different problems: validation checks the input, while hashing protects the password."
     }
   ]
+},
+{
+  "id": 43,
+  "slug": "mongodb-search-and-debouncing-complete-beginner-notes",
+  "title": "MongoDB Search & Debouncing — Complete Beginner Notes",
+  "date": "23 August 2026",
+  "description": "Beginner-friendly notes for implementing product search with MongoDB, Express, query parameters, regex, case-insensitive search and React debouncing.",
+  "content": [
+    {
+      "type": "heading",
+      "text": "1. Search with MongoDB — What Is It?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Search means finding documents from MongoDB based on what the user types. For example, when a user types iphone in a search box, the frontend sends the search value to the Express backend, and the backend searches MongoDB for matching products."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "React Search Box\n       ↓\nGET /products?search=iphone\n       ↓\nExpress\n       ↓\nMongoDB find()\n       ↓\nMatching Products\n       ↓\nReact UI"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Frontend takes the search text from the user.",
+        "The search value is sent to Express through the URL.",
+        "Express reads the value using req.query.",
+        "MongoDB searches the collection using find().",
+        "The matching documents are returned to the frontend."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "2. What Is a Query Parameter?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A query parameter is extra data sent through the URL after ?. It is commonly used for search, filtering, sorting, pagination and other optional data."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "GET /products?search=iphone"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here, search is the query parameter name and iphone is its value."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.get(\"/products\", (req, res) => {\n  console.log(req.query);\n});"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "// Output\n{\n  search: \"iphone\"\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "3. How to Get Search Value from req.query"
+    },
+    {
+      "type": "paragraph",
+      "text": "Express provides query parameters through req.query. We can directly get the search value using destructuring."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.get(\"/products\", async (req, res) => {\n  const { search } = req.query;\n\n  console.log(search);\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "If the request is /products?search=iphone, the value of search will be iphone."
+    },
+
+    {
+      "type": "heading",
+      "text": "4. MongoDB find() for Search"
+    },
+    {
+      "type": "paragraph",
+      "text": "MongoDB's find() method is used to find documents that match a condition. For an exact value, we can search like this:"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const products = await Product.find({\n  name: \"iPhone 15\"\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "This looks for a document whose name exactly matches iPhone 15. For normal search boxes, we usually want partial matching, so regex is useful."
+    },
+
+    {
+      "type": "heading",
+      "text": "5. What Is $regex?"
+    },
+    {
+      "type": "paragraph",
+      "text": "$regex is a MongoDB operator used to search text using a pattern. It allows partial matching instead of requiring the complete value."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const products = await Product.find({\n  name: {\n    $regex: \"iphone\"\n  }\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "If the database contains iPhone 15, iPhone 16 and Samsung Galaxy S24, searching for iphone can match the iPhone products because the word iphone exists inside their names."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "$regex is useful for text searching.",
+        "It can match part of a string.",
+        "It is commonly used for search boxes.",
+        "It can be combined with $options for additional search behavior."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "6. What Does $options: \"i\" Mean?"
+    },
+    {
+      "type": "paragraph",
+      "text": "$options: \"i\" makes the regex search case-insensitive. This means uppercase and lowercase letters are treated as the same."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "name: {\n  $regex: search,\n  $options: \"i\"\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "With the i option, searches such as iphone, iPhone, IPHONE and Iphone can match the same products."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "$regex → defines what text or pattern to search.",
+        "\"i\" → ignores uppercase and lowercase differences.",
+        "Together they are commonly used for user-friendly text search."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "7. Complete MongoDB Search Route"
+    },
+    {
+      "type": "paragraph",
+      "text": "A common beginner-friendly search route reads the query parameter and uses it to create a MongoDB search condition."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.get(\"/products\", async (req, res) => {\n  try {\n    const { search } = req.query;\n\n    if (!search) {\n      return res.json({\n        success: true,\n        data: []\n      });\n    }\n\n    const products = await Product.find({\n      name: {\n        $regex: search,\n        $options: \"i\"\n      }\n    });\n\n    res.json({\n      success: true,\n      data: products\n    });\n\n  } catch (error) {\n    res.status(500).json({\n      success: false,\n      message: error.message\n    });\n  }\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "The if (!search) check is useful when the application should return an empty array when the search box is empty. Without this condition, find({}) could return all products."
+    },
+
+    {
+      "type": "heading",
+      "text": "8. Frontend Sending Search to Express"
+    },
+    {
+      "type": "paragraph",
+      "text": "The frontend can send the search value as a query parameter. encodeURIComponent() safely encodes special characters before putting the value into the URL."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const response = await fetch(\n  `http://localhost:1200/products?search=${encodeURIComponent(search)}`\n);\n\nconst result = await response.json();\nsetProducts(result.data);"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "<input\n  type=\"text\"\n  placeholder=\"Search products\"\n  value={search}\n  onChange={(e) => setSearch(e.target.value)}\n/>"
+    },
+
+    {
+      "type": "heading",
+      "text": "9. Why Does Every Keystroke Make an API Call?"
+    },
+    {
+      "type": "paragraph",
+      "text": "If useEffect depends directly on search, every change in the search state can trigger fetchProducts(). For example, typing iphone can cause API requests for i, ip, iph, ipho, iphon and iphone."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "useEffect(() => {\n  fetchProducts();\n}, [search]);"
+    },
+    {
+      "type": "paragraph",
+      "text": "This works, but it can create many unnecessary API requests while the user is still typing."
+    },
+
+    {
+      "type": "heading",
+      "text": "10. Debouncing — What Is It?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Debouncing means waiting for the user to stop typing for a short time before making the API request. It reduces unnecessary API calls."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Without debounce:\ni → API\nip → API\niph → API\nipho → API\niphone → API\n\nWith debounce:\niphone\n   ↓\nwait 500ms\n   ↓\none API call"
+    },
+
+    {
+      "type": "heading",
+      "text": "11. Debouncing with setTimeout()"
+    },
+    {
+      "type": "paragraph",
+      "text": "A simple React debounce can be created using setTimeout() and clearTimeout(). We wait for 500 milliseconds after the last change before updating the value used for the API request."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const [search, setSearch] = useState(\"\");\nconst [debouncedSearch, setDebouncedSearch] = useState(\"\");\n\nuseEffect(() => {\n  const timer = setTimeout(() => {\n    setDebouncedSearch(search);\n  }, 500);\n\n  return () => {\n    clearTimeout(timer);\n  };\n}, [search]);"
+    },
+
+    {
+      "type": "heading",
+      "text": "12. API Call Using Debounced Search"
+    },
+    {
+      "type": "paragraph",
+      "text": "The API request should depend on debouncedSearch instead of search. Now the API is called only after the user stops typing for the selected delay."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "useEffect(() => {\n  fetchProducts();\n}, [debouncedSearch]);\n\nconst fetchProducts = async () => {\n  const response = await fetch(\n    `http://localhost:1200/products?search=${encodeURIComponent(debouncedSearch)}`\n  );\n\n  const result = await response.json();\n  setProducts(result.data);\n};"
+    },
+
+    {
+      "type": "heading",
+      "text": "13. Why clearTimeout() Is Needed"
+    },
+    {
+      "type": "paragraph",
+      "text": "Every time the user types, a new timer is created. clearTimeout() cancels the previous timer so that only the latest typing action can trigger the search."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "search stores what the user is currently typing.",
+        "setTimeout waits for a short period.",
+        "clearTimeout cancels the previous timer when the user types again.",
+        "debouncedSearch changes only after the user stops typing.",
+        "The API request uses debouncedSearch."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "14. Displaying Search Results"
+    },
+    {
+      "type": "paragraph",
+      "text": "MongoDB returns an array of products, so React can use map() to display each product. When no matching products exist, the array length is 0."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "{products.length === 0 ? (\n  <h2>Data not found</h2>\n) : (\n  products.map((product) => (\n    <div key={product._id}>\n      <h3>{product.name}</h3>\n      <p>{product.category}</p>\n      <p>₹{product.price}</p>\n    </div>\n  ))\n)}"
+    },
+
+    {
+      "type": "heading",
+      "text": "15. Complete Search Flow"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "User types in React\n        ↓\nsearch state updates\n        ↓\nDebounce waits 500ms\n        ↓\ndebouncedSearch updates\n        ↓\nFetch API request\n        ↓\n/products?search=iphone\n        ↓\nExpress reads req.query.search\n        ↓\nMongoDB find() + $regex\n        ↓\n$options: \"i\" ignores case\n        ↓\nMatching products returned\n        ↓\nReact displays products"
+    },
+
+    {
+      "type": "heading",
+      "text": "16. Important Points to Remember"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "req.query is used to read query parameters from the URL.",
+        "find() is used to search MongoDB documents.",
+        "$regex is useful for partial text searching.",
+        "$options: \"i\" makes text search case-insensitive.",
+        "if (!search) can be used when an empty search should return no products.",
+        "products is an array, so use products.map() to display multiple results.",
+        "products.length === 0 is used to check whether no results were found.",
+        "Debouncing reduces unnecessary API requests while the user is typing.",
+        "setTimeout() creates the waiting period and clearTimeout() cancels the previous timer.",
+        "A separate Product model/collection should normally be used for product data instead of mixing users and products in one collection."
+      ]
+    }
+  ]
 }
 
 ];
