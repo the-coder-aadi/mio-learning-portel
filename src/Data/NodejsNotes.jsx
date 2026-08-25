@@ -3515,6 +3515,345 @@ export const NodeJSNotes = [
       ]
     }
   ]
+},
+
+{
+  "id": 44,
+  "slug": "mongodb-important-features-beginner-notes",
+  "title": "MongoDB Important Features — Complete Beginner Notes",
+  "date": "25 August 2026",
+  "description": "Beginner-friendly notes covering select, pagination, query operators, indexing and basic aggregation with practical MongoDB and Mongoose examples.",
+  "content": [
+    {
+      "type": "heading",
+      "text": "1. select() — Choose Which Fields to Return"
+    },
+    {
+      "type": "paragraph",
+      "text": "select() is used when you do not want to return every field from MongoDB. It lets you choose which fields should be included or excluded from the result."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const user = await User.find().select(\"name email\");"
+    },
+    {
+      "type": "paragraph",
+      "text": "This returns only name and email instead of all user fields."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const user = await User.find().select(\"-password\");"
+    },
+    {
+      "type": "paragraph",
+      "text": "The - sign means exclude this field. This is commonly used to hide passwords from API responses."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "select(\"name email\") → only name and email.",
+        "select(\"-password\") → return everything except password.",
+        "Use select() when the frontend does not need all database fields."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "2. Pagination — Show Data Page by Page"
+    },
+    {
+      "type": "paragraph",
+      "text": "Pagination means showing a large amount of data in small pages. For example, instead of showing 100 products at once, show 5 products on each page."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const page = Number(req.query.page) || 1;\nconst limit = 5;\n\nconst products = await Product.find()\n  .skip((page - 1) * limit)\n  .limit(limit);"
+    },
+    {
+      "type": "paragraph",
+      "text": "If page is 1, skip 0 and return 5 products. If page is 2, skip the first 5 and return the next 5. If page is 3, skip the first 10 and return the next 5."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Page 1 → products 1-5\nPage 2 → products 6-10\nPage 3 → products 11-15"
+    },
+    {
+      "type": "paragraph",
+      "text": "Pagination is useful when a collection contains many records and you do not want to send everything to the frontend at once."
+    },
+
+    {
+      "type": "heading",
+      "text": "3. Query Operators — $in and $nin"
+    },
+    {
+      "type": "paragraph",
+      "text": "$in checks whether a field matches any value from a given list."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const products = await Product.find({\n  category: { $in: [\"mobile\", \"laptop\"] }\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "This finds products whose category is either mobile or laptop."
+    },
+    {
+      "type": "paragraph",
+      "text": "$nin means not in. It finds documents whose field does not match any value from the given list."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const products = await Product.find({\n  category: { $nin: [\"mobile\", \"laptop\"] }\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "This finds products whose category is neither mobile nor laptop."
+    },
+
+    {
+      "type": "heading",
+      "text": "4. $match — Filter Data in Aggregation"
+    },
+    {
+      "type": "paragraph",
+      "text": "$match is used inside an aggregation pipeline to filter documents. It is similar to the filter part of find()."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const products = await Product.aggregate([\n  {\n    $match: {\n      category: \"mobile\"\n    }\n  }\n]);"
+    },
+    {
+      "type": "paragraph",
+      "text": "This keeps only mobile products. If you only need to find documents, find() is usually simpler. $match becomes especially useful when it is followed by other aggregation stages such as $group."
+    },
+
+    {
+      "type": "heading",
+      "text": "5. Indexing — Make Searches Faster"
+    },
+    {
+      "type": "paragraph",
+      "text": "An index is a special data structure MongoDB maintains for a field so queries on that field can be performed more efficiently. Without a useful index, MongoDB may need to scan many documents to find matching data."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const userSchema = new mongoose.Schema({\n  name: String,\n  email: {\n    type: String,\n    index: true\n  }\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here, MongoDB creates an index for the email field. A query such as findOne({ email: \"aditya@gmail.com\" }) can use that index to locate matching documents efficiently."
+    },
+    {
+      "type": "paragraph",
+      "text": "Use an index on fields that are frequently searched, filtered or sorted, especially when the collection becomes large. Do not add indexes to every field because indexes also require storage and have a maintenance cost when documents are inserted or updated."
+    },
+    {
+      "type": "paragraph",
+      "text": "Important: index: true does not mean MongoDB simply checks every indexed email one by one. The index is organized so MongoDB can locate values efficiently."
+    },
+
+    {
+      "type": "heading",
+      "text": "6. Aggregation — Process and Calculate Data"
+    },
+    {
+      "type": "paragraph",
+      "text": "Aggregation is used when you want MongoDB to process documents and produce a calculated or summarized result. It is useful for counting, grouping, calculating totals and averages, finding minimum or maximum values, sorting and limiting results."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const result = await Product.aggregate([\n  // aggregation stages go here\n]);"
+    },
+    {
+      "type": "paragraph",
+      "text": "The array is called an aggregation pipeline. Each stage receives data, performs an operation and passes the result to the next stage."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Documents\n   ↓\nStage 1\n   ↓\nStage 2\n   ↓\nStage 3\n   ↓\nFinal Result"
+    },
+
+    {
+      "type": "heading",
+      "text": "7. $group — Create Groups"
+    },
+    {
+      "type": "paragraph",
+      "text": "$group combines documents according to a field and creates a new summarized result."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const result = await Product.aggregate([\n  {\n    $group: {\n      _id: \"$category\"\n    }\n  }\n]);"
+    },
+    {
+      "type": "paragraph",
+      "text": "\"$category\" means use the value stored in the category field. If the categories are mobile and laptop, MongoDB creates separate groups for mobile and laptop."
+    },
+
+    {
+      "type": "heading",
+      "text": "8. $sum — Add or Count"
+    },
+    {
+      "type": "paragraph",
+      "text": "$sum can be used to add numeric values or count documents."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const result = await Product.aggregate([\n  {\n    $group: {\n      _id: \"$category\",\n      totalProducts: { $sum: 1 },\n      totalStock: { $sum: \"$stock\" }\n    }\n  }\n]);"
+    },
+    {
+      "type": "paragraph",
+      "text": "$sum: 1 counts documents. $sum: \"$stock\" adds the stock values of the products in each group."
+    },
+
+    {
+      "type": "heading",
+      "text": "9. $avg — Calculate Average"
+    },
+    {
+      "type": "paragraph",
+      "text": "$avg calculates the average of a numeric field."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const result = await Product.aggregate([\n  {\n    $group: {\n      _id: \"$category\",\n      averagePrice: { $avg: \"$price\" }\n    }\n  }\n]);"
+    },
+    {
+      "type": "paragraph",
+      "text": "This gives the average price for each category."
+    },
+
+    {
+      "type": "heading",
+      "text": "10. $min and $max — Lowest and Highest"
+    },
+    {
+      "type": "paragraph",
+      "text": "$min finds the smallest value and $max finds the largest value."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const result = await Product.aggregate([\n  {\n    $group: {\n      _id: \"$category\",\n      cheapest: { $min: \"$price\" },\n      mostExpensive: { $max: \"$price\" }\n    }\n  }\n]);"
+    },
+    {
+      "type": "paragraph",
+      "text": "This can be used to find the cheapest and most expensive product price in each category."
+    },
+
+    {
+      "type": "heading",
+      "text": "11. $sort — Sort Results"
+    },
+    {
+      "type": "paragraph",
+      "text": "$sort is used to arrange documents in ascending or descending order."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const products = await Product.aggregate([\n  {\n    $sort: {\n      price: -1\n    }\n  }\n]);"
+    },
+    {
+      "type": "paragraph",
+      "text": "1 means ascending order. -1 means descending order. In this example, expensive products come first."
+    },
+
+    {
+      "type": "heading",
+      "text": "12. $limit — Limit the Number of Results"
+    },
+    {
+      "type": "paragraph",
+      "text": "$limit keeps only a specific number of documents."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const products = await Product.aggregate([\n  { $sort: { price: -1 } },\n  { $limit: 5 }\n]);"
+    },
+    {
+      "type": "paragraph",
+      "text": "This sorts products by price from high to low and returns only the first 5 products."
+    },
+
+    {
+      "type": "heading",
+      "text": "13. $project — Choose or Create Output Fields"
+    },
+    {
+      "type": "paragraph",
+      "text": "$project controls which fields should appear in the aggregation result. It can also create calculated fields."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const result = await Product.aggregate([\n  {\n    $project: {\n      name: 1,\n      price: 1\n    }\n  }\n]);"
+    },
+    {
+      "type": "paragraph",
+      "text": "This keeps the name and price fields in the result."
+    },
+
+    {
+      "type": "heading",
+      "text": "14. $addFields — Add a New Field"
+    },
+    {
+      "type": "paragraph",
+      "text": "$addFields creates a new field in the aggregation result without removing the existing fields."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const result = await Product.aggregate([\n  {\n    $addFields: {\n      totalPrice: {\n        $multiply: [\"$price\", \"$quantity\"]\n      }\n    }\n  }\n]);"
+    },
+    {
+      "type": "paragraph",
+      "text": "If price is 50000 and quantity is 2, totalPrice becomes 100000."
+    },
+
+    {
+      "type": "heading",
+      "text": "15. Quick Revision"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "select() → choose which fields to return.",
+        "Pagination → show large data page by page using skip() and limit().",
+        "$in → value can be one of the given values.",
+        "$nin → value must not be one of the given values.",
+        "$match → filter documents inside an aggregation pipeline.",
+        "Index → helps MongoDB perform frequently used queries more efficiently.",
+        "Aggregation → process and calculate data to create useful summaries.",
+        "$group → group documents.",
+        "$sum → add values or count documents.",
+        "$avg → calculate average.",
+        "$min → find the smallest value.",
+        "$max → find the largest value.",
+        "$sort → sort results.",
+        "$limit → keep only a specific number of results.",
+        "$project → control fields in the output.",
+        "$addFields → create a new field in the result."
+      ]
+    }
+  ]
 }
 
 ];
