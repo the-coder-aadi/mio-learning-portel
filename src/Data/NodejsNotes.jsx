@@ -3854,6 +3854,498 @@ export const NodeJSNotes = [
       ]
     }
   ]
+},
+
+
+{
+  "id": 45,
+  "slug": "jwt-access-token-refresh-token-complete-beginner-notes",
+  "title": "JWT, Access Token & Refresh Token — Complete Beginner Notes",
+  "date": "26 August 2026",
+  "description": " Explaining JWT, access tokens, refresh tokens, cookies, localStorage, Bearer tokens, CORS credentials and the complete login-to-protected-route authentication flow.",
+  "content": [
+    {
+      "type": "heading",
+      "text": "1. Complete Authentication Flow — First Understand This"
+    },
+    {
+      "type": "paragraph",
+      "text": "Before learning JWT and tokens, understand the complete flow. A user first registers an account. During registration, the password is hashed and stored in MongoDB. Later, the user logs in with email and password. If the password is correct, the backend creates an Access Token and a Refresh Token. The Access Token is used to access protected APIs. The Refresh Token is used when the Access Token expires."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "REGISTER\n   ↓\nPassword is hashed\n   ↓\nUser saved in MongoDB\n   ↓\nLOGIN\n   ↓\nEmail + Password\n   ↓\nbcrypt.compare()\n   ↓\nPassword correct?\n   ↓ YES\nCreate Access Token + Refresh Token\n   ↓\nAccess Token → Frontend\nRefresh Token → HttpOnly Cookie\n   ↓\nUser goes to Home\n   ↓\nProtected Route checks Access Token\n   ↓\nAccess Token valid?\n   ↓ YES\nHome page allowed\n\nIf Access Token is expired:\n   ↓\nCheck Refresh Token\n   ↓\nRefresh Token valid?\n   ↓ YES\nCreate new Access Token\n(and rotate Refresh Token if rotation is used)\n   ↓\nSend new token to Frontend\n   ↓\nHome page allowed\n\nIf Refresh Token is also invalid:\n   ↓\nSend user to Login"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Register → create user and hash password.",
+        "Login → verify email and password.",
+        "Successful login → create Access Token and Refresh Token.",
+        "Access Token → used for protected API requests.",
+        "Refresh Token → used to get a new Access Token.",
+        "If both tokens are invalid → user must login again."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "2. What Is JWT?"
+    },
+    {
+      "type": "paragraph",
+      "text": "JWT means JSON Web Token. It is a common format used to create signed tokens. After successful login, the backend can create a JWT containing information such as the user's ID. The frontend can then send the Access Token with protected requests."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "User Login\n   ↓\nBackend verifies user\n   ↓\nBackend creates JWT\n   ↓\nJWT goes to Frontend\n   ↓\nFrontend sends JWT with protected requests\n   ↓\nBackend verifies JWT"
+    },
+    {
+      "type": "paragraph",
+      "text": "JWT does not mean that the data is automatically encrypted. Its payload can normally be decoded. Therefore, never put passwords, OTPs, secret keys or other sensitive information inside the JWT payload."
+    },
+
+    {
+      "type": "heading",
+      "text": "3. JWT Structure — Header, Payload and Signature"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "JWT = HEADER.PAYLOAD.SIGNATURE"
+    },
+    {
+      "type": "paragraph",
+      "text": "A JWT has three main parts. Header tells how the token is created. Payload contains claims such as userId. Signature is created using a secret and is used by the backend to verify that the token has not been changed."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "HEADER\n{\n  \"alg\": \"HS256\",\n  \"typ\": \"JWT\"\n}\n\nPAYLOAD\n{\n  \"userId\": \"123\"\n}\n\nSIGNATURE\nCreated using the secret key."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Header → information about the token algorithm/type.",
+        "Payload → claims such as userId or role.",
+        "Signature → helps the backend verify the token.",
+        "Do not put passwords or other secrets in the payload."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "4. What Is an Access Token?"
+    },
+    {
+      "type": "paragraph",
+      "text": "An Access Token is used to access protected APIs. For example, a logged-in user may access /profile, /orders or /dashboard. The Access Token is usually short-lived so that a stolen token does not remain useful for a very long time."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Access Token\n↓\nUsed for protected API requests\n↓\nUsually short-lived\n↓\nExample: 15 minutes"
+    },
+
+    {
+      "type": "heading",
+      "text": "5. What Is a Refresh Token?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A Refresh Token is used to get a new Access Token after the Access Token expires. It prevents the user from having to enter their password again every few minutes."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Access Token expires\n        ↓\nFrontend calls /refresh\n        ↓\nBackend checks Refresh Token\n        ↓\nRefresh Token valid?\n        ↓ YES\nCreate new Access Token\n        ↓\nFrontend continues using the application"
+    },
+
+    {
+      "type": "heading",
+      "text": "6. Access Token vs Refresh Token"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Access Token → used to access protected APIs.",
+        "Access Token → usually short-lived, for example 15 minutes.",
+        "Refresh Token → used to get a new Access Token.",
+        "Refresh Token → usually longer-lived, for example several days.",
+        "Access Token should contain only necessary claims.",
+        "Refresh Token should be protected carefully because it can create new Access Tokens."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "7. When Are the Tokens Created?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Normally, tokens are not created during registration. They are created after a successful login. First the backend finds the user and compares the entered password with the hashed password using bcrypt. Only when the credentials are correct does the backend create the tokens."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const user = await User.findOne({ email });\n\nif (!user) {\n  return res.status(401).json({\n    message: \"Invalid credentials\"\n  });\n}\n\nconst correct = await bcrypt.compare(\n  password,\n  user.password\n);\n\nif (!correct) {\n  return res.status(401).json({\n    message: \"Invalid credentials\"\n  });\n}\n\n// Password is correct\n// Now create tokens"
+    },
+
+    {
+      "type": "heading",
+      "text": "8. How to Create an Access Token"
+    },
+    {
+      "type": "paragraph",
+      "text": "Install jsonwebtoken first. jwt.sign() is used to create a signed JWT. The first argument is the payload, the second is the secret key and the third contains options such as expiry."
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "text": "npm install jsonwebtoken"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import jwt from \"jsonwebtoken\";\n\nconst accessToken = jwt.sign(\n  {\n    userId: user._id\n  },\n  process.env.ACCESS_TOKEN_SECRET,\n  {\n    expiresIn: \"15m\"\n  }\n);"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "userId → payload.",
+        "ACCESS_TOKEN_SECRET → secret used to sign the token.",
+        "15m → token expires after 15 minutes.",
+        "Never put the user's password inside the payload."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "9. How to Create a Refresh Token"
+    },
+    {
+      "type": "paragraph",
+      "text": "A Refresh Token can also be a JWT. It should use a separate secret from the Access Token. It normally has a longer expiry."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const refreshToken = jwt.sign(\n  {\n    userId: user._id\n  },\n  process.env.REFRESH_TOKEN_SECRET,\n  {\n    expiresIn: \"7d\"\n  }\n);"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "ACCESS_TOKEN_SECRET\n        ≠\nREFRESH_TOKEN_SECRET"
+    },
+
+    {
+      "type": "heading",
+      "text": "10. Complete Login Example"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.post(\"/login\", async (req, res) => {\n  try {\n    const { email, password } = req.body;\n\n    const user = await User.findOne({ email });\n\n    if (!user) {\n      return res.status(401).json({\n        message: \"Invalid credentials\"\n      });\n    }\n\n    const correct = await bcrypt.compare(\n      password,\n      user.password\n    );\n\n    if (!correct) {\n      return res.status(401).json({\n        message: \"Invalid credentials\"\n      });\n    }\n\n    const accessToken = jwt.sign(\n      { userId: user._id },\n      process.env.ACCESS_TOKEN_SECRET,\n      { expiresIn: \"15m\" }\n    );\n\n    const refreshToken = jwt.sign(\n      { userId: user._id },\n      process.env.REFRESH_TOKEN_SECRET,\n      { expiresIn: \"7d\" }\n    );\n\n    res.cookie(\"refreshToken\", refreshToken, {\n      httpOnly: true,\n      secure: true,\n      sameSite: \"strict\",\n      maxAge: 7 * 24 * 60 * 60 * 1000\n    });\n\n    res.json({\n      success: true,\n      accessToken\n    });\n\n  } catch (error) {\n    res.status(500).json({\n      message: \"Login failed\"\n    });\n  }\n});"
+    },
+
+    {
+      "type": "heading",
+      "text": "11. Where Should Access and Refresh Tokens Be Stored?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A common browser architecture is to keep the Refresh Token inside an HttpOnly cookie and keep the short-lived Access Token in frontend memory. Some beginner projects store the Access Token in localStorage, but localStorage is readable by JavaScript, so an XSS vulnerability can expose the token. Therefore, localStorage should not automatically be considered the most secure choice."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Common safer browser setup:\n\nAccess Token\n↓\nReact state / memory\n\nRefresh Token\n↓\nHttpOnly Cookie"
+    },
+    {
+      "type": "paragraph",
+      "text": "If a project specifically uses localStorage for learning purposes, the Access Token can be stored like this. The security tradeoff should be explained to students."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "localStorage.setItem(\n  \"accessToken\",\n  accessToken\n);\n\nconst token = localStorage.getItem(\n  \"accessToken\"\n);"
+    },
+
+    {
+      "type": "heading",
+      "text": "12. Why Keep the Refresh Token in an HttpOnly Cookie?"
+    },
+    {
+      "type": "paragraph",
+      "text": "An HttpOnly cookie cannot be directly read by normal JavaScript using document.cookie. This makes it harder for an XSS attack to directly steal the refresh token. The browser can still send the cookie with suitable requests."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "res.cookie(\"refreshToken\", refreshToken, {\n  httpOnly: true,\n  secure: true,\n  sameSite: \"strict\",\n  maxAge: 7 * 24 * 60 * 60 * 1000\n});"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "httpOnly → JavaScript cannot directly read the cookie.",
+        "secure → cookie is sent over HTTPS in production.",
+        "sameSite → controls cross-site cookie sending and helps reduce CSRF risk.",
+        "maxAge → controls how long the browser keeps the cookie."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "13. What Is a Bearer Token?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Bearer simply means that whoever presents the token is treated as the bearer of that token. The standard Authorization header format is 'Bearer followed by the token'."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Authorization: Bearer ACCESS_TOKEN"
+    },
+    {
+      "type": "paragraph",
+      "text": "Bearer is not a special JWT command. It is a standard authentication scheme used in the Authorization header. We use it so the backend clearly knows that the value is being presented as a bearer access token."
+    },
+
+    {
+      "type": "heading",
+      "text": "14. Why Not Send the Token Directly?"
+    },
+    {
+      "type": "paragraph",
+      "text": "You technically could send a token in many different ways, but using the Authorization header with the Bearer scheme is a standard and widely understood pattern for API authentication. It keeps authentication information separate from normal request data."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "fetch(\"http://localhost:1200/profile\", {\n  headers: {\n    Authorization: `Bearer ${accessToken}`\n  }\n});"
+    },
+
+    {
+      "type": "heading",
+      "text": "15. How Backend Reads the Bearer Token"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const authHeader = req.headers.authorization;\n\n// Example:\n// Bearer eyJhbGciOi...\n\nconst token = authHeader.split(\" \")[1];"
+    },
+    {
+      "type": "paragraph",
+      "text": "split(' ') separates the word Bearer from the actual token. Index 0 contains Bearer and index 1 contains the token."
+    },
+
+    {
+      "type": "heading",
+      "text": "16. How Backend Verifies the Access Token"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "function authenticate(req, res, next) {\n  const authHeader = req.headers.authorization;\n\n  if (!authHeader) {\n    return res.status(401).json({\n      message: \"Access token required\"\n    });\n  }\n\n  const token = authHeader.split(\" \")[1];\n\n  try {\n    const decoded = jwt.verify(\n      token,\n      process.env.ACCESS_TOKEN_SECRET\n    );\n\n    req.user = decoded;\n    next();\n\n  } catch (error) {\n    return res.status(401).json({\n      message: \"Invalid or expired token\"\n    });\n  }\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "17. Protected Route — What Happens Before Home?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A protected route is a route that should only be accessible to an authenticated user. The backend middleware checks the Access Token before allowing the request to continue."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.get(\n  \"/profile\",\n  authenticate,\n  async (req, res) => {\n\n    const user = await User.findById(\n      req.user.userId\n    ).select(\"-password\");\n\n    res.json({\n      success: true,\n      user\n    });\n  }\n);"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend requests /profile\n        ↓\nAccess Token sent\n        ↓\nauthenticate middleware\n        ↓\njwt.verify()\n        ↓\nValid?\n   ↓          ↓\n YES          NO\n   ↓           ↓\nnext()      401\n   ↓\nProtected route"
+    },
+
+    {
+      "type": "heading",
+      "text": "18. How Frontend Can Protect the Home Page"
+    },
+    {
+      "type": "paragraph",
+      "text": "React Router can protect the frontend page, but frontend protection alone is not security. The backend must always protect the actual API. The frontend guard is mainly used to control which page the user sees."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "function ProtectedRoute({ children }) {\n  if (!accessToken) {\n    return <Navigate to=\"/login\" />;\n  }\n\n  return children;\n}"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "<Route\n  path=\"/home\"\n  element={\n    <ProtectedRoute>\n      <Home />\n    </ProtectedRoute>\n  }\n/>"
+    },
+
+    {
+      "type": "heading",
+      "text": "19. Important: Frontend Protected Route Is Not Enough"
+    },
+    {
+      "type": "paragraph",
+      "text": "A user can manually call your backend API without using your React page. Therefore, authentication must also be checked on the backend using middleware. The frontend ProtectedRoute controls navigation, while backend authentication protects the real data."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend ProtectedRoute\n→ controls page navigation\n\nBackend authenticate middleware\n→ protects real API/data"
+    },
+
+    {
+      "type": "heading",
+      "text": "20. What Happens When the Access Token Expires?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Suppose the Access Token expires after 15 minutes. The frontend sends it to a protected API. The backend verifies it and finds that it is expired. The backend returns 401 Unauthorized."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend\n   ↓\nProtected API\n   ↓\nAccess Token\n   ↓\nBackend jwt.verify()\n   ↓\nExpired ❌\n   ↓\n401 Unauthorized\n   ↓\nFrontend calls /refresh"
+    },
+
+    {
+      "type": "heading",
+      "text": "21. Refresh Endpoint"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Refresh Token is read from the cookie. The backend verifies it using the Refresh Token secret. If it is valid, the backend creates a new Access Token."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.post(\"/refresh\", async (req, res) => {\n  const refreshToken = req.cookies.refreshToken;\n\n  if (!refreshToken) {\n    return res.status(401).json({\n      message: \"Refresh token missing\"\n    });\n  }\n\n  try {\n    const decoded = jwt.verify(\n      refreshToken,\n      process.env.REFRESH_TOKEN_SECRET\n    );\n\n    const newAccessToken = jwt.sign(\n      {\n        userId: decoded.userId\n      },\n      process.env.ACCESS_TOKEN_SECRET,\n      {\n        expiresIn: \"15m\"\n      }\n    );\n\n    res.json({\n      accessToken: newAccessToken\n    });\n\n  } catch (error) {\n    res.status(401).json({\n      message: \"Invalid refresh token\"\n    });\n  }\n});"
+    },
+
+    {
+      "type": "heading",
+      "text": "22. What Is Refresh Token Rotation?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Refresh Token Rotation means that after a successful refresh, the old Refresh Token is no longer used and a new Refresh Token is issued. This reduces the usefulness of an old stolen refresh token and allows the server to detect refresh-token reuse when server-side session tracking is implemented."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "LOGIN\n ↓\nRefresh Token A\n ↓\nAccess Token expires\n ↓\n/refresh\n ↓\nToken A is rotated/revoked\n ↓\nNew Access Token B\n+\nNew Refresh Token C\n ↓\nCookie updated"
+    },
+
+    {
+      "type": "heading",
+      "text": "23. Why Store Refresh Tokens in the Database?"
+    },
+    {
+      "type": "paragraph",
+      "text": "For a simple learning project, a signed Refresh Token can be verified directly. For a more complete production design, refresh sessions are commonly tracked server-side. This lets the server revoke sessions, support logout, detect token reuse and control individual sessions."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "{\n  userId: \"123\",\n  tokenHash: \"...\",\n  expiresAt: \"...\",\n  revoked: false\n}"
+    },
+
+    {
+      "type": "heading",
+      "text": "24. CORS — Why credentials: true?"
+    },
+    {
+      "type": "paragraph",
+      "text": "When the frontend and backend are on different origins and cookies are involved, the backend CORS configuration must allow credentialed requests. In Express, credentials: true tells the server to allow browser credential handling for the configured origin."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import cors from \"cors\";\n\nserver.use(cors({\n  origin: \"http://localhost:5173\",\n  credentials: true\n}));"
+    },
+    {
+      "type": "paragraph",
+      "text": "Do not use origin: '*' together with credentialed cookies. Use the actual frontend origin."
+    },
+
+    {
+      "type": "heading",
+      "text": "25. Frontend — Why credentials: include?"
+    },
+    {
+      "type": "paragraph",
+      "text": "credentials: 'include' tells the browser that credentials such as cookies should be included in the cross-origin fetch request and that credentialed cookies can be handled according to the browser's cookie rules."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "fetch(\"http://localhost:1200/refresh\", {\n  method: \"POST\",\n  credentials: \"include\"\n});"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend\ncredentials: \"include\"\n        ↓\nBrowser includes eligible cookies\n        ↓\nBackend receives refresh cookie\n        ↓\nreq.cookies.refreshToken"
+    },
+
+    {
+      "type": "heading",
+      "text": "26. Cookie Parser"
+    },
+    {
+      "type": "paragraph",
+      "text": "To easily read cookies in Express, cookie-parser is commonly used."
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "text": "npm install cookie-parser"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import cookieParser from \"cookie-parser\";\n\nserver.use(cookieParser());\n\n// Later:\nconst refreshToken = req.cookies.refreshToken;"
+    },
+
+    {
+      "type": "heading",
+      "text": "27. Complete Simple Flow to Remember"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "REGISTER\n   ↓\nHash Password\n   ↓\nMongoDB\n\nLOGIN\n   ↓\nFind User\n   ↓\nbcrypt.compare()\n   ↓\nPassword correct\n   ↓\nCreate Access Token\nCreate Refresh Token\n   ↓\nAccess Token → Frontend\nRefresh Token → HttpOnly Cookie\n   ↓\nHOME\n   ↓\nProtected API\n   ↓\nBearer Access Token\n   ↓\nBackend verifies JWT\n   ↓\nValid → API allowed\n\nExpired → /refresh\n   ↓\nCheck Refresh Token\n   ↓\nValid → New Access Token\n   ↓\nWith rotation → New Refresh Token too\n   ↓\nContinue\n\nRefresh invalid/expired\n   ↓\nLogin page"
+    },
+
+    {
+      "type": "heading",
+      "text": "28. Important Security Rules"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Never store plain-text passwords in MongoDB.",
+        "Never put passwords, OTPs or secret keys inside JWT payloads.",
+        "Use a strong secret for signing tokens and keep it in environment variables.",
+        "Use different secrets for Access and Refresh Tokens.",
+        "Keep Access Tokens short-lived.",
+        "Protect Refresh Tokens carefully; HttpOnly cookies are a common browser choice.",
+        "Use HTTPS in production.",
+        "Protect backend APIs with authentication middleware.",
+        "Frontend ProtectedRoute is useful for navigation but does not replace backend authentication.",
+        "For production systems, consider refresh-token rotation and server-side refresh-session tracking."
+      ]
+    }
+  ]
 }
 
 ];
