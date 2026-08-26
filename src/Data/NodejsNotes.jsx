@@ -3856,7 +3856,6 @@ export const NodeJSNotes = [
   ]
 },
 
-
 {
   "id": 45,
   "slug": "jwt-access-token-refresh-token-complete-beginner-notes",
