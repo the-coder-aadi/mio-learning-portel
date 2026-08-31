@@ -4345,6 +4345,356 @@ export const NodeJSNotes = [
       ]
     }
   ]
+},
+{
+  "id": 46,
+  "slug": "multer-cloudinary-file-upload-complete-beginner-notes",
+  "title": "Multer & Cloudinary — Complete Beginner File Upload Notes",
+  "date": "31 August 2026",
+  "description": "Beginner-friendly notes explaining how Multer receives files in Express, how local file storage works, and how to upload images directly to Cloudinary using multer-storage-cloudinary and store the Cloudinary URL in MongoDB.",
+  "content": [
+    {
+      "type": "heading",
+      "text": "1. What Are We Trying to Do?"
+    },
+    {
+      "type": "paragraph",
+      "text": "When a user selects an image from the frontend, the image needs to be sent to the backend. Multer helps Express receive that file. At first we can store the file inside the backend uploads folder. Later, we can use Cloudinary to store the image online."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Frontend\n   ↓\nImage/File\n   ↓\nExpress Backend\n   ↓\nMulter\n   ↓\nStorage\n   ↓\nLocal uploads folder OR Cloudinary"
+    },
+
+    {
+      "type": "heading",
+      "text": "2. What Is Multer?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Multer is an Express middleware used to receive files sent from the frontend. JSON can handle normal text data, but files are normally sent using FormData with multipart/form-data. Multer reads this multipart request and gives us the uploaded file through req.file."
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Multer is mainly used for file uploads.",
+        "It works with FormData and multipart/form-data.",
+        "It receives images, PDFs, videos and other files.",
+        "A single uploaded file is available in req.file.",
+        "Normal form values are available in req.body."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "3. Install Multer"
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "text": "npm install multer"
+    },
+
+    {
+      "type": "heading",
+      "text": "4. Basic Multer Storage"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import multer from \"multer\";\n\nconst storage = multer.diskStorage({\n\n  destination: function (req, file, cb) {\n    cb(null, \"uploads/\");\n  },\n\n  filename: function (req, file, cb) {\n    cb(null, Date.now() + \"-\" + file.originalname);\n  }\n\n});\n\nconst upload = multer({\n  storage: storage\n});\n\nexport default upload;"
+    },
+
+    {
+      "type": "heading",
+      "text": "5. What Is diskStorage()?"
+    },
+    {
+      "type": "paragraph",
+      "text": "multer.diskStorage() tells Multer that we want to save the uploaded file on our own computer/server disk. It mainly needs two things: where to save the file and what filename to give it."
+    },
+
+    {
+      "type": "heading",
+      "text": "6. What Is destination?"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "destination: function (req, file, cb) {\n  cb(null, \"uploads/\");\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "destination tells Multer where the file should be saved. Here uploads/ means the file will be stored inside the uploads folder."
+    },
+
+    {
+      "type": "heading",
+      "text": "7. What Are req, file and cb?"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "req — The Express request object. It contains information coming from the frontend.",
+        "file — Information about the uploaded file, such as originalname, mimetype and size.",
+        "cb — Callback function used to tell Multer where/how the file should be saved."
+      ]
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "destination: function (req, file, cb) {\n  cb(null, \"uploads/\");\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "cb(null, \"uploads/\") means there is no error and the destination is the uploads folder. null means no error."
+    },
+
+    {
+      "type": "heading",
+      "text": "8. What Is filename?"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "filename: function (req, file, cb) {\n  cb(null, Date.now() + \"-\" + file.originalname);\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "filename decides the name of the saved file. Date.now() gives a unique time-based number. Adding the original filename helps us keep the original file name."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "original file:\nphoto.jpg\n\nsaved file:\n1788155601173-photo.jpg"
+    },
+
+    {
+      "type": "heading",
+      "text": "9. What Is upload?"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const upload = multer({\n  storage: storage\n});\n\nexport default upload;"
+    },
+    {
+      "type": "paragraph",
+      "text": "upload is the Multer middleware. We export it so that routes can use it."
+    },
+
+    {
+      "type": "heading",
+      "text": "10. upload.single()"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "router.post(\"/upload\", upload.single(\"img\"), (req, res) => {\n\n  console.log(req.file);\n\n  res.json({\n    success: true,\n    file: req.file\n  });\n\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "upload.single(\"img\") means this route accepts one file. The name img must match the name used in FormData on the frontend."
+    },
+
+    {
+      "type": "heading",
+      "text": "11. Frontend File Upload"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const formdata = new FormData();\n\nformdata.append(\"name\", name);\nformdata.append(\"img\", img);\n\nawait fetch(\"http://localhost:9000/upload\", {\n  method: \"POST\",\n  body: formdata\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "Do not manually set Content-Type to application/json when sending FormData. The browser automatically sets the correct multipart/form-data content type and boundary."
+    },
+
+    {
+      "type": "heading",
+      "text": "12. req.body and req.file"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "console.log(req.body);\nconsole.log(req.file);"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "req.body contains normal form values such as name and email.",
+        "req.file contains information about the uploaded file.",
+        "upload.single(\"img\") puts the uploaded image inside req.file."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "13. Why Use Cloudinary?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Local uploads are stored inside our own server. This is not ideal when an application grows or when files need to be available from different servers. Cloudinary is a cloud service that stores and serves images and other media online."
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "Without Cloudinary:\nFrontend → Multer → backend/uploads/\n\nWith Cloudinary:\nFrontend → Multer → Cloudinary → Image URL"
+    },
+
+    {
+      "type": "heading",
+      "text": "14. What Do We Need From Cloudinary?"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Cloud Name — identifies your Cloudinary account.",
+        "API Key — identifies your application.",
+        "API Secret — private secret used for Cloudinary authentication.",
+        "These values should be stored in .env and should not be uploaded to GitHub."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "15. Install Cloudinary Packages"
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "text": "npm install cloudinary multer-storage-cloudinary"
+    },
+
+    {
+      "type": "heading",
+      "text": "16. Cloudinary Configuration"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import dotenv from \"dotenv\";\ndotenv.config();\n\nimport { v2 as cloudinary } from \"cloudinary\";\n\ncloudinary.config({\n  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,\n  api_key: process.env.CLOUDINARY_API_KEY,\n  api_secret: process.env.CLOUDINARY_API_SECRET\n});\n\nexport default cloudinary;"
+    },
+
+    {
+      "type": "heading",
+      "text": "17. .env File"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "CLOUDINARY_CLOUD_NAME=your_cloud_name\nCLOUDINARY_API_KEY=your_api_key\nCLOUDINARY_API_SECRET=your_api_secret"
+    },
+    {
+      "type": "paragraph",
+      "text": "Never share the API Secret publicly. Keep Cloudinary credentials inside the .env file."
+    },
+
+    {
+      "type": "heading",
+      "text": "18. What Is CloudinaryStorage?"
+    },
+    {
+      "type": "paragraph",
+      "text": "CloudinaryStorage connects Multer with Cloudinary. Instead of Multer saving the file in the local uploads folder, CloudinaryStorage tells Multer to send the uploaded file to Cloudinary."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import multer from \"multer\";\nimport { CloudinaryStorage } from \"multer-storage-cloudinary\";\nimport cloudinary from \"../cloudinary.js\";\n\nconst storage = new CloudinaryStorage({\n  cloudinary: cloudinary,\n\n  params: {\n    folder: \"my-app\",\n    allowed_formats: [\"jpg\", \"jpeg\", \"png\", \"webp\"]\n  }\n});\n\nconst upload = multer({\n  storage: storage\n});\n\nexport default upload;"
+    },
+
+    {
+      "type": "heading",
+      "text": "19. What Is folder?"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "params: {\n  folder: \"my-app\"\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "folder tells Cloudinary which folder should contain the uploaded files. Here the images will be organized inside the my-app folder."
+    },
+
+    {
+      "type": "heading",
+      "text": "20. What Is allowed_formats?"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "allowed_formats: [\"jpg\", \"jpeg\", \"png\", \"webp\"]"
+    },
+    {
+      "type": "paragraph",
+      "text": "This controls which file formats are accepted. It helps prevent unwanted file types from being uploaded."
+    },
+
+    {
+      "type": "heading",
+      "text": "21. Complete Cloudinary Upload Route"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import express from \"express\";\nimport upload from \"./multer.js\";\n\nconst router = express.Router();\n\nrouter.post(\"/upload\", upload.single(\"img\"), async (req, res) => {\n\n  try {\n\n    console.log(req.file);\n\n    res.json({\n      success: true,\n      message: \"Image uploaded successfully\",\n      imageUrl: req.file.path\n    });\n\n  } catch (error) {\n\n    console.log(error);\n\n    res.json({\n      success: false,\n      message: \"Upload failed\"\n    });\n\n  }\n});\n\nexport default router;"
+    },
+
+    {
+      "type": "heading",
+      "text": "22. What Happens After Upload?"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "User selects image\n       ↓\nFrontend FormData\n       ↓\nExpress route\n       ↓\nupload.single(\"img\")\n       ↓\nMulter receives file\n       ↓\nCloudinaryStorage\n       ↓\nCloudinary uploads image\n       ↓\nCloudinary gives image URL\n       ↓\nreq.file.path\n       ↓\nSend URL to frontend\n       ↓\nOptionally save URL in MongoDB"
+    },
+
+    {
+      "type": "heading",
+      "text": "23. Store Cloudinary URL in MongoDB"
+    },
+    {
+      "type": "paragraph",
+      "text": "Cloudinary stores the actual image. MongoDB usually stores only the image URL. This keeps the database smaller and allows the frontend to load the image directly from Cloudinary."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const user = await usermodel.create({\n  name: req.body.name,\n  email: req.body.email,\n  image: req.file.path\n});"
+    },
+
+    {
+      "type": "heading",
+      "text": "24. Simple Final Understanding"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Multer receives files from the frontend.",
+        "diskStorage saves files on the local server.",
+        "CloudinaryStorage sends files from Multer to Cloudinary.",
+        "Cloudinary stores the actual image online.",
+        "Cloudinary returns a URL for the uploaded image.",
+        "That URL can be stored in MongoDB.",
+        "Frontend can use that URL inside <img src={url} />."
+      ]
+    },
+
+    {
+      "type": "heading",
+      "text": "25. Most Important Code to Remember"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const storage = new CloudinaryStorage({\n  cloudinary,\n  params: {\n    folder: \"my-app\",\n    allowed_formats: [\"jpg\", \"jpeg\", \"png\", \"webp\"]\n  }\n});\n\nconst upload = multer({ storage });\n\nrouter.post(\"/upload\", upload.single(\"img\"), (req, res) => {\n  console.log(req.file.path);\n});"
+    }
+  ]
 }
 
 ];
