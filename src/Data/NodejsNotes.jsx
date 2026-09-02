@@ -4695,6 +4695,299 @@ export const NodeJSNotes = [
       "text": "const storage = new CloudinaryStorage({\n  cloudinary,\n  params: {\n    folder: \"my-app\",\n    allowed_formats: [\"jpg\", \"jpeg\", \"png\", \"webp\"]\n  }\n});\n\nconst upload = multer({ storage });\n\nrouter.post(\"/upload\", upload.single(\"img\"), (req, res) => {\n  console.log(req.file.path);\n});"
     }
   ]
+},
+
+{
+  "id": 47,
+  "slug": "forgot-password-nodejs-nodemailer-complete-beginner-notes",
+  "title": "Forgot Password with Node.js, Nodemailer & React - Complete Beginner Notes",
+  "date": "2 September 2026",
+  "description": "Simple beginner-friendly notes explaining the complete forgot password flow using Node.js, Express, MongoDB, Mongoose, bcrypt, Nodemailer and React.",
+  "content": [
+    {
+      "type": "heading",
+      "text": "1. What Are We Building?"
+    },
+    {
+      "type": "paragraph",
+      "text": "We are building a Forgot Password system. When a user forgets their password, they enter their registered email. The backend creates a temporary reset token and sends a password reset link to that email. The user clicks the link, enters a new password, and the backend updates the password."
+    },
+    {
+      "type": "heading",
+      "text": "2. Complete Forgot Password Flow"
+    },
+    {
+      "type": "paragraph",
+      "text": "The complete flow is: User clicks Forgot Password → enters email → frontend sends email to backend → backend finds the user → backend creates a random reset token → backend creates an expiry time → token and expiry are saved in MongoDB → backend creates a reset link → Nodemailer sends the link to the user's email → user clicks the link → React opens the Reset Password page → React gets the token from the URL → user enters a new password → frontend sends the password and token to backend → backend checks the token and expiry → backend hashes the new password → backend updates the password → backend removes the reset token → password reset is complete."
+    },
+    {
+      "type": "heading",
+      "text": "3. What Is a Reset Token?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A reset token is a temporary random value. It works like a temporary key for changing the password. The backend creates this token and sends it inside the reset link. When the user clicks the link, the frontend sends the token back to the backend. The backend checks whether the token is correct and has not expired."
+    },
+    {
+      "type": "heading",
+      "text": "4. Generate a Reset Token"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import crypto from \"crypto\";\n\nconst resetToken = crypto.randomBytes(32).toString(\"hex\");\n\nconsole.log(resetToken);"
+    },
+    {
+      "type": "paragraph",
+      "text": "crypto is a built-in Node.js module. randomBytes(32) creates random data. toString(\"hex\") converts that data into a string that can be used in a URL."
+    },
+    {
+      "type": "heading",
+      "text": "5. Create Token Expiry"
+    },
+    {
+      "type": "paragraph",
+      "text": "A password reset link should not work forever. We can make the reset token valid for only 15 minutes."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const resetTokenExpiry = Date.now() + 15 * 60 * 1000;"
+    },
+    {
+      "type": "paragraph",
+      "text": "Date.now() gives the current time. 15 * 60 * 1000 represents 15 minutes in milliseconds. After 15 minutes, the token will be considered expired."
+    },
+    {
+      "type": "heading",
+      "text": "6. User Schema"
+    },
+    {
+      "type": "paragraph",
+      "text": "resetToken and resetTokenExpiry should not be required during registration. A normal user does not have a reset token. These fields are filled only when the user requests a password reset."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import mongoose from \"mongoose\";\n\nconst userschema = new mongoose.Schema({\n  name: {\n    type: String,\n    required: true\n  },\n\n  email: {\n    type: String,\n    required: true,\n    unique: true\n  },\n\n  password: {\n    type: String,\n    required: true\n  },\n\n  resetToken: {\n    type: String,\n    default: null\n  },\n\n  resetTokenExpiry: {\n    type: Date,\n    default: null\n  },\n\n  imageurl: {\n    type: String\n  }\n});\n\nconst usermodel = mongoose.model(\"users\", userschema);\n\nexport default usermodel;"
+    },
+    {
+      "type": "heading",
+      "text": "7. What Is Nodemailer?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Nodemailer is a Node.js package used to send emails from the backend. For example, our Express server can use Nodemailer to send a password reset email to a user's Gmail address."
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "text": "npm install nodemailer"
+    },
+    {
+      "type": "heading",
+      "text": "8. What Is a Transporter?"
+    },
+    {
+      "type": "paragraph",
+      "text": "A transporter is the email configuration used by Nodemailer. It tells Nodemailer which email service we are using and which email account will send the message."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import nodemailer from \"nodemailer\";\n\nconst transporter = nodemailer.createTransport({\n  service: \"gmail\",\n  auth: {\n    user: process.env.EMAIL,\n    pass: process.env.EMAIL_PASSWORD\n  }\n});"
+    },
+    {
+      "type": "paragraph",
+      "text": "service: gmail means we are using Gmail. user is the sender email address. pass is the Gmail App Password. We should not use the normal Gmail account password."
+    },
+    {
+      "type": "heading",
+      "text": "9. Environment Variables"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "EMAIL=yourgmail@gmail.com\nEMAIL_PASSWORD=your_16_character_app_password"
+    },
+    {
+      "type": "paragraph",
+      "text": "Keep the email and App Password inside the .env file. Never put these credentials inside frontend code and never upload the .env file to GitHub."
+    },
+    {
+      "type": "heading",
+      "text": "10. Create the Forgot Password Route"
+    },
+    {
+      "type": "paragraph",
+      "text": "This route receives the user's email, finds the user, creates a reset token, saves the token in MongoDB, creates a reset link and sends that link through email."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import crypto from \"crypto\";\nimport nodemailer from \"nodemailer\";\n\nconst transporter = nodemailer.createTransport({\n  service: \"gmail\",\n  auth: {\n    user: process.env.EMAIL,\n    pass: process.env.EMAIL_PASSWORD\n  }\n});\n\nserver.post(\"/forgot-password\", async (req, res) => {\n  try {\n    const { email } = req.body;\n\n    const user = await usermodel.findOne({ email });\n\n    if (!user) {\n      return res.json({\n        success: false,\n        msg: \"Email not registered\"\n      });\n    }\n\n    const resetToken = crypto.randomBytes(32).toString(\"hex\");\n\n    const resetTokenExpiry = Date.now() + 15 * 60 * 1000;\n\n    user.resetToken = resetToken;\n    user.resetTokenExpiry = resetTokenExpiry;\n\n    await user.save();\n\n    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;\n\n    await transporter.sendMail({\n      from: process.env.EMAIL,\n      to: user.email,\n      subject: \"Reset Your Password\",\n      html: `\n        <h2>Password Reset</h2>\n        <p>You requested to reset your password.</p>\n        <p>Click the button below to create a new password:</p>\n\n        <a href=\"${resetLink}\">\n          Reset Password\n        </a>\n\n        <p>This link will expire in 15 minutes.</p>\n      `\n    });\n\n    res.json({\n      success: true,\n      msg: \"Reset password link sent to your email\"\n    });\n\n  } catch (error) {\n    console.log(error);\n\n    res.status(500).json({\n      success: false,\n      msg: \"Something went wrong\"\n    });\n  }\n});"
+    },
+    {
+      "type": "heading",
+      "text": "11. What Happens in This Route?"
+    },
+    {
+      "type": "paragraph",
+      "text": "First, req.body gives us the email. Then findOne() searches for that email in MongoDB. If the user exists, crypto.randomBytes() creates a random reset token. Then we create an expiry time of 15 minutes. Both values are saved in the user's document. After that, we create a reset link containing the token. Finally, Nodemailer sends the reset link to the user's email."
+    },
+    {
+      "type": "heading",
+      "text": "12. Example MongoDB Data"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "text": "{\n  \"name\": \"Aadi\",\n  \"email\": \"user@gmail.com\",\n  \"password\": \"hashed-password\",\n  \"resetToken\": \"a8f3c91d123456\",\n  \"resetTokenExpiry\": \"2026-09-02T10:15:00.000Z\",\n  \"imageurl\": \"https://example.com/image.jpg\"\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "During normal registration, resetToken and resetTokenExpiry can remain null. They are filled when the user requests a password reset."
+    },
+    {
+      "type": "heading",
+      "text": "13. What Does the Email Link Look Like?"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "text": "http://localhost:5173/reset-password/a8f3c91d123456"
+    },
+    {
+      "type": "paragraph",
+      "text": "The last part of the URL is the reset token. The frontend will get this token from the URL and send it to the backend when the user submits the new password."
+    },
+    {
+      "type": "heading",
+      "text": "14. Create the React Reset Password Route"
+    },
+    {
+      "type": "paragraph",
+      "text": "When the user clicks the email link, React needs a route that can receive the token from the URL."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "import { BrowserRouter, Routes, Route } from \"react-router-dom\";\nimport ResetPassword from \"./pages/ResetPassword\";\n\nfunction App() {\n  return (\n    <BrowserRouter>\n      <Routes>\n        <Route\n          path=\"/reset-password/:token\"\n          element={<ResetPassword />}\n        />\n      </Routes>\n    </BrowserRouter>\n  );\n}\n\nexport default App;"
+    },
+    {
+      "type": "paragraph",
+      "text": ":token is a dynamic value. For example, if the URL is /reset-password/abc123, then token will contain abc123."
+    },
+    {
+      "type": "heading",
+      "text": "15. Reset Password React Page"
+    },
+    {
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useState } from \"react\";\nimport { useParams } from \"react-router-dom\";\n\nfunction ResetPassword() {\n  const { token } = useParams();\n\n  const [password, setPassword] = useState(\"\");\n  const [confirmPassword, setConfirmPassword] = useState(\"\");\n\n  const resetPassword = async () => {\n    if (password !== confirmPassword) {\n      alert(\"Passwords do not match\");\n      return;\n    }\n\n    const response = await fetch(\n      `http://localhost:9000/reset-password/${token}`,\n      {\n        method: \"POST\",\n        headers: {\n          \"Content-Type\": \"application/json\"\n        },\n        body: JSON.stringify({\n          password\n        })\n      }\n    );\n\n    const data = await response.json();\n\n    if (data.success) {\n      alert(\"Password reset successfully\");\n    } else {\n      alert(data.msg);\n    }\n  };\n\n  return (\n    <div>\n      <h2>Reset Password</h2>\n\n      <input\n        type=\"password\"\n        placeholder=\"New password\"\n        value={password}\n        onChange={(e) => setPassword(e.target.value)}\n      />\n\n      <input\n        type=\"password\"\n        placeholder=\"Confirm password\"\n        value={confirmPassword}\n        onChange={(e) => setConfirmPassword(e.target.value)}\n      />\n\n      <button onClick={resetPassword}>\n        Reset Password\n      </button>\n    </div>\n  );\n}\n\nexport default ResetPassword;"
+    },
+    {
+      "type": "heading",
+      "text": "16. How Does React Get the Token?"
+    },
+    {
+      "type": "paragraph",
+      "text": "useParams() gives us the dynamic value from the URL. If the URL is http://localhost:5173/reset-password/abc123, then token will contain abc123."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const { token } = useParams();\n\nconsole.log(token);"
+    },
+    {
+      "type": "heading",
+      "text": "17. Backend Reset Password Route"
+    },
+    {
+      "type": "paragraph",
+      "text": "Now the frontend sends the token and new password to the backend. The backend checks whether the token exists and whether it is still valid."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "server.post(\"/reset-password/:token\", async (req, res) => {\n  try {\n    const { token } = req.params;\n    const { password } = req.body;\n\n    const user = await usermodel.findOne({\n      resetToken: token,\n      resetTokenExpiry: { $gt: Date.now() }\n    });\n\n    if (!user) {\n      return res.json({\n        success: false,\n        msg: \"Invalid or expired reset link\"\n      });\n    }\n\n    const hashedPassword = await bcrypt.hash(password, 10);\n\n    user.password = hashedPassword;\n\n    user.resetToken = null;\n    user.resetTokenExpiry = null;\n\n    await user.save();\n\n    res.json({\n      success: true,\n      msg: \"Password reset successfully\"\n    });\n\n  } catch (error) {\n    console.log(error);\n\n    res.status(500).json({\n      success: false,\n      msg: \"Something went wrong\"\n    });\n  }\n});"
+    },
+    {
+      "type": "heading",
+      "text": "18. What Does $gt Mean?"
+    },
+    {
+      "type": "paragraph",
+      "text": "$gt means greater than. resetTokenExpiry: { $gt: Date.now() } means the expiry time stored in MongoDB must be greater than the current time. If it is greater, the token is still valid. If it is not greater, the token has expired."
+    },
+    {
+      "type": "heading",
+      "text": "19. Why Do We Hash the New Password?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Passwords should never be stored as plain text in MongoDB. bcrypt converts the new password into a hashed value before saving it."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "const hashedPassword = await bcrypt.hash(password, 10);\n\nuser.password = hashedPassword;\nawait user.save();"
+    },
+    {
+      "type": "heading",
+      "text": "20. Why Do We Remove the Reset Token?"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "text": "user.resetToken = null;\nuser.resetTokenExpiry = null;\n\nawait user.save();"
+    },
+    {
+      "type": "paragraph",
+      "text": "After the password is successfully changed, the reset token is removed. This prevents the same reset link from being used again."
+    },
+    {
+      "type": "heading",
+      "text": "21. Complete Flow in Simple Words"
+    },
+    {
+      "type": "paragraph",
+      "text": "User clicks Forgot Password. The user enters their email. Frontend sends the email to the backend. Backend finds the user in MongoDB. Backend creates a random token. Backend creates a 15 minute expiry time. Backend saves both in MongoDB. Backend creates a reset link containing the token. Nodemailer sends the link to the user's email. User clicks the link. React opens the Reset Password page. React gets the token using useParams(). User enters a new password. Frontend sends the new password to backend. Backend checks the token and expiry. If valid, bcrypt hashes the new password. MongoDB gets the new password. Reset token and expiry are removed. Password reset is complete."
+    },
+    {
+      "type": "heading",
+      "text": "22. Simple Mental Model"
+    },
+    {
+      "type": "paragraph",
+      "text": "Think of the reset token as a temporary key. Backend creates the key → saves the key → sends the key inside the email link → user brings the key back through the reset page → backend checks the key → if the key is valid, password can be changed → after password change, the key is destroyed."
+    },
+    {
+      "type": "heading",
+      "text": "23. Important Beginner Rules"
+    },
+    {
+      "type": "summary",
+      "items": [
+        "Nodemailer is used to send emails from Node.js.",
+        "Transporter is Nodemailer's email-sending configuration.",
+        "Use a Gmail App Password instead of the normal Gmail password.",
+        "crypto.randomBytes() can generate a random reset token.",
+        "Give the reset token an expiry time.",
+        "resetToken should not be required during registration.",
+        "resetTokenExpiry should not be required during registration.",
+        "Use Date for resetTokenExpiry.",
+        "The reset token can be placed inside the reset URL.",
+        "React can get the token using useParams().",
+        "Backend must check both token and expiry before changing the password.",
+        "Hash the new password with bcrypt before saving it.",
+        "Remove the reset token after successful password reset.",
+        "Keep email credentials inside .env.",
+        "Never expose email credentials in frontend code."
+      ]
+    }
+  ]
 }
 
 ];
